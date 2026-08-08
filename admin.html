@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mapocabs — Trip Manager (Admin)</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1C1B1A; --asphalt-soft:#2A2825; --amber:#FFD23F; --amber-deep:#E8B800;
+    --paper:#F7F4EE; --muted:#8A8377; --highway-green:#1F5F4A; --line:rgba(247,244,238,0.14); --danger:#C4553D;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans',sans-serif; padding:32px 20px 80px;}
+  h1,h2{font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;}
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:860px; margin:0 auto;}
+  .banner{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; font-size:13px; color:#D8D2C4; margin-bottom:32px;}
+  .banner b{color:var(--amber);}
+  h1{font-size:32px; margin-bottom:6px;}
+  .sub{color:var(--muted); font-size:14px; margin-bottom:28px;}
+  .panel{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:24px; margin-bottom:24px;}
+  .panel h2{font-size:21px; margin-bottom:16px;}
+  label{display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted); letter-spacing:0.06em; margin-bottom:6px; margin-top:14px;}
+  label:first-child{margin-top:0;}
+  input, select, textarea{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:11px 12px; border-radius:6px; font-family:'Work Sans'; font-size:14px; outline:none;
+  }
+  input:focus, select:focus{border-color:var(--amber);}
+  textarea{font-family:'Space Mono'; font-size:12.5px; resize:vertical;}
+  .car-row{display:grid; grid-template-columns:1fr 120px 36px; gap:10px; align-items:end; margin-top:10px;}
+  .car-row:first-of-type{margin-top:14px;}
+  .btn{border:none; border-radius:6px; padding:11px 20px; font-family:'Barlow Condensed'; font-weight:700; font-size:15px; letter-spacing:0.02em; cursor:pointer; margin-top:18px;}
+  .btn-amber{background:var(--amber); color:var(--asphalt);}
+  .btn-amber:hover{background:var(--amber-deep);}
+  .btn-ghost{background:transparent; color:var(--paper); border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--amber);}
+  .btn-danger{background:transparent; color:var(--danger); border:1px solid var(--danger); padding:6px 10px; font-size:12px; height:38px;}
+  .btn-add-car{background:transparent; color:var(--amber); border:1px dashed var(--amber); font-size:13px; padding:8px 14px; font-family:'Work Sans'; font-weight:600; text-transform:none;}
+  .cat-group{margin-bottom:22px;}
+  .cat-title{font-family:'Space Mono'; font-size:12px; color:var(--amber); letter-spacing:0.06em; margin-bottom:10px; text-transform:uppercase;}
+  .trip-item{display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border:1px solid var(--line); border-radius:8px; margin-bottom:10px;}
+  .trip-item .ti-route{font-family:'Barlow Condensed'; font-weight:600; font-size:17px;}
+  .trip-item .ti-meta{font-family:'Space Mono'; font-size:11.5px; color:var(--muted); margin-top:4px;}
+  .ti-actions{display:flex; gap:8px;}
+  .ti-actions button{background:transparent; border:1px solid var(--line); color:var(--paper); border-radius:6px; padding:8px 12px; font-size:12px; cursor:pointer; font-family:'Work Sans';}
+  .ti-actions button:hover{border-color:var(--amber);}
+  .empty{color:var(--muted); font-family:'Space Mono'; font-size:13px; padding:12px 0;}
+  #codeOut{margin-top:14px; height:300px;}
+  .copy-note{font-size:12px; color:var(--muted); margin-top:8px;}
+  .copy-note.ok{color:var(--highway-green);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="banner">
+    This page runs in your browser only — nothing is sent anywhere. Your changes are saved <b>to this browser</b> so they survive a refresh, but the source of truth is the <b>generated code</b> at the bottom: copy it into <span class="mono">index.html</span> and re-upload that file to update your live site.
+  </div>
+
+  <h1>Trip Manager</h1>
+  <div class="sub">Add, edit, and remove packages — then export the code to update your live site.</div>
+
+  <div class="panel">
+    <h2 id="formTitle">Add a package</h2>
+
+    <label for="fCat">CATEGORY</label>
+    <select id="fCat">
+      <option value="outstation">Outstation Trips</option>
+      <option value="local8080">Local Package</option>
+      <option value="airport">Airport Transfer</option>
+      <option value="localride">Short Rides</option>
+    </select>
+
+    <label for="fRoute">ROUTE / TITLE</label>
+    <input id="fRoute" placeholder="e.g. Vapi/Daman/Silvassa → Statue of Unity">
+
+    <label for="fNote">NOTE (shown under the title, e.g. what's included)</label>
+    <input id="fNote" placeholder="e.g. Full-day trip · Min 300 km/day">
+
+    <label>CAR TYPES &amp; PRICES</label>
+    <div id="carRows"></div>
+    <button class="btn btn-add-car" onclick="addCarRow()">+ Add another car type</button>
+    <br>
+    <button class="btn btn-amber" onclick="savePkg()">Save package</button>
+    <button class="btn btn-ghost" id="cancelEditBtn" style="display:none" onclick="cancelEdit()">Cancel edit</button>
+  </div>
+
+  <div class="panel">
+    <h2>Your packages</h2>
+    <div id="tripListArea"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Export to your website</h2>
+    <div class="sub" style="margin-bottom:0;">Copy this block and paste it over the <span class="mono">const PACKAGES = {...}</span> section in <span class="mono">index.html</span>.</div>
+    <textarea id="codeOut" readonly></textarea>
+    <button class="btn btn-amber" onclick="copyCode()">Copy code</button>
+    <div class="copy-note" id="copyNote"></div>
+  </div>
+
+</div>
+
+<script>
+const STORAGE_KEY = "mapocabs_packages_v1";
+const CATEGORIES = [
+  { id: "outstation", label: "Outstation Trips" },
+  { id: "local8080", label: "Local Package" },
+  { id: "airport", label: "Airport Transfer" },
+  { id: "localride", label: "Short Rides" }
+];
+let packages = {}; // { outstation: [...], local8080: [...], ... }
+let editing = null; // { cat, index } or null
+
+function loadPackages(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    packages = raw ? JSON.parse(raw) : {};
+  }catch(e){ packages = {}; }
+  CATEGORIES.forEach(c => { if(!packages[c.id]) packages[c.id] = []; });
+}
+function persist(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(packages));
+  renderTripList();
+  renderCode();
+}
+
+function addCarRow(type = "", price = ""){
+  const wrap = document.getElementById("carRows");
+  const row = document.createElement("div");
+  row.className = "car-row";
+  row.innerHTML = `
+    <div><input class="carType" placeholder="mapo" value="${escapeAttr(type)}"></div>
+    <div><input class="carPrice" type="number" placeholder="1500" value="${escapeAttr(price)}"></div>
+    <button class="btn-danger" onclick="this.parentElement.remove()" title="Remove">✕</button>
+  `;
+  wrap.appendChild(row);
+}
+
+function escapeAttr(s){ return String(s).replace(/"/g,'&quot;'); }
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function clearForm(){
+  document.getElementById("fCat").value = "outstation";
+  document.getElementById("fRoute").value = "";
+  document.getElementById("fNote").value = "";
+  document.getElementById("carRows").innerHTML = "";
+  addCarRow();
+  editing = null;
+  document.getElementById("formTitle").textContent = "Add a package";
+  document.getElementById("cancelEditBtn").style.display = "none";
+}
+
+function savePkg(){
+  const cat = document.getElementById("fCat").value;
+  const route = document.getElementById("fRoute").value.trim();
+  const note = document.getElementById("fNote").value.trim();
+  const carRows = [...document.querySelectorAll("#carRows .car-row")];
+  const cars = carRows.map(r => {
+    const type = r.querySelector(".carType").value.trim();
+    const price = parseFloat(r.querySelector(".carPrice").value) || 0;
+    return { type, price };
+  }).filter(c => c.type && c.price > 0);
+
+  if(!route){ alert("Please enter a route or title."); return; }
+  if(cars.length === 0){ alert("Add at least one car type with a price."); return; }
+
+  const pkg = { route, note, cars };
+
+  if(editing){
+    if(editing.cat === cat){
+      packages[editing.cat][editing.index] = pkg;
+    } else {
+      packages[editing.cat].splice(editing.index, 1);
+      packages[cat].push(pkg);
+    }
+  } else {
+    packages[cat].push(pkg);
+  }
+  persist();
+  clearForm();
+}
+
+function editPkg(cat, index){
+  const p = packages[cat][index];
+  editing = { cat, index };
+  document.getElementById("fCat").value = cat;
+  document.getElementById("fRoute").value = p.route;
+  document.getElementById("fNote").value = p.note;
+  document.getElementById("carRows").innerHTML = "";
+  p.cars.forEach(c => addCarRow(c.type, c.price));
+  document.getElementById("formTitle").textContent = `Editing: ${p.route}`;
+  document.getElementById("cancelEditBtn").style.display = "inline-block";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function cancelEdit(){ clearForm(); }
+
+function deletePkg(cat, index){
+  if(!confirm("Delete this package?")) return;
+  packages[cat].splice(index, 1);
+  persist();
+}
+
+function renderTripList(){
+  const area = document.getElementById("tripListArea");
+  area.innerHTML = CATEGORIES.map(c => {
+    const list = packages[c.id] || [];
+    const itemsHtml = list.length === 0
+      ? `<div class="empty">No packages in this category yet.</div>`
+      : list.map((p,i) => `
+          <div class="trip-item">
+            <div>
+              <div class="ti-route">${escapeHtml(p.route)}</div>
+              <div class="ti-meta">${escapeHtml(p.note || "")} · ${p.cars.map(car=>`${escapeHtml(car.type)}: ₹${car.price}`).join(" · ")}</div>
+            </div>
+            <div class="ti-actions">
+              <button onclick="editPkg('${c.id}', ${i})">Edit</button>
+              <button onclick="deletePkg('${c.id}', ${i})">Delete</button>
+            </div>
+          </div>
+        `).join("");
+    return `<div class="cat-group"><div class="cat-title">${c.label} (${list.length})</div>${itemsHtml}</div>`;
+  }).join("");
+}
+
+function jsStr(s){ return '"' + String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"') + '"'; }
+
+function renderCode(){
+  const out = document.getElementById("codeOut");
+  const catBlocks = CATEGORIES.map(c => {
+    const list = packages[c.id] || [];
+    const pkgsStr = list.map(p => {
+      const carsStr = p.cars.map(car => `        { type: ${jsStr(car.type)}, price: ${car.price} }`).join(",\n");
+      return `    {
+      route: ${jsStr(p.route)},
+      note: ${jsStr(p.note || "")},
+      cars: [
+${carsStr}
+      ]
+    }`;
+    }).join(",\n");
+    return `  ${c.id}: [\n${pkgsStr}\n  ]`;
+  }).join(",\n");
+  out.value = `const PACKAGES = {\n${catBlocks}\n};`;
+}
+
+function copyCode(){
+  const out = document.getElementById("codeOut");
+  out.select();
+  document.execCommand("copy");
+  const note = document.getElementById("copyNote");
+  note.textContent = "Copied — paste it over the PACKAGES object in index.html";
+  note.classList.add("ok");
+  setTimeout(()=>{ note.textContent=""; note.classList.remove("ok"); }, 3000);
+}
+
+function seedIfEmpty(){
+  if(localStorage.getItem(STORAGE_KEY)) return;
+  const seed = {
+    outstation: [
+      { route:"Vapi/Daman/Silvassa → Statue of Unity", note:"Full-day trip · Min 300 km/day",
+        cars:[{type:"mapo",price:5999},{type:"mapo XL",price:6999},{type:"mapo XL premium",price:9999},{type:"mapo Traveller (20-seater)",price:17999}] },
+      { route:"Vapi/Daman/Silvassa → Trimbakeshwar", note:"Full-day trip · Min 300 km/day",
+        cars:[{type:"mapo",price:4999},{type:"mapo XL",price:5999},{type:"mapo XL premium",price:7499},{type:"mapo Traveller (20-seater)",price:11999}] }
+    ],
+    local8080: [
+      { route:"Vapi/Daman/Silvassa — Local Package", note:"8 hours / 80 km included",
+        cars:[{type:"mapo",price:1999},{type:"mapo XL",price:2199},{type:"mapo XL premium",price:3199}] }
+    ],
+    airport: [
+      { route:"Vapi/Daman/Silvassa ⇄ Mumbai Airport", note:"One-way Pickup or Drop · Toll included",
+        cars:[{type:"mapo",price:2999},{type:"mapo XL",price:3999},{type:"mapo XL premium",price:4999}] },
+      { route:"Vapi/Daman/Silvassa ⇄ Mumbai Airport", note:"Round Trip · Toll included",
+        cars:[{type:"mapo",price:4799},{type:"mapo XL",price:5499},{type:"mapo XL premium",price:6499}] },
+      { route:"Vapi/Daman/Silvassa ⇄ Surat Airport", note:"One-way Pickup or Drop · Toll included",
+        cars:[{type:"mapo",price:2799},{type:"mapo XL",price:3799},{type:"mapo XL premium",price:4999}] },
+      { route:"Vapi/Daman/Silvassa ⇄ Surat Airport", note:"Round Trip · Toll included",
+        cars:[{type:"mapo",price:4299},{type:"mapo XL",price:5299},{type:"mapo XL premium",price:6299}] }
+    ],
+    localride: [
+      { route:"0 – 10 km", note:"Point to point, no stops", cars:[{type:"mapo",price:573},{type:"mapo XL",price:703},{type:"mapo XL premium",price:944}] },
+      { route:"11 – 20 km", note:"Point to point, no stops", cars:[{type:"mapo",price:767},{type:"mapo XL",price:911},{type:"mapo XL premium",price:1272}] },
+      { route:"21 – 30 km", note:"Point to point, no stops", cars:[{type:"mapo",price:965},{type:"mapo XL",price:1119},{type:"mapo XL premium",price:1598}] },
+      { route:"31 – 40 km", note:"Point to point, no stops", cars:[{type:"mapo",price:1163},{type:"mapo XL",price:1327},{type:"mapo XL premium",price:1925}] }
+    ]
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
+}
+
+seedIfEmpty();
+loadPackages();
+addCarRow();
+renderTripList();
+renderCode();
+</script>
+</body>
+</html>

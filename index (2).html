@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mapocabs — Choice of Professionals</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1C1B1A; --asphalt-soft:#2A2825; --amber:#FFD23F; --amber-deep:#E8B800;
+    --paper:#F7F4EE; --muted:#8A8377; --highway-green:#1F5F4A; --line:rgba(247,244,238,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans', sans-serif; line-height:1.5;}
+  h1,h2,h3,.display{font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;}
+  .mono{font-family:'Space Mono', monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  .lane-divider{height:0; border-top:3px dashed rgba(247,244,238,0.22); margin:56px 0;}
+
+  header{padding:22px 0; border-bottom:1px solid var(--line);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo img{height:34px; width:auto;}
+  .logo .logo-text{font-family:'Barlow Condensed'; font-weight:700; font-size:26px;}
+  .logo .logo-text span{color:var(--amber);}
+  .header-call{
+    font-family:'Space Mono'; font-size:13px; color:var(--amber); text-decoration:none;
+    border:1px solid var(--amber); padding:8px 14px; border-radius:6px;
+  }
+
+  .hero{padding:56px 0 8px;}
+  .eyebrow{font-family:'Space Mono'; font-size:13px; color:var(--amber); letter-spacing:0.08em; margin-bottom:16px;}
+  .hero h1{font-size:clamp(34px, 5.2vw, 60px); line-height:0.98; max-width:760px;}
+  .hero h1 span{color:var(--amber);}
+  .hero-sub{max-width:520px; margin-top:16px; color:#D8D2C4; font-size:15.5px;}
+
+  /* SEARCH BAR */
+  .search-shell{
+    margin-top:32px; background:var(--asphalt-soft); border:1px solid var(--line);
+    border-radius:10px; padding:8px; display:flex; gap:8px; position:relative;
+  }
+  .search-shell input{
+    flex:1; background:transparent; border:none; color:var(--paper);
+    padding:14px 16px; font-family:'Work Sans'; font-size:16px; outline:none;
+  }
+  .search-shell input::placeholder{color:#6B6560;}
+  .search-shell button{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:0 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:17px;
+    letter-spacing:0.02em; cursor:pointer;
+  }
+  .search-shell button:hover{background:var(--amber-deep);}
+
+  /* HOT SELLING PILLS */
+  .hot-row{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .hot-pill{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 16px; border-radius:24px; font-size:13.5px; font-weight:500; cursor:pointer;
+    display:flex; align-items:center; gap:8px;
+  }
+  .hot-pill:hover{border-color:var(--amber);}
+  .hot-pill .tag{
+    background:var(--amber); color:var(--asphalt); font-family:'Space Mono'; font-size:9.5px;
+    padding:2px 6px; border-radius:3px; letter-spacing:0.04em; font-weight:700;
+  }
+
+  /* RESULTS */
+  #results{margin-top:8px;}
+  .results-head{display:flex; justify-content:space-between; align-items:baseline; margin:28px 0 14px;}
+  .results-head h2{font-size:22px;}
+  .results-head .clear-btn{
+    background:none; border:none; color:var(--muted); font-family:'Space Mono'; font-size:12px;
+    cursor:pointer; text-decoration:underline;
+  }
+  .card{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:14px;
+  }
+  .card-route{font-family:'Barlow Condensed'; font-weight:600; font-size:21px;}
+  .card-sub{font-family:'Space Mono'; font-size:11.5px; color:var(--muted); margin-top:6px;}
+  .car-list{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+  .car-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border-top:1px solid var(--line); padding-top:10px; flex-wrap:wrap;
+  }
+  .car-row:first-child{border-top:none; padding-top:0;}
+  .car-name{font-size:15px; font-weight:500;}
+  .car-right{display:flex; align-items:center; gap:14px;}
+  .car-price{font-family:'Space Mono'; font-weight:700; font-size:20px; color:var(--amber);}
+  .wa-btn{
+    background:var(--highway-green); color:var(--paper); border:none; border-radius:6px;
+    padding:9px 16px; font-family:'Work Sans'; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .wa-btn:hover{opacity:0.88;}
+  .no-match{color:var(--muted); font-family:'Space Mono'; font-size:13px; padding:12px 0;}
+
+  /* CAROUSEL — "Trips We Do" advertising strip */
+  .carousel-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px;}
+  .carousel-head h2{font-size:28px;}
+  .carousel-arrows{display:flex; gap:8px;}
+  .arrow-btn{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px;
+  }
+  .arrow-btn:hover{border-color:var(--amber);}
+  .carousel-track{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px;
+    scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .promo-card{
+    scroll-snap-align:start; flex:0 0 280px; border-radius:14px; padding:24px;
+    min-height:200px; display:flex; flex-direction:column; justify-content:flex-end;
+    border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer;
+  }
+  .promo-card::before{
+    content:""; position:absolute; inset:0; opacity:0.9;
+  }
+  .promo-card .pc-content{position:relative; z-index:1;}
+  .promo-card .pc-eyebrow{font-family:'Space Mono'; font-size:10.5px; letter-spacing:0.08em; opacity:0.85;}
+  .promo-card .pc-title{font-family:'Barlow Condensed'; font-weight:700; font-size:26px; margin-top:6px; line-height:1;}
+  .promo-card .pc-price{font-family:'Space Mono'; font-size:13px; margin-top:10px;}
+  .promo-card .pc-cta{
+    margin-top:14px; display:inline-block; background:var(--asphalt); color:var(--paper);
+    padding:8px 14px; border-radius:6px; font-size:12.5px; font-weight:600;
+  }
+
+  /* extra charges */
+  .terms-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;}
+  @media (max-width:720px){ .terms-grid{grid-template-columns:1fr 1fr;} }
+  .terms-cell{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; padding:14px;}
+  .terms-cell .tc-car{font-family:'Barlow Condensed'; font-weight:600; font-size:16px;}
+  .terms-cell .tc-rate{font-family:'Space Mono'; font-size:12px; color:var(--amber); margin-top:6px;}
+  .terms-list{margin-top:18px; color:#D8D2C4; font-size:14px;}
+  .terms-list li{margin-bottom:6px; margin-left:18px;}
+
+  footer{padding:40px 0 60px; color:var(--muted); font-size:14px;}
+  footer a{color:var(--amber); text-decoration:none;}
+  .foot-brand{font-family:'Barlow Condensed'; font-weight:700; font-size:18px; color:var(--paper); margin-bottom:6px;}
+  .foot-social{display:flex; gap:14px; margin-top:16px;}
+  .foot-social a{border:1px solid var(--line); border-radius:6px; padding:8px 14px; font-family:'Space Mono'; font-size:12px; color:var(--paper); letter-spacing:0.03em;}
+  .foot-social a:hover{border-color:var(--amber); color:var(--amber);}
+
+  @media (max-width:600px){ .search-shell{flex-direction:column;} .search-shell button{padding:14px;} }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  /* ENQUIRY FORM */
+  .enquiry-panel{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px; padding:28px;}
+  .enquiry-panel h2{font-size:26px; margin-bottom:6px;}
+  .enquiry-sub{color:var(--muted); font-size:13.5px; margin-bottom:20px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .form-grid .full{grid-column:1 / -1;}
+  .form-field label{display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted); letter-spacing:0.06em; margin-bottom:6px;}
+  .form-field input, .form-field textarea{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:12px 13px; border-radius:6px; font-family:'Work Sans'; font-size:14px; outline:none;
+  }
+  .form-field input:focus, .form-field textarea:focus{border-color:var(--amber);}
+  .form-field textarea{resize:vertical; min-height:80px;}
+  .form-submit-btn{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:13px 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:16px;
+    letter-spacing:0.02em; cursor:pointer; margin-top:18px;
+  }
+  .form-submit-btn:hover{background:var(--amber-deep);}
+  .form-status{margin-top:12px; font-family:'Space Mono'; font-size:12.5px;}
+  .form-status.ok{color:var(--highway-green);}
+  .form-status.err{color:#C4553D;}
+
+  /* FEEDBACK BUTTON + MODAL */
+  .feedback-fab{
+    position:fixed; bottom:22px; right:22px; z-index:40;
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:26px;
+    padding:13px 20px; font-family:'Barlow Condensed'; font-weight:700; font-size:15px;
+    letter-spacing:0.02em; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .feedback-fab:hover{background:var(--amber-deep);}
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(10,9,8,0.72); z-index:50;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px;
+    padding:26px; max-width:420px; width:100%; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--muted); font-size:20px; cursor:pointer;
+  }
+  .modal-close:hover{color:var(--amber);}
+  .modal-box h2{font-size:22px; margin-bottom:16px;}
+  .star-row{display:flex; gap:8px; margin-top:6px;}
+  .star-btn{
+    background:none; border:1px solid var(--line); color:var(--muted); width:40px; height:40px;
+    border-radius:6px; font-size:18px; cursor:pointer;
+  }
+  .star-btn.active{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+
+  /* COUPON */
+  .coupon-bar{
+    margin-top:16px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  }
+  .coupon-bar input{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 14px; border-radius:6px; font-family:'Space Mono'; font-size:13px;
+    text-transform:uppercase; outline:none; width:180px;
+  }
+  .coupon-bar input:focus{border-color:var(--amber);}
+  .coupon-bar button{
+    background:transparent; border:1px solid var(--amber); color:var(--amber);
+    padding:10px 16px; border-radius:6px; font-family:'Barlow Condensed'; font-weight:700;
+    font-size:14px; letter-spacing:0.02em; cursor:pointer; text-transform:uppercase;
+  }
+  .coupon-bar button:hover{background:var(--amber); color:var(--asphalt);}
+  .coupon-msg{font-family:'Space Mono'; font-size:12px;}
+  .coupon-msg.ok{color:var(--highway-green);}
+  .coupon-msg.err{color:#C4553D;}
+  .coupon-applied-badge{
+    background:var(--highway-green); color:var(--paper); font-family:'Space Mono';
+    font-size:11.5px; padding:6px 12px; border-radius:20px; display:inline-flex;
+    align-items:center; gap:8px;
+  }
+  .coupon-applied-badge button{
+    background:none; border:none; color:var(--paper); cursor:pointer; font-size:13px; opacity:0.8;
+  }
+  .price-strike{
+    font-family:'Space Mono'; font-size:13px; color:var(--muted); text-decoration:line-through;
+    margin-right:8px;
+  }
+  .promo-price-strike{
+    font-family:'Space Mono'; font-size:11px; color:rgba(247,244,238,0.55); text-decoration:line-through;
+    margin-right:6px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="data:image/png;base64,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" alt="mapocabs">
+      <div class="logo-text">mapo<span>cabs</span></div>
+    </div>
+    <a class="header-call" href="tel:+919313268624">CALL +91 93132 68624</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CHOICE OF PROFESSIONALS · VAPI / DAMAN / SILVASSA</div>
+    <h1>Fixed-fare cabs. <span>No surprises.</span></h1>
+    <p class="hero-sub">Search where you're headed and see every car type and price up front.</p>
+
+    <div class="search-shell">
+      <input id="searchInput" type="text" placeholder="Search a destination — e.g. Statue of Unity, Mumbai Airport, Trimbakeshwar…" autocomplete="off">
+      <button onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="hot-row">
+      <div class="hot-pill" onclick="quickFilter('local8080')"><span class="tag">HOT</span> Mapo Quick Trip</div>
+      <div class="hot-pill" onclick="quickFilter('airport')"><span class="tag">HOT</span> Airport Transfer</div>
+      <div class="hot-pill" onclick="quickFilter('outstation')">Outstation Trips</div>
+      <div class="hot-pill" onclick="quickFilter('localride')">Short Rides</div>
+    </div>
+
+    <div class="coupon-bar" id="couponBar">
+      <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+      <button onclick="applyCoupon()">Apply</button>
+      <span class="coupon-msg" id="couponMsg"></span>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="carousel-head">
+    <h2>Trips We Do</h2>
+    <div class="carousel-arrows">
+      <button class="arrow-btn" onclick="scrollCarousel(-1)">‹</button>
+      <button class="arrow-btn" onclick="scrollCarousel(1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="carouselTrack"></div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div style="margin-bottom:20px;"><h2 style="font-size:28px;">Extra Charges &amp; Terms</h2></div>
+  <div class="mono" style="font-size:12px; color:var(--muted); margin-bottom:18px;">Applies if you exceed the included kilometres or hours in a package.</div>
+  <div class="terms-grid" id="ratesGrid"></div>
+  <ul class="terms-list">
+    <li>Toll tax excluded on outstation &amp; local packages. Included on airport transfers.</li>
+    <li>Parking charges extra, if applicable.</li>
+    <li>Minimum 300 km per day on outstation full-day trips.</li>
+    <li>Driver allowance (D/A) charged extra.</li>
+  </ul>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="enquiry-panel">
+    <h2>Send us an enquiry</h2>
+    <div class="enquiry-sub">Don't use WhatsApp, or want a custom trip quoted? Fill this in and we'll get back to you — it also saves straight to our system.</div>
+    <div class="form-grid">
+      <div class="form-field"><label for="enqName">NAME</label><input id="enqName" placeholder="Your name"></div>
+      <div class="form-field"><label for="enqPhone">PHONE</label><input id="enqPhone" placeholder="Your phone number"></div>
+      <div class="form-field full"><label for="enqTrip">TRIP / ROUTE</label><input id="enqTrip" placeholder="e.g. Vapi to Mumbai Airport, 15th August"></div>
+      <div class="form-field full"><label for="enqMsg">MESSAGE</label><textarea id="enqMsg" placeholder="Any details — number of passengers, timing, luggage, etc."></textarea></div>
+    </div>
+    <button class="form-submit-btn" onclick="submitEnquiry()">Send Enquiry</button>
+    <div class="form-status" id="enqStatus"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">mapocabs</div>
+    Choice of professionals · <a href="https://mapocabs.com">mapocabs.com</a><br>
+    Book on <a href="#" id="footerWaLink">WhatsApp</a> or call <span class="mono">+91 93132 68624</span>.
+    <div class="foot-social">
+      <a href="https://instagram.com/mapocabs" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/mapocabs" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://linkedin.com/company/mapocabs" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<button class="feedback-fab" onclick="openFeedback()">★ Feedback</button>
+
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeFeedback()">✕</button>
+    <h2>Rate your ride</h2>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbName">NAME</label>
+      <input id="fbName" placeholder="Your name">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbPhone">PHONE (optional)</label>
+      <input id="fbPhone" placeholder="Your phone number">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label>RATING</label>
+      <div class="star-row" id="starRow"></div>
+    </div>
+    <div class="form-field">
+      <label for="fbComment">COMMENT</label>
+      <textarea id="fbComment" placeholder="How was your trip?"></textarea>
+    </div>
+    <button class="form-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+    <div class="form-status" id="fbStatus"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   EDIT YOUR DETAILS HERE
+   ========================================================================= */
+const WHATSAPP_NUMBER = "919313268624";
+
+// Paste the Google Apps Script "Web app" URL here once you've deployed it
+// (see google-apps-script.gs.txt for the code to paste into Apps Script).
+// Leave as-is and enquiries just won't be logged to a sheet yet.
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxABEmeg1HELiHiY3qta9jEvCm9KYV6G-G0_AcdgS2OXTaCRPxEuQLqdpeslw3AQ3kd/exec";
+
+// Coupon: applying this shows a 10% "discount" off the listed price.
+// Your listed prices already include this 10% buffer, so this doesn't
+// cost you anything extra — it just makes the offer visible to customers.
+const COUPON_CODE = "MAPOTRIP";
+const COUPON_DISCOUNT = 0.10;
+
+/* =========================================================================
+   YOUR PACKAGES — grouped by category. Use the Trip Manager (admin.html)
+   to add/edit these without touching code.
+   ========================================================================= */
+const CATEGORIES = [
+  { id: "outstation", label: "Outstation Trips" },
+  { id: "local8080", label: "Local Package" },
+  { id: "airport", label: "Airport Transfer" },
+  { id: "localride", label: "Short Rides" }
+];
+
+const PACKAGES = {
+  outstation: [
+    {
+      route: "Vapi/Daman/Silvassa → Statue of Unity",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 5999 },
+        { type: "mapo XL", price: 6999 },
+        { type: "mapo XL premium", price: 9999 },
+        { type: "mapo Traveller (20-seater)", price: 17999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa → Trimbakeshwar",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 4999 },
+        { type: "mapo XL", price: 5999 },
+        { type: "mapo XL premium", price: 7499 },
+        { type: "mapo Traveller (20-seater)", price: 11999 }
+      ]
+    }
+  ],
+  local8080: [
+    {
+      route: "Vapi/Daman/Silvassa — Local Package",
+      note: "8 hours / 80 km included",
+      cars: [
+        { type: "mapo", price: 1999 },
+        { type: "mapo XL", price: 2199 },
+        { type: "mapo XL premium", price: 3199 }
+      ]
+    }
+  ],
+  airport: [
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2999 },
+        { type: "mapo XL", price: 3999 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4799 },
+        { type: "mapo XL", price: 5499 },
+        { type: "mapo XL premium", price: 6499 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2799 },
+        { type: "mapo XL", price: 3799 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4299 },
+        { type: "mapo XL", price: 5299 },
+        { type: "mapo XL premium", price: 6299 }
+      ]
+    }
+  ],
+  localride: [
+    {
+      route: "0 – 10 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 573 },
+        { type: "mapo XL", price: 703 },
+        { type: "mapo XL premium", price: 944 }
+      ]
+    },
+    {
+      route: "11 – 20 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 767 },
+        { type: "mapo XL", price: 911 },
+        { type: "mapo XL premium", price: 1272 }
+      ]
+    },
+    {
+      route: "21 – 30 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 965 },
+        { type: "mapo XL", price: 1119 },
+        { type: "mapo XL premium", price: 1598 }
+      ]
+    },
+    {
+      route: "31 – 40 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 1163 },
+        { type: "mapo XL", price: 1327 },
+        { type: "mapo XL premium", price: 1925 }
+      ]
+    }
+  ]
+};
+
+// Extra per-km / per-hour rates once a package's included km/hours are exceeded
+const EXTRA_RATES = [
+  { type: "mapo", perKm: 12, perHour: 100 },
+  { type: "mapo XL", perKm: 14, perHour: 120 },
+  { type: "mapo XL premium", perKm: 20, perHour: 170 },
+  { type: "mapo Traveller", perKm: 32, perHour: 200 }
+];
+
+// "Trips We Do" carousel — the advertising strip. Add a `photo` filename
+// (e.g. "statue-of-unity.jpg", placed next to index.html) to use a real
+// photo instead of the plain color card.
+const PROMO_TRIPS = [
+  { title: "Statue of Unity", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 5999, color: "#3D5A47", searchTerm: "Statue of Unity", photo: null },
+  { title: "Trimbakeshwar", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 4999, color: "#5A4632", searchTerm: "Trimbakeshwar", photo: null },
+  { title: "Mumbai Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2999, color: "#33475B", searchTerm: "Mumbai Airport", photo: null },
+  { title: "Surat Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2799, color: "#4A3A55", searchTerm: "Surat Airport", photo: null },
+  { title: "Local Package", eyebrow: "8 HRS / 80 KM", fromPrice: 1999, color: "#6B4A2E", searchTerm: "Local Package", photo: null }
+];
+
+/* ================= NOTHING BELOW THIS LINE NEEDS EDITING ================= */
+
+let couponApplied = false;
+
+function discountedPrice(price){
+  return Math.round(price * (1 - COUPON_DISCOUNT));
+}
+
+function waLink(pkgRoute, note, car){
+  const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+  const couponLine = couponApplied ? `%0ACoupon: ${COUPON_CODE} (10%25 off)` : "";
+  const msg = `Hi mapocabs, I'd like to book a cab.%0ATrip: ${pkgRoute}%0A${note}%0ACar: ${car.type}%0AFare: Rs.${finalPrice}${couponLine}`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+document.getElementById("footerWaLink").href = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+// Sends a row to your Google Sheet via the Apps Script Web App.
+// Fails silently (site keeps working) if WEBHOOK_URL hasn't been set yet.
+function logToSheet(payload){
+  if(!WEBHOOK_URL || WEBHOOK_URL.indexOf("PASTE_YOUR") === 0){
+    console.log("WEBHOOK_URL not set yet — skipping sheet log.", payload);
+    return Promise.resolve();
+  }
+  return fetch(WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors", // Apps Script doesn't return normal CORS headers; we don't need to read the response
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  }).catch(err => console.log("Sheet log failed (site still works):", err));
+}
+
+function logBookingClick(pkgRoute, note, car){
+  const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+  logToSheet({
+    type: "enquiry",
+    name: "",
+    phone: "",
+    trip: pkgRoute,
+    car: car.type,
+    price: finalPrice,
+    message: `Tapped Book on WhatsApp · ${note}${couponApplied ? ` · Coupon ${COUPON_CODE} applied` : ""}`
+  });
+}
+
+function normalize(s){ return s.trim().toLowerCase(); }
+
+function flatten(){
+  let all = [];
+  CATEGORIES.forEach(c => {
+    (PACKAGES[c.id] || []).forEach(p => all.push({ ...p, catId: c.id, catLabel: c.label }));
+  });
+  return all;
+}
+
+function renderCard(pkg){
+  const carsHtml = pkg.cars.map(car => {
+    const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+    const priceHtml = couponApplied
+      ? `<span class="price-strike">₹${car.price.toLocaleString('en-IN')}</span><span class="car-price">₹${finalPrice.toLocaleString('en-IN')}</span>`
+      : `<span class="car-price">₹${finalPrice.toLocaleString('en-IN')}</span>`;
+    return `
+    <div class="car-row">
+      <div class="car-name">${car.type}</div>
+      <div class="car-right">
+        <div>${priceHtml}</div>
+        <a class="wa-btn" href="${waLink(pkg.route, pkg.note, car)}" target="_blank" rel="noopener"
+           onclick='logBookingClick(${JSON.stringify(pkg.route)}, ${JSON.stringify(pkg.note)}, ${JSON.stringify(car)})'>Book on WhatsApp</a>
+      </div>
+    </div>
+  `;
+  }).join("");
+  return `
+    <div class="card">
+      <div class="card-route">${pkg.route}</div>
+      <div class="card-sub">${pkg.catLabel}${pkg.note ? " · " + pkg.note : ""}</div>
+      <div class="car-list">${carsHtml}</div>
+    </div>
+  `;
+}
+
+let lastShown = { list: [], heading: "" };
+
+function showResults(list, headingText){
+  lastShown = { list, heading: headingText };
+  const resultsEl = document.getElementById("results");
+  if(list.length === 0){
+    resultsEl.innerHTML = `
+      <div class="results-head"><h2>${headingText}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+      <div class="no-match">No match yet — message us on WhatsApp for a custom quote, <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" style="color:var(--amber)">tap here</a>.</div>
+    `;
+    return;
+  }
+  resultsEl.innerHTML = `
+    <div class="results-head"><h2>${headingText}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+    ${list.map(renderCard).join("")}
+  `;
+  resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function runSearch(){
+  const q = normalize(document.getElementById("searchInput").value);
+  if(!q){ clearResults(); return; }
+  const matches = flatten().filter(p => normalize(p.route).includes(q) || normalize(p.catLabel).includes(q));
+  showResults(matches, `Results for "${document.getElementById("searchInput").value}"`);
+}
+
+function quickFilter(catId){
+  document.getElementById("searchInput").value = "";
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const list = (PACKAGES[catId] || []).map(p => ({ ...p, catId: cat.id, catLabel: cat.label }));
+  showResults(list, cat.label);
+}
+
+function searchFromPromo(term){
+  document.getElementById("searchInput").value = term;
+  runSearch();
+}
+
+function clearResults(){
+  document.getElementById("results").innerHTML = "";
+  document.getElementById("searchInput").value = "";
+  lastShown = { list: [], heading: "" };
+}
+
+document.getElementById("searchInput").addEventListener("keyup", e => { if(e.key === "Enter") runSearch(); });
+
+function applyCoupon(){
+  const input = document.getElementById("couponInput");
+  const msgEl = document.getElementById("couponMsg");
+  const code = input.value.trim().toUpperCase();
+
+  if(code === COUPON_CODE){
+    couponApplied = true;
+    const bar = document.getElementById("couponBar");
+    bar.innerHTML = `<span class="coupon-applied-badge">🎉 ${COUPON_CODE} applied — 10% off <button onclick="removeCoupon()">✕ remove</button></span>`;
+    if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+    renderCarousel();
+  } else {
+    msgEl.textContent = "That code isn't valid.";
+    msgEl.className = "coupon-msg err";
+  }
+}
+
+function removeCoupon(){
+  couponApplied = false;
+  const bar = document.getElementById("couponBar");
+  bar.innerHTML = `
+    <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+    <button onclick="applyCoupon()">Apply</button>
+    <span class="coupon-msg" id="couponMsg"></span>
+  `;
+  if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+  renderCarousel();
+}
+
+function renderCarousel(){
+  const track = document.getElementById("carouselTrack");
+  track.innerHTML = PROMO_TRIPS.map(t => {
+    const bg = t.photo
+      ? `background-image:linear-gradient(180deg, rgba(20,19,18,0.15), rgba(20,19,18,0.85)), url('${t.photo}'); background-size:cover; background-position:center;`
+      : `background:linear-gradient(160deg, ${t.color}, var(--asphalt));`;
+    const priceHtml = couponApplied
+      ? `<span class="promo-price-strike">₹${t.fromPrice.toLocaleString('en-IN')}</span>Starting ₹${discountedPrice(t.fromPrice).toLocaleString('en-IN')}`
+      : `Starting ₹${t.fromPrice.toLocaleString('en-IN')}`;
+    return `
+      <div class="promo-card" style="${bg}" onclick="searchFromPromo('${t.searchTerm.replace(/'/g,"\\'")}')">
+        <div class="pc-content">
+          <div class="pc-eyebrow">${t.eyebrow}</div>
+          <div class="pc-title">${t.title}</div>
+          <div class="pc-price">${priceHtml}</div>
+          <div class="pc-cta">View fares →</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function scrollCarousel(dir){
+  const track = document.getElementById("carouselTrack");
+  track.scrollBy({ left: dir * 300, behavior: "smooth" });
+}
+
+function renderRates(){
+  const grid = document.getElementById("ratesGrid");
+  grid.innerHTML = EXTRA_RATES.map(r => `
+    <div class="terms-cell">
+      <div class="tc-car">${r.type}</div>
+      <div class="tc-rate">₹${r.perKm}/km extra</div>
+      <div class="tc-rate">₹${r.perHour}/hr extra</div>
+    </div>
+  `).join("");
+}
+
+renderCarousel();
+renderRates();
+
+/* ---------------- Enquiry form ---------------- */
+function submitEnquiry(){
+  const name = document.getElementById("enqName").value.trim();
+  const phone = document.getElementById("enqPhone").value.trim();
+  const trip = document.getElementById("enqTrip").value.trim();
+  const message = document.getElementById("enqMsg").value.trim();
+  const statusEl = document.getElementById("enqStatus");
+
+  if(!name || !phone){
+    statusEl.textContent = "Please add at least your name and phone number.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "enquiry", name, phone, trip, car: "", price: "", message });
+
+  statusEl.textContent = "Thanks — we've got your enquiry and will reach out shortly.";
+  statusEl.className = "form-status ok";
+  document.getElementById("enqName").value = "";
+  document.getElementById("enqPhone").value = "";
+  document.getElementById("enqTrip").value = "";
+  document.getElementById("enqMsg").value = "";
+}
+
+/* ---------------- Feedback modal ---------------- */
+let selectedRating = 0;
+
+function renderStars(){
+  const row = document.getElementById("starRow");
+  row.innerHTML = [1,2,3,4,5].map(n => `
+    <button type="button" class="star-btn ${n <= selectedRating ? 'active' : ''}" onclick="setRating(${n})">★</button>
+  `).join("");
+}
+function setRating(n){ selectedRating = n; renderStars(); }
+renderStars();
+
+function openFeedback(){
+  document.getElementById("feedbackModal").classList.add("open");
+}
+function closeFeedback(){
+  document.getElementById("feedbackModal").classList.remove("open");
+}
+document.getElementById("feedbackModal").addEventListener("click", e => {
+  if(e.target.id === "feedbackModal") closeFeedback();
+});
+
+function submitFeedback(){
+  const name = document.getElementById("fbName").value.trim();
+  const phone = document.getElementById("fbPhone").value.trim();
+  const comment = document.getElementById("fbComment").value.trim();
+  const statusEl = document.getElementById("fbStatus");
+
+  if(!name || selectedRating === 0){
+    statusEl.textContent = "Please add your name and pick a star rating.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "feedback", name, phone, rating: selectedRating, comment });
+
+  statusEl.textContent = "Thank you for the feedback!";
+  statusEl.className = "form-status ok";
+  setTimeout(() => {
+    closeFeedback();
+    document.getElementById("fbName").value = "";
+    document.getElementById("fbPhone").value = "";
+    document.getElementById("fbComment").value = "";
+    selectedRating = 0;
+    renderStars();
+    statusEl.textContent = "";
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
