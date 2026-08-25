@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<!--
+  mapocabs website
+  Version: 1.8
+  Last updated: 23 Aug 2026
+  See CHANGELOG.md for full history of what's changed.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mapocabs — Fixed-Fare Cabs in Vapi, Daman & Silvassa</title>
+<meta name="description" content="mapocabs — fixed-fare cab service in Vapi, Daman and Silvassa. Outstation trips, airport transfers, local packages and quick rides. Book instantly on WhatsApp.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1C1B1A">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="mapocabs">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1C1B1A; --asphalt-soft:#2A2825; --amber:#FFD23F; --amber-deep:#E8B800;
+    --paper:#F7F4EE; --muted:#8A8377; --highway-green:#1F5F4A; --line:rgba(247,244,238,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans', sans-serif; line-height:1.5;}
+  h1,h2,h3,.display{font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;}
+  .mono{font-family:'Space Mono', monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  .lane-divider{height:0; border-top:3px dashed rgba(247,244,238,0.22); margin:56px 0;}
+
+  header{padding:22px 0; border-bottom:1px solid var(--line);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo img{height:34px; width:auto;}
+  .logo .logo-text{font-family:'Barlow Condensed'; font-weight:700; font-size:26px;}
+  .logo .logo-text span{color:var(--amber);}
+  .header-call{
+    font-family:'Space Mono'; font-size:13px; color:var(--amber); text-decoration:none;
+    border:1px solid var(--amber); padding:8px 14px; border-radius:6px;
+  }
+
+  .hero{padding:56px 0 8px;}
+  .eyebrow{font-family:'Space Mono'; font-size:13px; color:var(--amber); letter-spacing:0.08em; margin-bottom:16px;}
+  .hero h1{font-size:clamp(34px, 5.2vw, 60px); line-height:0.98; max-width:760px;}
+  .hero h1 span{color:var(--amber);}
+  .hero-sub{max-width:520px; margin-top:16px; color:#D8D2C4; font-size:15.5px;}
+
+  /* SEARCH BAR */
+  .search-shell{
+    margin-top:32px; background:var(--asphalt-soft); border:1px solid var(--line);
+    border-radius:10px; padding:8px; display:flex; gap:8px; position:relative;
+  }
+  .search-shell input{
+    flex:1; background:transparent; border:none; color:var(--paper);
+    padding:14px 16px; font-family:'Work Sans'; font-size:16px; outline:none;
+  }
+  .search-shell input::placeholder{color:#6B6560;}
+  .search-shell button{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:0 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:17px;
+    letter-spacing:0.02em; cursor:pointer;
+  }
+  .search-shell button:hover{background:var(--amber-deep);}
+
+  /* HOT SELLING PILLS */
+  .hot-row{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .hot-pill{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 16px; border-radius:24px; font-size:13.5px; font-weight:500; cursor:pointer;
+    display:flex; align-items:center; gap:8px;
+  }
+  .hot-pill:hover{border-color:var(--amber);}
+  .hot-pill-outline{background:transparent; border:1px dashed var(--muted); color:var(--muted);}
+  .hot-pill-outline:hover{border-color:var(--amber); color:var(--amber);}
+  .enquiry-panel.jump-highlight{animation:mp-highlight 1.6s ease-out;}
+  @keyframes mp-highlight{
+    0%{box-shadow:0 0 0 0 rgba(255,210,63,0.5);}
+    40%{box-shadow:0 0 0 6px rgba(255,210,63,0.15);}
+    100%{box-shadow:0 0 0 0 rgba(255,210,63,0);}
+  }
+  .hot-pill .tag{
+    background:var(--amber); color:var(--asphalt); font-family:'Space Mono'; font-size:9.5px;
+    padding:2px 6px; border-radius:3px; letter-spacing:0.04em; font-weight:700;
+  }
+
+  /* RESULTS */
+  #results{margin-top:8px;}
+  .results-head{display:flex; justify-content:space-between; align-items:baseline; margin:28px 0 14px;}
+  .results-head h2{font-size:22px;}
+  .results-head .clear-btn{
+    background:none; border:none; color:var(--muted); font-family:'Space Mono'; font-size:12px;
+    cursor:pointer; text-decoration:underline;
+  }
+  .card{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:14px;
+  }
+  .card-route{font-family:'Barlow Condensed'; font-weight:600; font-size:21px;}
+  .toggle-off{position:relative; width:40px; height:22px; background:#ccc; border-radius:12px; display:inline-block; vertical-align:middle;}
+  .toggle-off::after{content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 0 0 1px #bbb;}
+  .not-launched-row{display:flex; align-items:center; justify-content:space-between; background:#f4f4f2; border-radius:8px; padding:10px 12px; margin-top:8px;}
+  .not-launched-row span{font-size:13px; color:#666;}
+  .hot-tag{background:#fbe1e1; color:#a32d2d; font-size:11px; font-weight:600; padding:3px 8px; border-radius:6px; margin-right:8px;}
+  .card-sub{font-family:'Space Mono'; font-size:11.5px; color:var(--muted); margin-top:6px;}
+  .car-list{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+  .car-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border-top:1px solid var(--line); padding-top:10px; flex-wrap:wrap;
+  }
+  .car-row:first-child{border-top:none; padding-top:0;}
+  .car-name{font-size:15px; font-weight:500;}
+  .car-right{display:flex; align-items:center; gap:14px;}
+  .car-price{font-family:'Space Mono'; font-weight:700; font-size:20px; color:var(--amber);}
+  .wa-btn{
+    background:var(--highway-green); color:var(--paper); border:none; border-radius:6px;
+    padding:9px 16px; font-family:'Work Sans'; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .wa-btn:hover{opacity:0.88;}
+  .no-match{color:var(--muted); font-family:'Space Mono'; font-size:13px; padding:12px 0;}
+
+  /* CAROUSEL — "Trips We Do" advertising strip */
+  .carousel-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px;}
+  .carousel-head h2{font-size:28px;}
+  .carousel-arrows{display:flex; gap:8px;}
+  .arrow-btn{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px;
+  }
+  .arrow-btn:hover{border-color:var(--amber);}
+  .carousel-track{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px;
+    scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .promo-card{
+    scroll-snap-align:start; flex:0 0 280px; border-radius:14px; padding:24px;
+    min-height:200px; display:flex; flex-direction:column; justify-content:flex-end;
+    border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer;
+  }
+  .promo-card::before{
+    content:""; position:absolute; inset:0; opacity:0.9;
+  }
+  .promo-card .pc-content{position:relative; z-index:1;}
+  .promo-card .pc-eyebrow{font-family:'Space Mono'; font-size:10.5px; letter-spacing:0.08em; opacity:0.85;}
+  .promo-card .pc-title{font-family:'Barlow Condensed'; font-weight:700; font-size:26px; margin-top:6px; line-height:1;}
+  .promo-card .pc-price{font-family:'Space Mono'; font-size:13px; margin-top:10px;}
+  .promo-card .pc-cta{
+    margin-top:14px; display:inline-block; background:var(--asphalt); color:var(--paper);
+    padding:8px 14px; border-radius:6px; font-size:12.5px; font-weight:600;
+  }
+
+  /* extra charges */
+  .terms-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;}
+  @media (max-width:720px){ .terms-grid{grid-template-columns:1fr 1fr;} }
+  .terms-cell{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; padding:14px;}
+  .terms-cell .tc-car{font-family:'Barlow Condensed'; font-weight:600; font-size:16px;}
+  .terms-cell .tc-rate{font-family:'Space Mono'; font-size:12px; color:var(--amber); margin-top:6px;}
+  .terms-list{margin-top:18px; color:#D8D2C4; font-size:14px;}
+  .terms-list li{margin-bottom:6px; margin-left:18px;}
+
+  /* ABOUT US */
+  .about-panel{
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .about-person{display:flex; align-items:center; gap:14px;}
+  .about-photo{
+    width:76px; height:76px; border-radius:50%; overflow:hidden;
+    border:2px solid var(--amber); flex-shrink:0;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .about-caption{
+    font-family:'Barlow Condensed'; font-weight:600; font-size:16px; color:var(--paper);
+  }
+  .about-caption span{
+    display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted);
+    font-weight:400; margin-top:2px; text-transform:none; letter-spacing:0.02em;
+  }
+  .about-tagline{
+    font-family:'Barlow Condensed'; font-weight:600; font-size:20px; color:var(--amber);
+    margin-bottom:16px; line-height:1.25;
+  }
+  .about-body{color:#D8D2C4; font-size:15px; line-height:1.65; max-width:640px;}
+  .about-body p{margin-bottom:14px;}
+  .about-body p:last-child{margin-bottom:0;}
+  .about-signoff{
+    font-family:'Barlow Condensed'; font-weight:700; font-size:17px; color:var(--paper);
+    margin-top:16px; letter-spacing:0.02em;
+  }
+  .about-toggle-btn{
+    background:transparent; border:1px solid var(--amber); color:var(--amber);
+    padding:10px 18px; border-radius:6px; font-family:'Barlow Condensed'; font-weight:700;
+    font-size:14px; letter-spacing:0.02em; cursor:pointer; text-transform:uppercase; margin-top:16px;
+  }
+  .about-toggle-btn:hover{background:var(--amber); color:var(--asphalt);}
+  .about-collapsed .about-full{display:none;}
+
+  footer{padding:40px 0 60px; color:var(--muted); font-size:14px;}
+  footer a{color:var(--amber); text-decoration:none;}
+  .foot-brand{font-family:'Barlow Condensed'; font-weight:700; font-size:18px; color:var(--paper); margin-bottom:6px;}
+  .foot-social{display:flex; gap:14px; margin-top:16px;}
+  .foot-social a{border:1px solid var(--line); border-radius:6px; padding:8px 14px; font-family:'Space Mono'; font-size:12px; color:var(--paper); letter-spacing:0.03em;}
+  .foot-social a:hover{border-color:var(--amber); color:var(--amber);}
+
+  @media (max-width:600px){ .search-shell{flex-direction:column;} .search-shell button{padding:14px;} }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  /* ENQUIRY FORM */
+  .enquiry-panel{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px; padding:28px;}
+  .enquiry-panel h2{font-size:26px; margin-bottom:6px;}
+  .enquiry-sub{color:var(--muted); font-size:13.5px; margin-bottom:20px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .form-grid .full{grid-column:1 / -1;}
+  .form-field label{display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted); letter-spacing:0.06em; margin-bottom:6px;}
+  .form-field input, .form-field textarea{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:12px 13px; border-radius:6px; font-family:'Work Sans'; font-size:14px; outline:none;
+  }
+  .form-field input:focus, .form-field textarea:focus{border-color:var(--amber);}
+  .form-field textarea{resize:vertical; min-height:80px;}
+  .form-submit-btn{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:13px 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:16px;
+    letter-spacing:0.02em; cursor:pointer; margin-top:18px;
+  }
+  .form-submit-btn:hover{background:var(--amber-deep);}
+  .form-status{margin-top:12px; font-family:'Space Mono'; font-size:12.5px;}
+  .form-status.ok{color:var(--highway-green);}
+  .form-status.err{color:#C4553D;}
+
+  /* FEEDBACK BUTTON + MODAL */
+  .feedback-fab{
+    position:fixed; bottom:22px; right:22px; z-index:40;
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:26px;
+    padding:13px 20px; font-family:'Barlow Condensed'; font-weight:700; font-size:15px;
+    letter-spacing:0.02em; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .feedback-fab:hover{background:var(--amber-deep);}
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(10,9,8,0.72); z-index:50;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px;
+    padding:26px; max-width:420px; width:100%; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--muted); font-size:20px; cursor:pointer;
+  }
+  .modal-close:hover{color:var(--amber);}
+  .modal-box h2{font-size:22px; margin-bottom:16px;}
+  .star-row{display:flex; gap:8px; margin-top:6px;}
+  .star-btn{
+    background:none; border:1px solid var(--line); color:var(--muted); width:40px; height:40px;
+    border-radius:6px; font-size:18px; cursor:pointer;
+  }
+  .star-btn.active{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+
+  /* COUPON */
+  .coupon-bar{
+    margin-top:16px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  }
+  .coupon-bar input{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 14px; border-radius:6px; font-family:'Space Mono'; font-size:13px;
+    text-transform:uppercase; outline:none; width:180px;
+  }
+  .coupon-bar input:focus{border-color:var(--amber);}
+  .coupon-bar button{
+    background:transparent; border:1px solid var(--amber); color:var(--amber);
+    padding:10px 16px; border-radius:6px; font-family:'Barlow Condensed'; font-weight:700;
+    font-size:14px; letter-spacing:0.02em; cursor:pointer; text-transform:uppercase;
+  }
+  .coupon-bar button:hover{background:var(--amber); color:var(--asphalt);}
+  .coupon-msg{font-family:'Space Mono'; font-size:12px;}
+  .coupon-msg.ok{color:var(--highway-green);}
+  .coupon-msg.err{color:#C4553D;}
+  .coupon-applied-badge{
+    background:var(--highway-green); color:var(--paper); font-family:'Space Mono';
+    font-size:11.5px; padding:6px 12px; border-radius:20px; display:inline-flex;
+    align-items:center; gap:8px;
+  }
+  .coupon-applied-badge button{
+    background:none; border:none; color:var(--paper); cursor:pointer; font-size:13px; opacity:0.8;
+  }
+
+  /* DAMAN AIRPORT TEASER BANNER */
+  .teaser-banner{
+    position:relative; background:linear-gradient(135deg, var(--asphalt) 0%, var(--asphalt-soft) 100%);
+    border:1px solid var(--amber); border-radius:14px; padding:22px 26px; overflow:hidden;
+    margin-top:18px; box-shadow:0 0 0 1px rgba(255,210,63,0.08), 0 12px 28px rgba(0,0,0,0.35);
+    cursor:pointer;
+  }
+  .teaser-banner::before{
+    content:""; position:absolute; top:-40px; right:-30px; width:160px; height:160px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,210,63,0.18) 0%, rgba(255,210,63,0) 70%);
+  }
+  .teaser-eyebrow{display:flex; align-items:center; gap:8px; margin-bottom:10px;}
+  .teaser-dot{position:relative; width:9px; height:9px; flex-shrink:0;}
+  .teaser-dot::before{
+    content:""; position:absolute; inset:0; border-radius:50%; background:var(--amber); opacity:0.55;
+    animation:mp-ping 1.5s ease-out infinite;
+  }
+  .teaser-dot::after{content:""; position:absolute; inset:0; border-radius:50%; background:var(--amber);}
+  @keyframes mp-ping{0%{transform:scale(1); opacity:0.55;}70%,100%{transform:scale(2.8); opacity:0;}}
+  .teaser-tag{font-family:'Space Mono'; font-size:11px; color:var(--amber); letter-spacing:0.1em;}
+  .teaser-headline{font-size:26px; font-weight:700; color:var(--paper); line-height:1.15; margin-bottom:14px;}
+  .teaser-headline span{color:var(--amber);}
+  .coupon-toggle-row{
+    display:flex; align-items:center; justify-content:space-between; background:rgba(255,210,63,0.07);
+    border:1px dashed rgba(255,210,63,0.5); border-radius:9px; padding:12px 16px;
+  }
+  .coupon-toggle-code{font-family:'Space Mono'; font-size:15px; font-weight:700; color:var(--amber); letter-spacing:0.03em;}
+  .coupon-toggle-sub{font-size:13px; color:#c9c6c1; margin-top:2px;}
+  .coupon-toggle-switch{position:relative; width:44px; height:24px; background:var(--amber); border-radius:14px; flex-shrink:0;}
+  .coupon-toggle-switch::after{
+    content:""; position:absolute; top:2px; right:2px; width:20px; height:20px; border-radius:50%; background:var(--asphalt);
+  }
+  .price-strike{
+    font-family:'Space Mono'; font-size:13px; color:var(--muted); text-decoration:line-through;
+    margin-right:8px;
+  }
+  .promo-price-strike{
+    font-family:'Space Mono'; font-size:11px; color:rgba(247,244,238,0.55); text-decoration:line-through;
+    margin-right:6px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="data:image/png;base64,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" alt="mapocabs">
+      <div class="logo-text">mapo<span>cabs</span></div>
+    </div>
+    <a class="header-call" href="tel:+919313268624">CALL +91 93132 68624</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CHOICE OF PROFESSIONALS · VAPI / DAMAN / SILVASSA</div>
+    <h1>Fixed-fare cabs. <span>No surprises.</span></h1>
+    <p class="hero-sub">Search where you're headed and see every car type and price up front.</p>
+
+    <div class="search-shell">
+      <input id="searchInput" type="text" placeholder="Search a destination — e.g. Statue of Unity, Mumbai Airport, Trimbakeshwar…" autocomplete="off">
+      <button onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="hot-row">
+      <div class="hot-pill" onclick="quickFilter('local8080')">Mapo Local</div>
+      <div class="hot-pill" onclick="quickFilter('airport')"><span class="tag">HOT</span> Airport Transfer</div>
+      <div class="hot-pill" onclick="quickFilter('outstation')">Outstation Trips</div>
+      <div class="hot-pill" onclick="quickFilter('localride')"><span class="tag">HOT</span> Mapo Quick Trip</div>
+      <div class="hot-pill hot-pill-outline" onclick="goToEnquiry()">Custom Trip →</div>
+    </div>
+
+    <div class="teaser-banner" onclick="quickFilter('localride')">
+      <div class="teaser-eyebrow">
+        <span class="teaser-dot"></span>
+        <span class="teaser-tag">COMING SOON</span>
+      </div>
+      <div class="teaser-headline">Daman Airport rides<br><span>are about to get organised.</span></div>
+      <div class="coupon-toggle-row" onclick="event.stopPropagation(); applyRakhiCoupon();">
+        <div>
+          <div class="coupon-toggle-code">MAPORAKHI</div>
+          <div class="coupon-toggle-sub">This Rakshabandhan, get 10% off every ride</div>
+        </div>
+        <div class="coupon-toggle-switch"></div>
+      </div>
+    </div>
+
+    <div class="coupon-bar" id="couponBar">
+      <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+      <button onclick="applyCoupon()">Apply</button>
+      <span class="coupon-msg" id="couponMsg"></span>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="carousel-head">
+    <h2>Trips We Do</h2>
+    <div class="carousel-arrows">
+      <button class="arrow-btn" onclick="scrollCarousel(-1)">‹</button>
+      <button class="arrow-btn" onclick="scrollCarousel(1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="carouselTrack"></div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div style="margin-bottom:24px;"><h2 style="font-size:28px;">About mapocabs</h2></div>
+  <div class="about-panel about-collapsed" id="aboutPanel">
+    <div class="about-person">
+      <div class="about-photo">
+        <img src="data:image/jpeg;base64,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" alt="Adarsh Upadhyay, Founder of mapocabs">
+      </div>
+      <div class="about-caption">Adarsh Upadhyay<span>Founder, mapocabs</span></div>
+    </div>
+    <div>
+      <div class="about-tagline">More Than Just a Ride. It's Your Journey, Our Responsibility.</div>
+      <div class="about-body">
+        <p>mapocabs is a growing cab service built with a simple idea — travel should be comfortable, reliable, and stress-free.</p>
+        <div class="about-full">
+          <p>Founded in 2022 in Vapi, mapocabs provides local, outstation, airport, and customized cab services for individuals, families, and businesses. From a quick ride across the city to a long-distance journey, we focus on making every trip smooth from booking to drop-off.</p>
+          <p>We work with a trusted network of professional drivers and vehicle partners while maintaining our commitment to punctuality, safety, transparent pricing, and customer comfort.</p>
+          <p>At mapocabs, we believe a cab service is not just about getting you from Point A to Point B. It's about respecting your time, taking care of your journey, and making sure you reach your destination with peace of mind.</p>
+        </div>
+        <div class="about-signoff">mapocabs — Your Ride, Our Commitment.</div>
+      </div>
+      <button class="about-toggle-btn" id="aboutToggleBtn" onclick="toggleAbout()">Read more</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div style="margin-bottom:20px;"><h2 style="font-size:28px;">Extra Charges &amp; Terms</h2></div>
+  <div class="mono" style="font-size:12px; color:var(--muted); margin-bottom:18px;">Applies if you exceed the included kilometres or hours in a package.</div>
+  <div class="terms-grid" id="ratesGrid"></div>
+  <ul class="terms-list">
+    <li>Toll tax excluded on outstation &amp; local packages. Included on airport transfers.</li>
+    <li>Parking charges extra, if applicable.</li>
+    <li>Minimum 300 km per day on outstation full-day trips.</li>
+    <li>Driver allowance (D/A) charged extra.</li>
+  </ul>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="enquiry-panel" id="enquiryPanel">
+    <h2>Send us an enquiry</h2>
+    <div class="enquiry-sub">Don't use WhatsApp, or want a custom trip quoted? Fill this in and we'll get back to you — it also saves straight to our system.</div>
+    <div class="form-grid">
+      <div class="form-field"><label for="enqName">NAME</label><input id="enqName" placeholder="Your name"></div>
+      <div class="form-field"><label for="enqPhone">PHONE</label><input id="enqPhone" placeholder="Your phone number"></div>
+      <div class="form-field full"><label for="enqTrip">TRIP / ROUTE</label><input id="enqTrip" placeholder="e.g. Vapi to Mumbai Airport, 15th August"></div>
+      <div class="form-field full"><label for="enqMsg">MESSAGE</label><textarea id="enqMsg" placeholder="Any details — number of passengers, timing, luggage, etc."></textarea></div>
+    </div>
+    <button class="form-submit-btn" onclick="submitEnquiry()">Send Enquiry</button>
+    <div class="form-status" id="enqStatus"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">mapocabs</div>
+    Choice of professionals · <a href="https://mapocabs.com">mapocabs.com</a><br>
+    Book on <a href="#" id="footerWaLink">WhatsApp</a> or call <span class="mono">+91 93132 68624</span>.
+    <div class="foot-social">
+      <a href="https://instagram.com/mapocabs" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/mapocabs" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://linkedin.com/company/mapocabs" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="mono" style="font-size:10.5px; color:var(--muted); margin-top:16px; opacity:0.7;">
+      Site v1.8 · Updated 23 Aug 2026
+    </div>
+  </div>
+</footer>
+
+<button class="feedback-fab" onclick="openFeedback()">★ Feedback</button>
+
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeFeedback()">✕</button>
+    <h2>Rate your ride</h2>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbName">NAME</label>
+      <input id="fbName" placeholder="Your name">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbPhone">PHONE (optional)</label>
+      <input id="fbPhone" placeholder="Your phone number">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label>RATING</label>
+      <div class="star-row" id="starRow"></div>
+    </div>
+    <div class="form-field">
+      <label for="fbComment">COMMENT</label>
+      <textarea id="fbComment" placeholder="How was your trip?"></textarea>
+    </div>
+    <button class="form-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+    <div class="form-status" id="fbStatus"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   EDIT YOUR DETAILS HERE
+   ========================================================================= */
+const WHATSAPP_NUMBER = "919313268624";
+
+// Paste the Google Apps Script "Web app" URL here once you've deployed it
+// (see google-apps-script.gs.txt for the code to paste into Apps Script).
+// Leave as-is and enquiries just won't be logged to a sheet yet.
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzD8p7lnvQUBbF5Yg6XBLBbueq7FcJn3QiV3joON-jsZ6BoMlkhQ0Uh9NG29rYUWmnS/exec";
+
+// Coupon: applying this shows a 10% "discount" off the listed price.
+// Your listed prices already include this 10% buffer, so this doesn't
+// cost you anything extra — it just makes the offer visible to customers.
+const COUPON_CODE = "MAPORAKHI";
+const COUPON_DISCOUNT = 0.10;
+
+/* =========================================================================
+   YOUR PACKAGES — grouped by category. Use the Trip Manager (admin.html)
+   to add/edit these without touching code.
+   ========================================================================= */
+const CATEGORIES = [
+  { id: "outstation", label: "Outstation Trips" },
+  { id: "local8080", label: "Mapo Local" },
+  { id: "airport", label: "Airport Transfer" },
+  { id: "localride", label: "Mapo Quick Trip" }
+];
+
+const PACKAGES = {
+  outstation: [
+    {
+      route: "Vapi/Daman/Silvassa → Statue of Unity",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 5999 },
+        { type: "mapo XL", price: 6999 },
+        { type: "mapo XL premium", price: 9999 },
+        { type: "mapo Traveller (20-seater)", price: 17999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa → Trimbakeshwar",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 4999 },
+        { type: "mapo XL", price: 5999 },
+        { type: "mapo XL premium", price: 7499 },
+        { type: "mapo Traveller (20-seater)", price: 11999 }
+      ]
+    }
+  ],
+  local8080: [
+    {
+      route: "Vapi/Daman/Silvassa — Local Package",
+      note: "8 hours / 80 km included",
+      cars: [
+        { type: "mapo", price: 1999 },
+        { type: "mapo XL", price: 2199 },
+        { type: "mapo XL premium", price: 3199 }
+      ]
+    }
+  ],
+  airport: [
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2999 },
+        { type: "mapo XL", price: 3999 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4799 },
+        { type: "mapo XL", price: 5499 },
+        { type: "mapo XL premium", price: 6499 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2799 },
+        { type: "mapo XL", price: 3799 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4299 },
+        { type: "mapo XL", price: 5299 },
+        { type: "mapo XL premium", price: 6299 }
+      ]
+    }
+  ],
+  localride: [
+    {
+      route: "Daman Airport Drop & Pickup",
+      note: "Point to point · Toll included",
+      launched: false,
+      cars: [
+        { type: "mapo", price: 599 }
+      ]
+    },
+    {
+      route: "0 – 10 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 573 },
+        { type: "mapo XL", price: 703 },
+        { type: "mapo XL premium", price: 944 }
+      ]
+    },
+    {
+      route: "11 – 20 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 767 },
+        { type: "mapo XL", price: 911 },
+        { type: "mapo XL premium", price: 1272 }
+      ]
+    },
+    {
+      route: "21 – 30 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 965 },
+        { type: "mapo XL", price: 1119 },
+        { type: "mapo XL premium", price: 1598 }
+      ]
+    },
+    {
+      route: "31 – 40 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 1163 },
+        { type: "mapo XL", price: 1327 },
+        { type: "mapo XL premium", price: 1925 }
+      ]
+    }
+  ]
+};
+
+// Extra per-km / per-hour rates once a package's included km/hours are exceeded
+const EXTRA_RATES = [
+  { type: "mapo", perKm: 12, perHour: 100 },
+  { type: "mapo XL", perKm: 14, perHour: 120 },
+  { type: "mapo XL premium", perKm: 20, perHour: 170 },
+  { type: "mapo Traveller", perKm: 32, perHour: 200 }
+];
+
+// "Trips We Do" carousel — the advertising strip. Add a `photo` filename
+// (e.g. "statue-of-unity.jpg", placed next to index.html) to use a real
+// photo instead of the plain color card.
+const PROMO_TRIPS = [
+  { title: "Statue of Unity", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 5999, color: "#3D5A47", searchTerm: "Statue of Unity", photo: null },
+  { title: "Trimbakeshwar", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 4999, color: "#5A4632", searchTerm: "Trimbakeshwar", photo: null },
+  { title: "Mumbai Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2999, color: "#33475B", searchTerm: "Mumbai Airport", photo: null },
+  { title: "Surat Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2799, color: "#4A3A55", searchTerm: "Surat Airport", photo: null },
+  { title: "Local Package", eyebrow: "8 HRS / 80 KM", fromPrice: 1999, color: "#6B4A2E", searchTerm: "Local Package", photo: null }
+];
+
+/* ================= NOTHING BELOW THIS LINE NEEDS EDITING ================= */
+
+let couponApplied = false;
+
+function discountedPrice(price){
+  return Math.round(price * (1 - COUPON_DISCOUNT));
+}
+
+function waLink(pkgRoute, note, car){
+  const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+  const couponLine = couponApplied ? `%0ACoupon: ${COUPON_CODE} (10%25 off)` : "";
+  const msg = `Hi mapocabs, I'd like to book a cab.%0ATrip: ${pkgRoute}%0A${note}%0ACar: ${car.type}%0AFare: Rs.${finalPrice}${couponLine}`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+document.getElementById("footerWaLink").href = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+// Sends a row to your Google Sheet via the Apps Script Web App.
+// Fails silently (site keeps working) if WEBHOOK_URL hasn't been set yet.
+function logToSheet(payload){
+  if(!WEBHOOK_URL || WEBHOOK_URL.indexOf("PASTE_YOUR") === 0){
+    console.log("WEBHOOK_URL not set yet — skipping sheet log.", payload);
+    return Promise.resolve();
+  }
+  return fetch(WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors", // Apps Script doesn't return normal CORS headers; we don't need to read the response
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  }).catch(err => console.log("Sheet log failed (site still works):", err));
+}
+
+function logBookingClick(pkgRoute, note, car){
+  const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+  logToSheet({
+    type: "enquiry",
+    name: "",
+    phone: "",
+    trip: pkgRoute,
+    car: car.type,
+    price: finalPrice,
+    message: `Tapped Book on WhatsApp · ${note}${couponApplied ? ` · Coupon ${COUPON_CODE} applied` : ""}`
+  });
+}
+
+function normalize(s){ return s.trim().toLowerCase(); }
+
+function flatten(){
+  let all = [];
+  CATEGORIES.forEach(c => {
+    (PACKAGES[c.id] || []).forEach(p => all.push({ ...p, catId: c.id, catLabel: c.label }));
+  });
+  return all;
+}
+
+function renderCard(pkg){
+  if(pkg.launched === false){
+    return `
+      <div class="card">
+        <div class="card-route"><span class="hot-tag">HOT</span>${pkg.route}</div>
+        <div class="card-sub">${pkg.catLabel}${pkg.note ? " · " + pkg.note : ""}</div>
+        <div style="font-size:13px;color:#666;margin:8px 0 4px;">Starts from ₹${pkg.cars[0].price}</div>
+        <div class="not-launched-row">
+          <span>Not launched yet</span>
+          <div class="toggle-off"></div>
+        </div>
+      </div>
+    `;
+  }
+  const carsHtml = pkg.cars.map(car => {
+    const finalPrice = couponApplied ? discountedPrice(car.price) : car.price;
+    const priceHtml = couponApplied
+      ? `<span class="price-strike">₹${car.price.toLocaleString('en-IN')}</span><span class="car-price">₹${finalPrice.toLocaleString('en-IN')}</span>`
+      : `<span class="car-price">₹${finalPrice.toLocaleString('en-IN')}</span>`;
+    return `
+    <div class="car-row">
+      <div class="car-name">${car.type}</div>
+      <div class="car-right">
+        <div>${priceHtml}</div>
+        <a class="wa-btn" href="${waLink(pkg.route, pkg.note, car)}" target="_blank" rel="noopener"
+           onclick='logBookingClick(${JSON.stringify(pkg.route)}, ${JSON.stringify(pkg.note)}, ${JSON.stringify(car)})'>Book on WhatsApp</a>
+      </div>
+    </div>
+  `;
+  }).join("");
+  return `
+    <div class="card">
+      <div class="card-route">${pkg.route}</div>
+      <div class="card-sub">${pkg.catLabel}${pkg.note ? " · " + pkg.note : ""}</div>
+      <div class="car-list">${carsHtml}</div>
+    </div>
+  `;
+}
+
+let lastShown = { list: [], heading: "" };
+
+function showResults(list, headingText){
+  lastShown = { list, heading: headingText };
+  const resultsEl = document.getElementById("results");
+  if(list.length === 0){
+    resultsEl.innerHTML = `
+      <div class="results-head"><h2>${headingText}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+      <div class="no-match">No match yet — message us on WhatsApp for a custom quote, <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" style="color:var(--amber)">tap here</a>.</div>
+    `;
+    return;
+  }
+  resultsEl.innerHTML = `
+    <div class="results-head"><h2>${headingText}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+    ${list.map(renderCard).join("")}
+  `;
+  resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const HOME_CITY_KEYWORDS = ["vapi", "daman", "silvassa"];
+
+function runSearch(){
+  const q = normalize(document.getElementById("searchInput").value);
+  if(!q){ clearResults(); return; }
+
+  // Searching your home base (Vapi/Daman/Silvassa) should surface everything —
+  // every trip starts from there, including Short Rides which don't otherwise
+  // mention the city name in their title.
+  if(HOME_CITY_KEYWORDS.some(k => q.includes(k))){
+    showResults(flatten(), `All Trips from Vapi / Daman / Silvassa`);
+    return;
+  }
+
+  const matches = flatten().filter(p => normalize(p.route).includes(q) || normalize(p.catLabel).includes(q));
+  showResults(matches, `Results for "${document.getElementById("searchInput").value}"`);
+}
+
+function quickFilter(catId){
+  document.getElementById("searchInput").value = "";
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const list = (PACKAGES[catId] || []).map(p => ({ ...p, catId: cat.id, catLabel: cat.label }));
+  showResults(list, cat.label);
+}
+
+function searchFromPromo(term){
+  document.getElementById("searchInput").value = term;
+  runSearch();
+}
+
+function clearResults(){
+  document.getElementById("results").innerHTML = "";
+  document.getElementById("searchInput").value = "";
+  lastShown = { list: [], heading: "" };
+}
+
+document.getElementById("searchInput").addEventListener("keyup", e => { if(e.key === "Enter") runSearch(); });
+
+function goToEnquiry(){
+  const panel = document.getElementById("enquiryPanel");
+  panel.scrollIntoView({behavior:"smooth", block:"center"});
+  panel.classList.remove("jump-highlight");
+  void panel.offsetWidth; // restart animation if clicked again
+  panel.classList.add("jump-highlight");
+}
+
+function applyRakhiCoupon(){
+  const input = document.getElementById("couponInput");
+  if(input) input.value = COUPON_CODE;
+  applyCoupon();
+  document.getElementById("couponBar").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function applyCoupon(){
+  const input = document.getElementById("couponInput");
+  const msgEl = document.getElementById("couponMsg");
+  const code = input.value.trim().toUpperCase();
+
+  if(code === COUPON_CODE){
+    couponApplied = true;
+    const bar = document.getElementById("couponBar");
+    bar.innerHTML = `<span class="coupon-applied-badge">🎉 ${COUPON_CODE} applied — 10% off <button onclick="removeCoupon()">✕ remove</button></span>`;
+    if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+    renderCarousel();
+  } else {
+    msgEl.textContent = "That code isn't valid.";
+    msgEl.className = "coupon-msg err";
+  }
+}
+
+function removeCoupon(){
+  couponApplied = false;
+  const bar = document.getElementById("couponBar");
+  bar.innerHTML = `
+    <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+    <button onclick="applyCoupon()">Apply</button>
+    <span class="coupon-msg" id="couponMsg"></span>
+  `;
+  if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+  renderCarousel();
+}
+
+function renderCarousel(){
+  const track = document.getElementById("carouselTrack");
+  track.innerHTML = PROMO_TRIPS.map(t => {
+    const bg = t.photo
+      ? `background-image:linear-gradient(180deg, rgba(20,19,18,0.15), rgba(20,19,18,0.85)), url('${t.photo}'); background-size:cover; background-position:center;`
+      : `background:linear-gradient(160deg, ${t.color}, var(--asphalt));`;
+    const priceHtml = couponApplied
+      ? `<span class="promo-price-strike">₹${t.fromPrice.toLocaleString('en-IN')}</span>Starting ₹${discountedPrice(t.fromPrice).toLocaleString('en-IN')}`
+      : `Starting ₹${t.fromPrice.toLocaleString('en-IN')}`;
+    return `
+      <div class="promo-card" style="${bg}" onclick="searchFromPromo('${t.searchTerm.replace(/'/g,"\\'")}')">
+        <div class="pc-content">
+          <div class="pc-eyebrow">${t.eyebrow}</div>
+          <div class="pc-title">${t.title}</div>
+          <div class="pc-price">${priceHtml}</div>
+          <div class="pc-cta">View fares →</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function scrollCarousel(dir){
+  const track = document.getElementById("carouselTrack");
+  track.scrollBy({ left: dir * 300, behavior: "smooth" });
+}
+
+function renderRates(){
+  const grid = document.getElementById("ratesGrid");
+  grid.innerHTML = EXTRA_RATES.map(r => `
+    <div class="terms-cell">
+      <div class="tc-car">${r.type}</div>
+      <div class="tc-rate">₹${r.perKm}/km extra</div>
+      <div class="tc-rate">₹${r.perHour}/hr extra</div>
+    </div>
+  `).join("");
+}
+
+renderCarousel();
+renderRates();
+
+function toggleAbout(){
+  const panel = document.getElementById("aboutPanel");
+  const btn = document.getElementById("aboutToggleBtn");
+  const collapsed = panel.classList.toggle("about-collapsed");
+  btn.textContent = collapsed ? "Read more" : "Show less";
+}
+
+/* ---------------- Enquiry form ---------------- */
+function submitEnquiry(){
+  const name = document.getElementById("enqName").value.trim();
+  const phone = document.getElementById("enqPhone").value.trim();
+  const trip = document.getElementById("enqTrip").value.trim();
+  const message = document.getElementById("enqMsg").value.trim();
+  const statusEl = document.getElementById("enqStatus");
+
+  if(!name || !phone){
+    statusEl.textContent = "Please add at least your name and phone number.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "enquiry", name, phone, trip, car: "", price: "", message });
+
+  statusEl.textContent = "Thanks — we've got your enquiry and will reach out shortly.";
+  statusEl.className = "form-status ok";
+  document.getElementById("enqName").value = "";
+  document.getElementById("enqPhone").value = "";
+  document.getElementById("enqTrip").value = "";
+  document.getElementById("enqMsg").value = "";
+}
+
+/* ---------------- Feedback modal ---------------- */
+let selectedRating = 0;
+
+function renderStars(){
+  const row = document.getElementById("starRow");
+  row.innerHTML = [1,2,3,4,5].map(n => `
+    <button type="button" class="star-btn ${n <= selectedRating ? 'active' : ''}" onclick="setRating(${n})">★</button>
+  `).join("");
+}
+function setRating(n){ selectedRating = n; renderStars(); }
+renderStars();
+
+function openFeedback(){
+  document.getElementById("feedbackModal").classList.add("open");
+}
+function closeFeedback(){
+  document.getElementById("feedbackModal").classList.remove("open");
+}
+document.getElementById("feedbackModal").addEventListener("click", e => {
+  if(e.target.id === "feedbackModal") closeFeedback();
+});
+
+function submitFeedback(){
+  const name = document.getElementById("fbName").value.trim();
+  const phone = document.getElementById("fbPhone").value.trim();
+  const comment = document.getElementById("fbComment").value.trim();
+  const statusEl = document.getElementById("fbStatus");
+
+  if(!name || selectedRating === 0){
+    statusEl.textContent = "Please add your name and pick a star rating.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "feedback", name, phone, rating: selectedRating, comment });
+
+  statusEl.textContent = "Thank you for the feedback!";
+  statusEl.className = "form-status ok";
+  setTimeout(() => {
+    closeFeedback();
+    document.getElementById("fbName").value = "";
+    document.getElementById("fbPhone").value = "";
+    document.getElementById("fbComment").value = "";
+    selectedRating = 0;
+    renderStars();
+    statusEl.textContent = "";
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
