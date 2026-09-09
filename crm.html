@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--
+  mapocabs CRM — Follow-up Tracker
+  Version: 1.0
+  Works entirely in this browser (localStorage) — no Google Sheets needed.
+  Use the Export button regularly to back up your data as a file.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mapocabs — Follow-up CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1C1B1A; --asphalt-soft:#2A2825; --amber:#FFD23F; --amber-deep:#E8B800;
+    --paper:#F7F4EE; --muted:#8A8377; --highway-green:#1F5F4A; --line:rgba(247,244,238,0.14);
+    --danger:#C4553D; --warn:#D98A2B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans',sans-serif; min-height:100vh; padding-bottom:60px;}
+  h1,h2{font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;}
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:var(--amber);}
+  .wrap{max-width:1000px; margin:0 auto; padding:28px 20px;}
+
+  .top-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;}
+  .top-header h1{font-size:30px;}
+  .top-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .btn{
+    background:transparent; border:1px solid var(--line); color:var(--paper);
+    padding:9px 15px; border-radius:6px; font-family:'Work Sans'; font-weight:600;
+    font-size:13px; cursor:pointer;
+  }
+  .btn:hover{border-color:var(--amber);}
+  .btn-amber{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+  .btn-amber:hover{background:var(--amber-deep);}
+
+  /* STATS */
+  .stats-row{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:22px;}
+  @media (max-width:640px){ .stats-row{grid-template-columns:1fr 1fr;} }
+  .stat-card{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; padding:14px; text-align:center;}
+  .stat-num{font-family:'Barlow Condensed'; font-weight:700; font-size:26px;}
+  .stat-label{font-family:'Space Mono'; font-size:10.5px; color:var(--muted); text-transform:uppercase; margin-top:2px;}
+  .stat-card.overdue .stat-num{color:var(--danger);}
+  .stat-card.today .stat-num{color:var(--amber);}
+  .stat-card.won .stat-num{color:var(--highway-green);}
+
+  /* FORM PANEL */
+  .panel{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:22px; margin-bottom:22px;}
+  .panel h2{font-size:20px; margin-bottom:14px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .form-grid .full{grid-column:1/-1;}
+  label{display:block; font-family:'Space Mono'; font-size:10.5px; color:var(--muted); letter-spacing:0.05em; margin-bottom:5px; margin-top:10px;}
+  label:first-child{margin-top:0;}
+  input, select, textarea{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:10px 12px; border-radius:6px; font-family:'Work Sans'; font-size:13.5px; outline:none;
+  }
+  input:focus, select:focus, textarea:focus{border-color:var(--amber);}
+  textarea{resize:vertical; min-height:60px;}
+
+  /* SEARCH + FILTERS */
+  .search-row{display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
+  .search-row input{flex:1; min-width:200px;}
+  .filter-row{display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;}
+  .filter-chip{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--muted);
+    padding:7px 14px; border-radius:20px; font-family:'Space Mono'; font-size:12px; cursor:pointer;
+  }
+  .filter-chip.active{background:var(--paper); color:var(--asphalt); border-color:var(--paper);}
+
+  /* LEAD CARDS */
+  .lead-card{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin-bottom:12px;}
+  .lead-card.urgent{border-color:var(--danger);}
+  .lc-top{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:flex-start;}
+  .lc-name{font-family:'Barlow Condensed'; font-weight:600; font-size:19px;}
+  .lc-meta{font-family:'Space Mono'; font-size:11px; color:var(--muted); margin-top:3px;}
+  .badge{
+    font-family:'Space Mono'; font-size:10.5px; padding:4px 10px; border-radius:20px; font-weight:700;
+    white-space:nowrap; height:fit-content;
+  }
+  .badge-overdue{background:rgba(196,85,61,0.15); color:var(--danger);}
+  .badge-today{background:rgba(255,210,63,0.15); color:var(--amber);}
+  .badge-upcoming{background:rgba(138,131,119,0.15); color:var(--muted);}
+  .badge-won{background:rgba(31,95,74,0.2); color:var(--highway-green);}
+  .badge-lost{background:rgba(138,131,119,0.15); color:var(--muted);}
+  .badge-none{background:rgba(138,131,119,0.1); color:var(--muted);}
+
+  .lc-details{margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; font-size:13px;}
+  .lc-detail label{margin:0 0 3px 0;}
+  .lc-notes{margin-top:10px; font-size:13px; color:#D8D2C4; border-top:1px solid var(--line); padding-top:10px;}
+  .lc-activities{margin-top:10px; font-size:12px; color:var(--muted);}
+  .lc-activities .act-item{padding:4px 0; border-top:1px solid rgba(247,244,238,0.06);}
+  .lc-activities .act-item:first-child{border-top:none;}
+  .lc-actions{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;}
+  .lc-actions a, .lc-actions button{
+    text-decoration:none; padding:8px 14px; border-radius:6px; font-size:12.5px; font-weight:600; cursor:pointer; border:none;
+  }
+  .act-call{background:var(--highway-green); color:var(--paper);}
+  .act-wa{background:var(--asphalt); border:1px solid var(--line) !important; color:var(--paper);}
+  .act-followup{background:var(--amber); color:var(--asphalt);}
+  .act-edit{background:transparent; border:1px solid var(--line) !important; color:var(--paper);}
+  .act-delete{background:transparent; border:1px solid var(--danger) !important; color:var(--danger);}
+
+  .empty-state{color:var(--muted); font-family:'Space Mono'; font-size:13px; padding:30px 0; text-align:center;}
+
+  /* MODAL */
+  .modal-overlay{position:fixed; inset:0; background:rgba(10,9,8,0.75); z-index:50; display:none; align-items:center; justify-content:center; padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px; padding:24px; max-width:420px; width:100%;}
+  .modal-box h2{font-size:20px; margin-bottom:14px;}
+  .modal-actions{display:flex; gap:8px; margin-top:16px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top-header">
+    <h1>Follow-up CRM</h1>
+    <div class="top-actions">
+      <button class="btn" onclick="exportData()">⬇ Export Backup</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">⬆ Import</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this.files[0])">
+      <a class="btn" href="bookings.html">Bookings →</a>
+    </div>
+  </div>
+
+  <div class="stats-row" id="statsRow"></div>
+
+  <div class="panel">
+    <h2 id="formTitle">Add a Lead</h2>
+    <div class="form-grid">
+      <div><label for="fName">NAME</label><input id="fName" placeholder="Customer name"></div>
+      <div><label for="fPhone">PHONE</label><input id="fPhone" placeholder="Phone number"></div>
+      <div><label for="fTrip">TRIP QUOTED</label><input id="fTrip" placeholder="e.g. Vapi to Mumbai Airport"></div>
+      <div><label for="fPrice">QUOTED PRICE</label><input id="fPrice" type="number" placeholder="e.g. 3000"></div>
+      <div>
+        <label for="fSource">SOURCE</label>
+        <select id="fSource">
+          <option>WhatsApp</option><option>Call</option><option>Walk-in</option>
+          <option>Website</option><option>Referral</option><option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="fStatus">STATUS</label>
+        <select id="fStatus">
+          <option>New</option><option>Contacted</option><option>Quoted</option>
+          <option>Follow-up Scheduled</option><option>Won</option><option>Lost</option>
+        </select>
+      </div>
+      <div class="full"><label for="fNextDate">NEXT FOLLOW-UP DATE</label><input id="fNextDate" type="date"></div>
+      <div class="full"><label for="fNotes">NOTES</label><textarea id="fNotes" placeholder="Anything worth remembering for next time"></textarea></div>
+    </div>
+    <button class="btn btn-amber" style="margin-top:16px;" onclick="saveLead()">Save Lead</button>
+    <button class="btn" id="cancelEditBtn" style="display:none; margin-top:16px;" onclick="cancelEdit()">Cancel Edit</button>
+  </div>
+
+  <div class="search-row">
+    <input id="searchInput" placeholder="Search by name or phone…" oninput="render()">
+  </div>
+  <div class="filter-row" id="filterRow"></div>
+
+  <div id="leadList"></div>
+</div>
+
+<div class="modal-overlay" id="followupModal">
+  <div class="modal-box">
+    <h2>Log Follow-up</h2>
+    <label for="fuNote">WHAT HAPPENED</label>
+    <textarea id="fuNote" placeholder="e.g. Called, said they'll confirm by Friday"></textarea>
+    <label for="fuStatus">UPDATE STATUS</label>
+    <select id="fuStatus">
+      <option>New</option><option>Contacted</option><option>Quoted</option>
+      <option>Follow-up Scheduled</option><option>Won</option><option>Lost</option>
+    </select>
+    <label for="fuNextDate">NEXT FOLLOW-UP DATE (optional)</label>
+    <input id="fuNextDate" type="date">
+    <div class="modal-actions">
+      <button class="btn btn-amber" onclick="submitFollowup()">Save</button>
+      <button class="btn" onclick="closeFollowupModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = "mapocabs_crm_leads_v1";
+let leads = [];
+let editingId = null;
+let followupLeadId = null;
+let activeFilter = "all";
+
+function loadLeads(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    leads = raw ? JSON.parse(raw) : [];
+  }catch(e){ leads = []; }
+}
+function persist(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  render();
+}
+
+function todayStr(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+
+function urgency(lead){
+  if(lead.status === "Won") return { key: "won", label: "WON" };
+  if(lead.status === "Lost") return { key: "lost", label: "LOST" };
+  if(!lead.nextFollowUp) return { key: "none", label: "NO DATE SET" };
+  const today = todayStr();
+  if(lead.nextFollowUp < today) return { key: "overdue", label: "OVERDUE" };
+  if(lead.nextFollowUp === today) return { key: "today", label: "DUE TODAY" };
+  return { key: "upcoming", label: formatDate(lead.nextFollowUp) };
+}
+
+function formatDate(iso){
+  if(!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+
+function escapeHtml(s){
+  return String(s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function clearForm(){
+  document.getElementById("fName").value = "";
+  document.getElementById("fPhone").value = "";
+  document.getElementById("fTrip").value = "";
+  document.getElementById("fPrice").value = "";
+  document.getElementById("fSource").value = "WhatsApp";
+  document.getElementById("fStatus").value = "New";
+  document.getElementById("fNextDate").value = "";
+  document.getElementById("fNotes").value = "";
+  editingId = null;
+  document.getElementById("formTitle").textContent = "Add a Lead";
+  document.getElementById("cancelEditBtn").style.display = "none";
+}
+
+function saveLead(){
+  const name = document.getElementById("fName").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  if(!name || !phone){ alert("Please add at least a name and phone number."); return; }
+
+  const lead = {
+    id: editingId || ("lead_" + Date.now()),
+    name, phone,
+    trip: document.getElementById("fTrip").value.trim(),
+    price: document.getElementById("fPrice").value.trim(),
+    source: document.getElementById("fSource").value,
+    status: document.getElementById("fStatus").value,
+    nextFollowUp: document.getElementById("fNextDate").value,
+    notes: document.getElementById("fNotes").value.trim(),
+    activities: (editingId ? (leads.find(l => l.id === editingId) || {}).activities : []) || [],
+    createdAt: editingId ? (leads.find(l => l.id === editingId) || {}).createdAt : new Date().toISOString()
+  };
+
+  if(editingId){
+    leads = leads.map(l => l.id === editingId ? lead : l);
+  } else {
+    leads.push(lead);
+  }
+  persist();
+  clearForm();
+}
+
+function editLead(id){
+  const l = leads.find(x => x.id === id);
+  if(!l) return;
+  editingId = id;
+  document.getElementById("fName").value = l.name;
+  document.getElementById("fPhone").value = l.phone;
+  document.getElementById("fTrip").value = l.trip || "";
+  document.getElementById("fPrice").value = l.price || "";
+  document.getElementById("fSource").value = l.source || "WhatsApp";
+  document.getElementById("fStatus").value = l.status || "New";
+  document.getElementById("fNextDate").value = l.nextFollowUp || "";
+  document.getElementById("fNotes").value = l.notes || "";
+  document.getElementById("formTitle").textContent = "Editing: " + l.name;
+  document.getElementById("cancelEditBtn").style.display = "inline-block";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function cancelEdit(){ clearForm(); }
+
+function deleteLead(id){
+  if(!confirm("Delete this lead permanently?")) return;
+  leads = leads.filter(l => l.id !== id);
+  persist();
+}
+
+function openFollowupModal(id){
+  followupLeadId = id;
+  const l = leads.find(x => x.id === id);
+  document.getElementById("fuNote").value = "";
+  document.getElementById("fuStatus").value = l.status || "New";
+  document.getElementById("fuNextDate").value = "";
+  document.getElementById("followupModal").classList.add("open");
+}
+function closeFollowupModal(){
+  document.getElementById("followupModal").classList.remove("open");
+  followupLeadId = null;
+}
+function submitFollowup(){
+  const l = leads.find(x => x.id === followupLeadId);
+  if(!l) return;
+  const note = document.getElementById("fuNote").value.trim();
+  const status = document.getElementById("fuStatus").value;
+  const nextDate = document.getElementById("fuNextDate").value;
+
+  if(note){
+    l.activities = l.activities || [];
+    l.activities.unshift({ date: new Date().toISOString(), text: note });
+  }
+  l.status = status;
+  if(nextDate) l.nextFollowUp = nextDate;
+  else if(status === "Won" || status === "Lost") l.nextFollowUp = "";
+
+  persist();
+  closeFollowupModal();
+}
+
+function setFilter(f){
+  activeFilter = f;
+  render();
+}
+
+function renderFilters(){
+  const row = document.getElementById("filterRow");
+  const filters = [
+    {key:"all", label:"All"}, {key:"overdue", label:"Overdue"}, {key:"today", label:"Today"},
+    {key:"upcoming", label:"Upcoming"}, {key:"none", label:"No date"}, {key:"won", label:"Won"}, {key:"lost", label:"Lost"}
+  ];
+  row.innerHTML = filters.map(f => `
+    <button class="filter-chip ${activeFilter===f.key?'active':''}" onclick="setFilter('${f.key}')">${f.label}</button>
+  `).join("");
+}
+
+function renderStats(){
+  const counts = { overdue:0, today:0, upcoming:0, won:0 };
+  leads.forEach(l => {
+    const u = urgency(l);
+    if(u.key === "overdue") counts.overdue++;
+    else if(u.key === "today") counts.today++;
+    else if(u.key === "upcoming") counts.upcoming++;
+    else if(u.key === "won") counts.won++;
+  });
+  const row = document.getElementById("statsRow");
+  row.innerHTML = `
+    <div class="stat-card overdue"><div class="stat-num">${counts.overdue}</div><div class="stat-label">Overdue</div></div>
+    <div class="stat-card today"><div class="stat-num">${counts.today}</div><div class="stat-label">Due Today</div></div>
+    <div class="stat-card"><div class="stat-num">${counts.upcoming}</div><div class="stat-label">Upcoming</div></div>
+    <div class="stat-card won"><div class="stat-num">${counts.won}</div><div class="stat-label">Won</div></div>
+  `;
+}
+
+function renderLeadCard(l){
+  const u = urgency(l);
+  const isUrgent = u.key === "overdue";
+  const badgeClass = "badge-" + u.key;
+  const waPhone = String(l.phone).replace(/\D/g,'');
+  const activitiesHtml = (l.activities || []).slice(0,3).map(a => `
+    <div class="act-item">${formatDate(a.date.slice(0,10))}: ${escapeHtml(a.text)}</div>
+  `).join("");
+
+  return `
+    <div class="lead-card ${isUrgent ? 'urgent' : ''}">
+      <div class="lc-top">
+        <div>
+          <div class="lc-name">${escapeHtml(l.name)}</div>
+          <div class="lc-meta">${escapeHtml(l.phone)} · ${escapeHtml(l.source || '')} · ${escapeHtml(l.status)}</div>
+        </div>
+        <span class="badge ${badgeClass}">${u.label}</span>
+      </div>
+      <div class="lc-details">
+        ${l.trip ? `<div class="lc-detail"><label>TRIP</label>${escapeHtml(l.trip)}</div>` : ""}
+        ${l.price ? `<div class="lc-detail"><label>QUOTED</label>₹${escapeHtml(l.price)}</div>` : ""}
+      </div>
+      ${l.notes ? `<div class="lc-notes">${escapeHtml(l.notes)}</div>` : ""}
+      ${activitiesHtml ? `<div class="lc-activities">${activitiesHtml}</div>` : ""}
+      <div class="lc-actions">
+        <a class="act-call" href="tel:${escapeHtml(l.phone)}">Call</a>
+        <a class="act-wa" href="https://wa.me/${waPhone}" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="act-followup" onclick="openFollowupModal('${l.id}')">Log Follow-up</button>
+        <button class="act-edit" onclick="editLead('${l.id}')">Edit</button>
+        <button class="act-delete" onclick="deleteLead('${l.id}')">Delete</button>
+      </div>
+    </div>
+  `;
+}
+
+function render(){
+  renderStats();
+  renderFilters();
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  let list = leads.slice();
+
+  if(q){
+    list = list.filter(l => (l.name||"").toLowerCase().includes(q) || (l.phone||"").includes(q));
+  }
+  if(activeFilter !== "all"){
+    list = list.filter(l => urgency(l).key === activeFilter);
+  }
+
+  // Sort: overdue first (oldest date first), then today, then upcoming (soonest first), then none, then won/lost
+  const order = { overdue:0, today:1, upcoming:2, none:3, won:4, lost:5 };
+  list.sort((a,b) => {
+    const ua = urgency(a), ub = urgency(b);
+    if(order[ua.key] !== order[ub.key]) return order[ua.key] - order[ub.key];
+    return (a.nextFollowUp||"").localeCompare(b.nextFollowUp||"");
+  });
+
+  const container = document.getElementById("leadList");
+  if(list.length === 0){
+    container.innerHTML = `<div class="empty-state">No leads here yet. Add one above, or adjust your filters.</div>`;
+    return;
+  }
+  container.innerHTML = list.map(renderLeadCard).join("");
+}
+
+function exportData(){
+  const blob = new Blob([JSON.stringify(leads, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mapocabs-crm-backup-" + todayStr() + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!Array.isArray(imported)) throw new Error("Invalid file");
+      if(confirm(`Import ${imported.length} leads? This will be MERGED with your current data (duplicates by ID will be replaced).`)){
+        const byId = {};
+        leads.forEach(l => byId[l.id] = l);
+        imported.forEach(l => byId[l.id] = l);
+        leads = Object.values(byId);
+        persist();
+        alert("Import complete.");
+      }
+    }catch(err){
+      alert("Couldn't read that file — make sure it's a backup exported from this CRM.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+document.getElementById("followupModal").addEventListener("click", e => {
+  if(e.target.id === "followupModal") closeFollowupModal();
+});
+
+loadLeads();
+render();
+</script>
+</body>
+</html>
