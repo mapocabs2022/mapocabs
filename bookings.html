@@ -182,7 +182,9 @@ document.getElementById("pinInput").addEventListener("keyup", e => { if(e.key ==
 async function fetchList(pin){
   const err = document.getElementById("pinError");
   try{
-    const res = await fetch(WEBHOOK_URL + "?action=list&key=" + encodeURIComponent(pin));
+    const testUrl = WEBHOOK_URL + "?action=list&key=" + encodeURIComponent(pin);
+console.log("Testing dashboard URL:", testUrl);
+const res = await fetch(testUrl);
     const json = await res.json();
     if(json.status === "unauthorized"){ err.textContent = "Incorrect PIN."; return false; }
     if(json.status !== "ok"){ err.textContent = "Dashboard isn't connected yet — update your Apps Script (see guide)."; return false; }
