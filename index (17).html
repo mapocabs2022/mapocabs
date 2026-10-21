@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<!--
+  mapocabs website
+  Version: 1.14
+  Last updated: 19 Oct 2026
+  See CHANGELOG.md for full history of what's changed.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mapocabs — Choice of Professionals</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1C1B1A; --asphalt-soft:#2A2825; --amber:#FFD23F; --amber-deep:#E8B800;
+    --paper:#F7F4EE; --muted:#8A8377; --highway-green:#1F5F4A; --line:rgba(247,244,238,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans', sans-serif; line-height:1.5;}
+  h1,h2,h3,.display{font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;}
+  .mono{font-family:'Space Mono', monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  .lane-divider{height:0; border-top:3px dashed rgba(247,244,238,0.22); margin:56px 0;}
+
+  header{padding:22px 0; border-bottom:1px solid var(--line);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo img{height:34px; width:auto;}
+  .logo .logo-text{font-family:'Barlow Condensed'; font-weight:700; font-size:26px;}
+  .logo .logo-text span{color:var(--amber);}
+  .header-call{
+    font-family:'Space Mono'; font-size:13px; color:var(--amber); text-decoration:none;
+    border:1px solid var(--amber); padding:8px 14px; border-radius:6px;
+  }
+
+  .hero{padding:56px 0 8px;}
+  .eyebrow{font-family:'Space Mono'; font-size:13px; color:var(--amber); letter-spacing:0.08em; margin-bottom:16px;}
+  .hero h1{font-size:clamp(34px, 5.2vw, 60px); line-height:0.98; max-width:760px;}
+  .hero h1 span{color:var(--amber);}
+  .hero-sub{max-width:520px; margin-top:16px; color:#D8D2C4; font-size:15.5px;}
+
+  /* SEARCH BAR */
+  .search-shell{
+    margin-top:32px; background:var(--asphalt-soft); border:1px solid var(--line);
+    border-radius:10px; padding:8px; display:flex; gap:8px; position:relative;
+  }
+  .search-shell input{
+    flex:1; background:transparent; border:none; color:var(--paper);
+    padding:14px 16px; font-family:'Work Sans'; font-size:16px; outline:none;
+  }
+  .search-shell input::placeholder{color:#6B6560;}
+  .search-shell button{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:0 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:17px;
+    letter-spacing:0.02em; cursor:pointer;
+  }
+  .search-shell button:hover{background:var(--amber-deep);}
+
+  /* HOT SELLING PILLS */
+  .hot-row{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .hot-pill{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 16px; border-radius:24px; font-size:13.5px; font-weight:500; cursor:pointer;
+    display:flex; align-items:center; gap:8px;
+  }
+  .hot-pill:hover{border-color:var(--amber);}
+  .hot-pill .tag{
+    background:var(--amber); color:var(--asphalt); font-family:'Space Mono'; font-size:9.5px;
+    padding:2px 6px; border-radius:3px; letter-spacing:0.04em; font-weight:700;
+  }
+
+  /* RESULTS */
+  #results{margin-top:8px;}
+  .results-head{display:flex; justify-content:space-between; align-items:baseline; margin:28px 0 14px;}
+  .results-head h2{font-size:22px;}
+  .results-head .clear-btn{
+    background:none; border:none; color:var(--muted); font-family:'Space Mono'; font-size:12px;
+    cursor:pointer; text-decoration:underline;
+  }
+  .card{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:14px;
+  }
+  .card-route{font-family:'Barlow Condensed'; font-weight:600; font-size:21px;}
+  .card-sub{font-family:'Space Mono'; font-size:11.5px; color:var(--muted); margin-top:6px;}
+  .car-list{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+  .car-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border-top:1px solid var(--line); padding-top:10px; flex-wrap:wrap;
+  }
+  .car-row:first-child{border-top:none; padding-top:0;}
+  .car-name{font-size:15px; font-weight:500;}
+  .car-right{display:flex; align-items:center; gap:14px;}
+  .car-price{font-family:'Space Mono'; font-weight:700; font-size:20px; color:var(--amber);}
+  .wa-btn{
+    background:var(--highway-green); color:var(--paper); border:none; border-radius:6px;
+    padding:9px 16px; font-family:'Work Sans'; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .wa-btn:hover{opacity:0.88;}
+  .no-match{color:var(--muted); font-family:'Space Mono'; font-size:13px; padding:12px 0;}
+
+  /* CAROUSEL — "Trips We Do" advertising strip */
+  .carousel-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px;}
+  .carousel-head h2{font-size:28px;}
+  .carousel-arrows{display:flex; gap:8px;}
+  .arrow-btn{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px;
+  }
+  .arrow-btn:hover{border-color:var(--amber);}
+  .carousel-track{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px;
+    scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .promo-card{
+    scroll-snap-align:start; flex:0 0 280px; border-radius:14px; padding:24px;
+    min-height:200px; display:flex; flex-direction:column; justify-content:flex-end;
+    border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer;
+  }
+  .promo-card::before{
+    content:""; position:absolute; inset:0; opacity:0.9;
+  }
+  .promo-card .pc-content{position:relative; z-index:1;}
+  .promo-card .pc-eyebrow{font-family:'Space Mono'; font-size:10.5px; letter-spacing:0.08em; opacity:0.85;}
+  .promo-card .pc-title{font-family:'Barlow Condensed'; font-weight:700; font-size:26px; margin-top:6px; line-height:1;}
+  .promo-card .pc-price{font-family:'Space Mono'; font-size:13px; margin-top:10px;}
+  .promo-card .pc-cta{
+    margin-top:14px; display:inline-block; background:var(--asphalt); color:var(--paper);
+    padding:8px 14px; border-radius:6px; font-size:12.5px; font-weight:600;
+  }
+
+  /* extra charges */
+  .terms-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;}
+  @media (max-width:720px){ .terms-grid{grid-template-columns:1fr 1fr;} }
+  .terms-cell{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; padding:14px;}
+  .terms-cell .tc-car{font-family:'Barlow Condensed'; font-weight:600; font-size:16px;}
+  .terms-cell .tc-rate{font-family:'Space Mono'; font-size:12px; color:var(--amber); margin-top:6px;}
+  .terms-list{margin-top:18px; color:#D8D2C4; font-size:14px;}
+  .terms-list li{margin-bottom:6px; margin-left:18px;}
+
+  /* ABOUT US */
+  .about-panel{
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .about-person{display:flex; align-items:center; gap:14px;}
+  .about-photo{
+    width:76px; height:76px; border-radius:50%; overflow:hidden;
+    border:2px solid var(--amber); flex-shrink:0;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .about-caption{
+    font-family:'Barlow Condensed'; font-weight:600; font-size:16px; color:var(--paper);
+  }
+  .about-caption span{
+    display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted);
+    font-weight:400; margin-top:2px; text-transform:none; letter-spacing:0.02em;
+  }
+  .about-tagline{
+    font-family:'Barlow Condensed'; font-weight:600; font-size:20px; color:var(--amber);
+    margin-bottom:16px; line-height:1.25;
+  }
+  .about-body{color:#D8D2C4; font-size:15px; line-height:1.65; max-width:640px;}
+  .about-body p{margin-bottom:14px;}
+  .about-body p:last-child{margin-bottom:0;}
+  .about-signoff{
+    font-family:'Barlow Condensed'; font-weight:700; font-size:17px; color:var(--paper);
+    margin-top:16px; letter-spacing:0.02em;
+  }
+  .about-toggle-btn{
+    background:transparent; border:1px solid var(--amber); color:var(--amber);
+    padding:10px 18px; border-radius:6px; font-family:'Barlow Condensed'; font-weight:700;
+    font-size:14px; letter-spacing:0.02em; cursor:pointer; text-transform:uppercase; margin-top:16px;
+  }
+  .about-toggle-btn:hover{background:var(--amber); color:var(--asphalt);}
+  .about-collapsed .about-full{display:none;}
+
+  /* OFFER POSTER (shown only when OFFER_ENABLED is true) */
+  .nav-poster{
+    position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px;
+    padding:34px 38px; border-radius:16px; overflow:hidden; border:2px solid #FFD23F; margin-top:8px;
+    background:radial-gradient(circle at 78% 50%,#93203a 0%,#5A0F1C 52%,#2A0610 100%); color:#FBF3E6;
+  }
+  .nav-poster::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(circle at 2px 2px,rgba(255,210,63,.16) 2px,transparent 2.5px); background-size:30px 30px;
+  }
+  .nav-poster > *{position:relative;}
+  .np-eyebrow{font-family:'Space Mono'; font-size:12px; letter-spacing:.2em; color:#FFD23F; text-transform:uppercase; margin-bottom:10px;}
+  .np-title{font-family:'Barlow Condensed'; font-weight:700; font-size:clamp(34px,5.4vw,60px); line-height:1; text-transform:uppercase;}
+  .np-title span{color:#FFD23F;}
+  .np-sub{margin-top:10px; font-size:15px; color:#E8DCC6; max-width:460px;}
+  .np-code-row{display:flex; align-items:center; gap:18px; margin-top:22px; flex-wrap:wrap;}
+  .np-code{
+    background:#FBF3E6; color:#5A0F1C; border:2px dashed #5A0F1C; box-shadow:0 0 0 5px #FBF3E6;
+    border-radius:8px; padding:8px 18px; display:flex; flex-direction:column; align-items:center; line-height:1.1;
+  }
+  .np-code span{font-family:'Space Mono'; font-size:9.5px; letter-spacing:.25em;}
+  .np-code b{font-family:'Barlow Condensed'; font-size:30px; letter-spacing:.08em;}
+  .np-btn{
+    background:#FFD23F; color:#2A0610; border:none; border-radius:7px; padding:13px 22px;
+    font-family:'Barlow Condensed'; font-weight:700; font-size:18px; letter-spacing:.03em; cursor:pointer; text-transform:uppercase;
+  }
+  .np-btn:hover{background:#FFE27A;}
+  .np-btn.done{background:var(--highway-green); color:#F7F4EE; cursor:default;}
+  .np-note{margin-top:16px; font-size:11.5px; color:#b9a99a;}
+  .np-mandala{
+    flex-shrink:0; width:200px; height:200px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:repeating-conic-gradient(from 0deg,#FFD23F 0 6deg,#F28C1B 6deg 12deg); box-shadow:0 0 50px rgba(255,210,63,.3);
+  }
+  .np-ring{width:168px; height:168px; border-radius:50%; background:#5A0F1C; border:4px solid #FFD23F; display:flex; align-items:center; justify-content:center;}
+  .np-core{
+    width:132px; height:132px; border-radius:50%; background:radial-gradient(circle at 50% 40%,#FFE27A,#F5A623);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; color:#3a0a14;
+    font-family:'Barlow Condensed'; font-weight:700; line-height:.9;
+  }
+  .np-core small{font-size:15px; letter-spacing:.3em; margin-left:.3em;}
+  .np-core strong{font-size:56px; line-height:.9;}
+  @media (max-width:680px){
+    .nav-poster{flex-direction:column-reverse; text-align:center; padding:26px 20px;}
+    .np-code-row{justify-content:center;} .np-sub{margin-left:auto; margin-right:auto;}
+    .np-mandala{width:150px; height:150px;} .np-ring{width:126px; height:126px;}
+    .np-core{width:98px; height:98px;} .np-core strong{font-size:40px;} .np-core small{font-size:12px;}
+  }
+
+  /* LIVE OFFER BANNER */
+  #offerBanner{
+    display:none; background:var(--amber); color:var(--asphalt);
+    padding:11px 20px; text-align:center; position:relative;
+  }
+  #offerBanner.show{display:block;}
+  #offerBanner .ob-text{
+    font-family:'Work Sans'; font-weight:600; font-size:13.5px;
+    max-width:900px; margin:0 auto; padding-right:28px;
+  }
+  #offerBanner .ob-close{
+    position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:var(--asphalt); font-size:16px;
+    cursor:pointer; opacity:0.7; padding:4px;
+  }
+  #offerBanner .ob-close:hover{opacity:1;}
+
+  footer{padding:40px 0 60px; color:var(--muted); font-size:14px;}
+  footer a{color:var(--amber); text-decoration:none;}
+  .foot-brand{font-family:'Barlow Condensed'; font-weight:700; font-size:18px; color:var(--paper); margin-bottom:6px;}
+  .foot-social{display:flex; gap:14px; margin-top:16px;}
+  .foot-social a{border:1px solid var(--line); border-radius:6px; padding:8px 14px; font-family:'Space Mono'; font-size:12px; color:var(--paper); letter-spacing:0.03em;}
+  .foot-social a:hover{border-color:var(--amber); color:var(--amber);}
+
+  @media (max-width:600px){ .search-shell{flex-direction:column;} .search-shell button{padding:14px;} }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  /* ---------- Trip planner (From / To + automatic fare) ---------- */
+  .mode-tabs{display:flex; gap:8px; margin-top:30px;}
+  .mode-btn{background:transparent; border:1px solid var(--line); color:#D8D2C4; padding:9px 18px; border-radius:22px;
+            font-family:'Barlow Condensed'; font-weight:700; font-size:16px; letter-spacing:.03em; text-transform:uppercase; cursor:pointer;}
+  .mode-btn.active{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+  .planner{margin-top:14px; background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:18px;}
+  .seg{display:inline-flex; border:1px solid var(--line); border-radius:7px; overflow:hidden; margin-bottom:14px;}
+  .seg-btn{background:transparent; border:none; color:#D8D2C4; padding:9px 18px; font-family:'Work Sans'; font-weight:600; font-size:13px; cursor:pointer;}
+  .seg-btn.active{background:var(--paper); color:var(--asphalt);}
+  .plan-grid{display:grid; grid-template-columns:1fr 44px 1fr; gap:10px; align-items:end;}
+  .plan-grid.dates{grid-template-columns:1fr 1fr auto; margin-top:12px;}
+  @media (max-width:680px){ .plan-grid, .plan-grid.dates{grid-template-columns:1fr;} .swap{justify-self:center; width:56px; height:38px;} }
+  .pf{position:relative;}
+  .pf label{display:block; font-family:'Space Mono'; font-size:10.5px; color:var(--muted); letter-spacing:.06em; margin-bottom:6px;}
+  .pf input{width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper); padding:13px; border-radius:7px; font-family:'Work Sans'; font-size:15px; outline:none;}
+  .pf input:focus{border-color:var(--amber);}
+  .swap{height:44px; border-radius:7px; border:1px solid var(--line); background:transparent; color:var(--amber); font-size:18px; cursor:pointer;}
+  .swap:hover{border-color:var(--amber);}
+  .ac{display:none; position:absolute; left:0; right:0; top:100%; margin-top:4px; z-index:30; background:#322f2b; border:1px solid var(--amber);
+      border-radius:8px; max-height:260px; overflow:auto; box-shadow:0 10px 30px rgba(0,0,0,.5);}
+  .ac-item{padding:11px 14px; font-size:14.5px; cursor:pointer; border-bottom:1px solid var(--line);}
+  .ac-item:last-child{border-bottom:none;} .ac-item.on, .ac-item:hover{background:rgba(255,210,63,.14);}
+  .plan-go{background:var(--amber); color:var(--asphalt); border:none; border-radius:7px; padding:0 26px; height:46px; font-family:'Barlow Condensed'; font-weight:700; font-size:18px; cursor:pointer; text-transform:uppercase;}
+  .plan-go:hover{background:var(--amber-deep);}
+  .plan-hint{margin-top:12px; font-size:12.5px; color:var(--muted);} .plan-msg{margin-top:10px; font-size:13px; color:#f0a898;}
+  .est-tag{display:inline-block; font-family:'Space Mono'; font-size:10px; letter-spacing:.08em; background:rgba(255,210,63,.15); color:var(--amber); padding:3px 8px; border-radius:4px; margin-left:8px; vertical-align:middle;}
+  .est-note{margin-top:10px; font-size:12.5px; color:var(--muted); border-left:2px solid var(--amber); padding:6px 10px; background:rgba(255,210,63,.05);}
+  .quote-price{font-family:'Space Mono'; font-size:13px; color:var(--amber);}
+
+  /* ---------- booking confirmation ---------- */
+  .bk-id-box{margin:14px 0; background:rgba(255,210,63,.1); border:2px dashed var(--amber); border-radius:10px; padding:16px; text-align:center;}
+  .bk-id-box small{display:block; font-family:'Space Mono'; font-size:10.5px; color:var(--muted); letter-spacing:.1em;}
+  .bk-id-box b{display:block; font-family:'Space Mono'; font-size:22px; color:var(--amber); margin-top:4px; letter-spacing:.04em;}
+  .bk-steps{font-size:13.5px; color:#D8D2C4; margin:12px 0 4px; padding-left:18px;} .bk-steps li{margin-bottom:6px;}
+  .bk-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+  .bk-btn2{background:transparent; border:1px solid var(--line); color:var(--paper); padding:10px 16px; border-radius:7px; font-family:'Work Sans'; font-weight:600; font-size:13px; cursor:pointer; text-decoration:none; display:inline-block;}
+  .bk-btn2:hover{border-color:var(--amber);}
+  .bk-fare{font-family:'Space Mono'; font-size:13px; color:var(--amber); margin-bottom:12px;}
+  .header-right{display:flex; align-items:center; gap:16px;}
+  .header-bill{font-family:'Space Mono'; font-size:12px; color:#D8D2C4; text-decoration:none; border-bottom:1px dashed var(--muted);}
+  @media (max-width:560px){ .header-bill{display:none;} }
+
+  /* ---------- Know mapocabs (tabs) ---------- */
+  .know-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px;}
+  .know-tab{background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper); padding:10px 18px; border-radius:7px;
+            font-family:'Barlow Condensed'; font-weight:600; font-size:16px; letter-spacing:.02em; text-transform:uppercase; cursor:pointer;}
+  .know-tab.active{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+  .know-panel{display:none;} .know-panel.show{display:block;}
+  .care-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  @media (max-width:860px){ .care-grid{grid-template-columns:1fr 1fr;} }
+  .care-item{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:16px;}
+  .care-item .ci{font-size:22px; margin-bottom:8px;} .care-item h4{font-family:'Barlow Condensed'; font-size:17px; letter-spacing:.02em; text-transform:uppercase;}
+  .care-item p{font-size:12.5px; color:#cfc8b8; margin-top:5px; line-height:1.45;}
+  .promise{margin-top:16px; border:1px solid var(--amber); border-radius:10px; padding:18px 20px; background:rgba(255,210,63,.05);}
+  .promise h4{font-family:'Barlow Condensed'; font-size:20px; text-transform:uppercase; color:var(--amber);} .promise li{font-size:14px; margin:6px 0 0 18px; color:#e6dfd0;}
+  .steps2{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  @media (max-width:860px){ .steps2{grid-template-columns:1fr;} }
+  .st{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:10px; padding:16px;}
+  .st b{font-family:'Space Mono'; font-size:12px; color:var(--amber);} .st h4{font-family:'Barlow Condensed'; font-size:18px; text-transform:uppercase; margin:6px 0 4px;} .st p{font-size:12.5px; color:#cfc8b8;}
+  .faq details{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:8px; margin-bottom:8px; padding:14px 16px;}
+  .faq summary{cursor:pointer; font-weight:600; font-size:14.5px; list-style:none;} .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; float:right; color:var(--amber); font-size:18px;} .faq details[open] summary::after{content:"–";}
+  .faq p{margin-top:10px; font-size:13.5px; color:#d6cfbf; line-height:1.55;}
+
+  .plan-grid.dates.one{grid-template-columns:1fr auto;}
+  @media (max-width:680px){ .plan-grid.dates.one{grid-template-columns:1fr;} }
+
+  /* ENQUIRY FORM */
+  .enquiry-panel{background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px; padding:28px;}
+  .enquiry-panel h2{font-size:26px; margin-bottom:6px;}
+  .enquiry-sub{color:var(--muted); font-size:13.5px; margin-bottom:20px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .form-grid .full{grid-column:1 / -1;}
+  .form-field label{display:block; font-family:'Space Mono'; font-size:11px; color:var(--muted); letter-spacing:0.06em; margin-bottom:6px;}
+  .form-field input, .form-field textarea{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:12px 13px; border-radius:6px; font-family:'Work Sans'; font-size:14px; outline:none;
+  }
+  .form-field input:focus, .form-field textarea:focus{border-color:var(--amber);}
+  .form-field textarea{resize:vertical; min-height:80px;}
+  .form-submit-btn{
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:7px;
+    padding:13px 26px; font-family:'Barlow Condensed'; font-weight:700; font-size:16px;
+    letter-spacing:0.02em; cursor:pointer; margin-top:18px;
+  }
+  .form-submit-btn:hover{background:var(--amber-deep);}
+  .form-status{margin-top:12px; font-family:'Space Mono'; font-size:12.5px;}
+  .form-status.ok{color:var(--highway-green);}
+  .form-status.err{color:#C4553D;}
+
+  /* FEEDBACK BUTTON + MODAL */
+  .feedback-fab{
+    position:fixed; bottom:22px; right:22px; z-index:40;
+    background:var(--amber); color:var(--asphalt); border:none; border-radius:26px;
+    padding:13px 20px; font-family:'Barlow Condensed'; font-weight:700; font-size:15px;
+    letter-spacing:0.02em; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .feedback-fab:hover{background:var(--amber-deep);}
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(10,9,8,0.72); z-index:50;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--asphalt-soft); border:1px solid var(--line); border-radius:12px;
+    padding:26px; max-width:420px; width:100%; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--muted); font-size:20px; cursor:pointer;
+  }
+  .modal-close:hover{color:var(--amber);}
+  .modal-box h2{font-size:22px; margin-bottom:16px;}
+  .star-row{display:flex; gap:8px; margin-top:6px;}
+  .star-btn{
+    background:none; border:1px solid var(--line); color:var(--muted); width:40px; height:40px;
+    border-radius:6px; font-size:18px; cursor:pointer;
+  }
+  .star-btn.active{background:var(--amber); color:var(--asphalt); border-color:var(--amber);}
+
+  /* COUPON */
+  .coupon-bar{
+    margin-top:16px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  }
+  .coupon-bar input{
+    background:var(--asphalt-soft); border:1px solid var(--line); color:var(--paper);
+    padding:10px 14px; border-radius:6px; font-family:'Space Mono'; font-size:13px;
+    text-transform:uppercase; outline:none; width:180px;
+  }
+  .coupon-bar input:focus{border-color:var(--amber);}
+  .coupon-bar button{
+    background:transparent; border:1px solid var(--amber); color:var(--amber);
+    padding:10px 16px; border-radius:6px; font-family:'Barlow Condensed'; font-weight:700;
+    font-size:14px; letter-spacing:0.02em; cursor:pointer; text-transform:uppercase;
+  }
+  .coupon-bar button:hover{background:var(--amber); color:var(--asphalt);}
+  .coupon-msg{font-family:'Space Mono'; font-size:12px;}
+  .coupon-msg.ok{color:var(--highway-green);}
+  .coupon-msg.err{color:#C4553D;}
+  .coupon-applied-badge{
+    background:var(--highway-green); color:var(--paper); font-family:'Space Mono';
+    font-size:11.5px; padding:6px 12px; border-radius:20px; display:inline-flex;
+    align-items:center; gap:8px;
+  }
+  .coupon-applied-badge button{
+    background:none; border:none; color:var(--paper); cursor:pointer; font-size:13px; opacity:0.8;
+  }
+  .price-strike{
+    font-family:'Space Mono'; font-size:13px; color:var(--muted); text-decoration:line-through;
+    margin-right:8px;
+  }
+  .promo-price-strike{
+    font-family:'Space Mono'; font-size:11px; color:rgba(247,244,238,0.55); text-decoration:line-through;
+    margin-right:6px;
+  }
+</style>
+</head>
+<body>
+
+<div id="offerBanner">
+  <div class="ob-text" id="offerBannerText"></div>
+  <button class="ob-close" onclick="dismissBanner()">✕</button>
+</div>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="data:image/png;base64,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" alt="mapocabs">
+      <div class="logo-text">mapo<span>cabs</span></div>
+    </div>
+    <div class="header-right"><a class="header-bill" id="headerBill" href="bill.html">My bill</a><a class="header-call" href="tel:+919313268624">CALL +91 93132 68624</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CHOICE OF PROFESSIONALS · VAPI / DAMAN / SILVASSA</div>
+    <h1>Fixed-fare cabs. <span>No surprises.</span></h1>
+    <p class="hero-sub">Pick up from any city — see every car type and your fare up front.</p>
+
+    <div class="mode-tabs" id="modeTabs">
+      <button class="mode-btn active" id="modePlan" onclick="setMode('plan')">Plan a trip</button>
+      <button class="mode-btn" id="modeBrowse" onclick="setMode('browse')">Fixed fares</button>
+    </div>
+
+    <div class="planner" id="plannerBox">
+      <div class="seg" id="tripSeg">
+        <button class="seg-btn active" data-t="oneway" onclick="setTripType('oneway')">One-way</button>
+        <button class="seg-btn" data-t="round" onclick="setTripType('round')">Round trip</button>
+      </div>
+      <div class="plan-grid">
+        <div class="pf"><label for="pfFrom">FROM (PICKUP CITY)</label><input id="pfFrom" placeholder="e.g. Surat" autocomplete="off"><div class="ac" id="acFrom"></div></div>
+        <button class="swap" type="button" onclick="swapPlaces()" aria-label="Swap pickup and drop">⇄</button>
+        <div class="pf"><label for="pfTo">TO (DROP)</label><input id="pfTo" placeholder="e.g. Mumbai Airport" autocomplete="off"><div class="ac" id="acTo"></div></div>
+      </div>
+      <div class="plan-grid dates">
+        <div class="pf"><label for="pfDate">TRAVEL DATE</label><input id="pfDate" type="date"></div>
+        <div class="pf" id="pfReturnWrap" style="display:none;"><label for="pfReturn">RETURN DATE</label><input id="pfReturn" type="date"></div>
+        <button class="plan-go" onclick="planTrip()">Get fare</button>
+      </div>
+      <div class="plan-msg" id="planMsg"></div>
+      <div class="plan-hint">Pickup from any city — your fare is calculated automatically.</div>
+    </div>
+
+    <div class="search-shell" id="browseBox" style="display:none;">
+      <input id="searchInput" type="text" placeholder="Search a destination — e.g. Statue of Unity, Mumbai Airport, Trimbakeshwar…" autocomplete="off">
+      <button onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="hot-row">
+      <div class="hot-pill" onclick="quickFilter('local8080')"><span class="tag">HOT</span> Mapo Quick Trip</div>
+      <div class="hot-pill" onclick="quickFilter('airport')"><span class="tag">HOT</span> Airport Transfer</div>
+      <div class="hot-pill" onclick="quickFilter('outstation')">Outstation Trips</div>
+      <div class="hot-pill" onclick="quickFilter('localride')">Short Rides</div>
+    </div>
+
+    <div class="coupon-bar" id="couponBar">
+      <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+      <button onclick="applyCoupon()">Apply</button>
+      <span class="coupon-msg" id="couponMsg"></span>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</section>
+
+<section class="wrap" id="offerPosterWrap" style="display:none;">
+  <div class="nav-poster">
+    <div class="np-text">
+      <div class="np-eyebrow" id="npEyebrow"></div>
+      <div class="np-title">Flat <span id="npPct"></span> off<br>on every ride</div>
+      <div class="np-sub">Local, airport &amp; outstation — our fixed fares, now even better.</div>
+      <div class="np-code-row">
+        <div class="np-code"><span>USE CODE</span><b id="npCode"></b></div>
+        <button class="np-btn" id="npBtn" onclick="applyOfferFromPoster()">Apply offer</button>
+      </div>
+      <div class="np-note" id="npNote"></div>
+    </div>
+    <div class="np-mandala"><div class="np-ring"><div class="np-core"><small>FLAT</small><strong id="npPct2"></strong><small>OFF</small></div></div></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="carousel-head">
+    <h2>Trips We Do</h2>
+    <div class="carousel-arrows">
+      <button class="arrow-btn" onclick="scrollCarousel(-1)">‹</button>
+      <button class="arrow-btn" onclick="scrollCarousel(1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="carouselTrack"></div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap" id="knowSection">
+  <div style="margin-bottom:20px;"><h2 style="font-size:28px;">Know mapocabs</h2></div>
+  <div class="know-tabs" id="knowTabs"></div>
+
+  <div class="know-panel" id="kp-about">
+  <div class="about-panel about-collapsed" id="aboutPanel">
+    <div class="about-person">
+      <div class="about-photo">
+        <img src="data:image/jpeg;base64,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" alt="Adarsh Upadhyay, Founder of mapocabs">
+      </div>
+      <div class="about-caption">Adarsh Upadhyay<span>Founder, mapocabs</span></div>
+    </div>
+    <div>
+      <div class="about-tagline">More Than Just a Ride. It's Your Journey, Our Responsibility.</div>
+      <div class="about-body">
+        <p>mapocabs is a growing cab service built with a simple idea — travel should be comfortable, reliable, and stress-free.</p>
+        <div class="about-full">
+          <p>Founded in 2022 in Vapi, mapocabs provides local, outstation, airport, and customized cab services for individuals, families, and businesses. From a quick ride across the city to a long-distance journey, we focus on making every trip smooth from booking to drop-off.</p>
+          <p>We work with a trusted network of professional drivers and vehicle partners while maintaining our commitment to punctuality, safety, transparent pricing, and customer comfort.</p>
+          <p>At mapocabs, we believe a cab service is not just about getting you from Point A to Point B. It's about respecting your time, taking care of your journey, and making sure you reach your destination with peace of mind.</p>
+        </div>
+        <div class="about-signoff">mapocabs — Your Ride, Our Commitment.</div>
+      </div>
+      <button class="about-toggle-btn" id="aboutToggleBtn" onclick="toggleAbout()">Read more</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="know-panel" id="kp-care">
+    <div class="care-grid">
+      <div class="care-item"><div class="ci">✨</div><h4>Clean &amp; hygienic cars</h4><p>Spotless cars, sanitized regularly for your health and comfort.</p></div>
+      <div class="care-item"><div class="ci">💧</div><h4>Complimentary water</h4><p>Stay refreshed throughout your journey.</p></div>
+      <div class="care-item"><div class="ci">🔌</div><h4>Phone charging</h4><p>Charge your devices so you're always connected.</p></div>
+      <div class="care-item"><div class="ci">🛡️</div><h4>Safe &amp; smooth driving</h4><p>Trained, experienced drivers who prioritise your safety.</p></div>
+      <div class="care-item"><div class="ci">🤝</div><h4>Professional behaviour</h4><p>Courteous, well-dressed and respectful at all times.</p></div>
+      <div class="care-item"><div class="ci">📍</div><h4>Share your trip</h4><p>Share your live location with loved ones for peace of mind.</p></div>
+      <div class="care-item"><div class="ci">🧾</div><h4>Transparent billing</h4><p>No hidden charges. What you see is what you pay — and a proper bill after every ride.</p></div>
+      <div class="care-item"><div class="ci">🎧</div><h4>24×7 support</h4><p>We're always here for you — anytime, anywhere.</p></div>
+    </div>
+    <div class="promise">
+      <h4>Our promise to you</h4>
+      <ul><li>Your safety is our priority.</li><li>Your time is our responsibility.</li><li>Your trust is our foundation.</li><li>Your satisfaction is our success.</li></ul>
+    </div>
+  </div>
+
+  <div class="know-panel" id="kp-how">
+    <div class="steps2">
+      <div class="st"><b>01</b><h4>Choose your trip</h4><p>Enter pickup and drop — any city. Or browse our fixed fares.</p></div>
+      <div class="st"><b>02</b><h4>See your fare</h4><p>Fixed routes show a fixed fare. Other routes get an automatic estimate.</p></div>
+      <div class="st"><b>03</b><h4>Confirm details</h4><p>Name, mobile, pickup address, date &amp; time. You instantly get a Booking ID.</p></div>
+      <div class="st"><b>04</b><h4>We confirm on WhatsApp</h4><p>We message you to confirm your booking and the final fare.</p></div>
+      <div class="st"><b>05</b><h4>Ride &amp; get your bill</h4><p>After your ride, download your bill using your Booking ID and mobile number.</p></div>
+    </div>
+  </div>
+
+  <div class="know-panel faq" id="kp-faq">
+    <details><summary>Is the fare I see final?</summary><p>For our fixed-fare routes (airport transfers, Statue of Unity, Trimbakeshwar, local packages and short rides) the fare shown is the fare. For other routes, the fare is calculated automatically from the approximate distance and marked "Estimate" — we confirm the final fare with you on WhatsApp before your trip.</p></details>
+    <details><summary>What is not included in the fare?</summary><p>Toll tax is excluded on outstation and local packages (included on airport transfers). Parking and driver allowance are extra where applicable, and extra kilometres or hours beyond a package are charged at the rates shown in "Extra Charges &amp; Terms" above.</p></details>
+    <details><summary>Can you pick me up from another city?</summary><p>Yes. Choose your pickup city in the "From" box in Plan a trip. If your city isn't in the list, send us a quote request and we'll reply on WhatsApp.</p></details>
+    <details><summary>How do I download my bill?</summary><p>Once your ride is marked complete, open the "My bill" page, enter your Booking ID (from your booking confirmation) and the mobile number you booked with, and download your bill as a PDF.</p></details>
+    <details><summary>How do I change or cancel a booking?</summary><p>Message us on WhatsApp with your Booking ID and we'll help you.</p></details>
+    <details><summary>How do I pay?</summary><p>We confirm the payment details with you on WhatsApp when we confirm your booking.</p></details>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div style="margin-bottom:20px;"><h2 style="font-size:28px;">Extra Charges &amp; Terms</h2></div>
+  <div class="mono" style="font-size:12px; color:var(--muted); margin-bottom:18px;">Applies if you exceed the included kilometres or hours in a package.</div>
+  <div class="terms-grid" id="ratesGrid"></div>
+  <ul class="terms-list">
+    <li>Toll tax excluded on outstation &amp; local packages. Included on airport transfers.</li>
+    <li>Parking charges extra, if applicable.</li>
+    <li>Minimum 300 km per day on outstation full-day trips.</li>
+    <li>Driver allowance (D/A) charged extra.</li>
+  </ul>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<section class="wrap">
+  <div class="enquiry-panel">
+    <h2>Send us an enquiry</h2>
+    <div class="enquiry-sub">Don't use WhatsApp, or want a custom trip quoted? Fill this in and we'll get back to you — it also saves straight to our system.</div>
+    <div class="form-grid">
+      <div class="form-field"><label for="enqName">NAME</label><input id="enqName" placeholder="Your name"></div>
+      <div class="form-field"><label for="enqPhone">PHONE</label><input id="enqPhone" placeholder="Your phone number"></div>
+      <div class="form-field full"><label for="enqTrip">TRIP / ROUTE</label><input id="enqTrip" placeholder="e.g. Vapi to Mumbai Airport, 15th August"></div>
+      <div class="form-field full"><label for="enqMsg">MESSAGE</label><textarea id="enqMsg" placeholder="Any details — number of passengers, timing, luggage, etc."></textarea></div>
+    </div>
+    <button class="form-submit-btn" onclick="submitEnquiry()">Send Enquiry</button>
+    <div class="form-status" id="enqStatus"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="lane-divider"></div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">mapocabs</div>
+    Choice of professionals · <a href="https://mapocabs.com">mapocabs.com</a><br>
+    Book on <a href="#" id="footerWaLink">WhatsApp</a> or call <span class="mono">+91 93132 68624</span>. <a href="bill.html" id="footerBill">Download your bill</a>
+    <div class="foot-social">
+      <a href="https://instagram.com/mapocabs" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/mapocabs" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://linkedin.com/company/mapocabs" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="mono" style="font-size:10.5px; color:var(--muted); margin-top:16px; opacity:0.7;">
+      Site v1.14 · Updated 19 Oct 2026
+    </div>
+  </div>
+</footer>
+
+<button class="feedback-fab" onclick="openFeedback()">★ Feedback</button>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBookingModal()">✕</button>
+
+    <div id="bkFormView">
+      <h2>Confirm your booking</h2>
+      <div class="form-field" style="margin-bottom:10px;">
+        <label class="mono" style="font-size:11px; color:var(--muted);">TRIP</label>
+        <div id="bkRouteText" style="font-family:'Barlow Condensed'; font-weight:600; font-size:17px; margin-top:4px;"></div>
+      </div>
+      <div class="bk-fare" id="bkFare"></div>
+      <div class="form-field" style="margin-bottom:12px;">
+        <label for="bkPickup" id="bkPickupLabel">PICKUP ADDRESS</label>
+        <input id="bkPickup" placeholder="House / area / landmark">
+      </div>
+      <div class="form-field" style="margin-bottom:12px;">
+        <label for="bkName">YOUR NAME</label>
+        <input id="bkName" placeholder="Full name">
+      </div>
+      <div class="form-field" style="margin-bottom:12px;">
+        <label for="bkPhone">MOBILE NUMBER</label>
+        <input id="bkPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <div class="form-field"><label for="bkDate">TRAVEL DATE</label><input id="bkDate" type="date"></div>
+        <div class="form-field"><label for="bkTime">PICKUP TIME</label><input id="bkTime" type="time"></div>
+      </div>
+      <div class="form-field" id="bkReturnWrap" style="margin-bottom:12px; display:none;">
+        <label for="bkReturn">RETURN DATE</label><input id="bkReturn" type="date">
+      </div>
+      <button class="form-submit-btn" onclick="confirmBooking()">Confirm &amp; open WhatsApp</button>
+      <div class="form-status" id="bkStatus"></div>
+    </div>
+
+    <div id="bkDoneView" style="display:none;">
+      <h2>Booking request sent ✓</h2>
+      <div class="bk-id-box"><small>YOUR BOOKING ID</small><b id="bkIdText"></b></div>
+      <ol class="bk-steps">
+        <li>We've opened WhatsApp with your booking details — please press <b>Send</b> there.</li>
+        <li>We'll confirm your booking and final fare on WhatsApp.</li>
+        <li>After your ride, download your bill with this ID and your mobile number.</li>
+      </ol>
+      <div class="bk-row">
+        <button class="bk-btn2" onclick="copyBookingId()" id="bkCopyBtn">Copy Booking ID</button>
+        <button class="bk-btn2" onclick="reopenWhatsApp()">Open WhatsApp again</button>
+        <a class="bk-btn2" href="bill.html" target="_blank" rel="noopener">My bill page</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeFeedback()">✕</button>
+    <h2>Rate your ride</h2>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbName">NAME</label>
+      <input id="fbName" placeholder="Your name">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label for="fbPhone">PHONE (optional)</label>
+      <input id="fbPhone" placeholder="Your phone number">
+    </div>
+    <div class="form-field" style="margin-bottom:14px;">
+      <label>RATING</label>
+      <div class="star-row" id="starRow"></div>
+    </div>
+    <div class="form-field">
+      <label for="fbComment">COMMENT</label>
+      <textarea id="fbComment" placeholder="How was your trip?"></textarea>
+    </div>
+    <button class="form-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+    <div class="form-status" id="fbStatus"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   EDIT YOUR DETAILS HERE
+   ========================================================================= */
+const WHATSAPP_NUMBER = "919313268624";
+
+// Paste the Google Apps Script "Web app" URL here once you've deployed it
+// (see google-apps-script.gs.txt for the code to paste into Apps Script).
+// Leave as-is and enquiries just won't be logged to a sheet yet.
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzD8p7lnvQUBbF5Yg6XBLBbueq7FcJn3QiV3joON-jsZ6BoMlkhQ0Uh9NG29rYUWmnS/exec";
+
+// Coupon code and discount. Customers type (or tap "Apply offer" on the
+// poster) to see struck-through prices with the discount applied.
+let COUPON_CODE = "MAPOGARBA";
+let COUPON_DISCOUNT = 0.12;
+
+// =========================================================================
+// OFFER TOGGLE — one switch for the whole offer. No Google Sheets needed.
+//
+//   OFFER_ENABLED = true   -> top banner + offer poster + coupon box all show
+//   OFFER_ENABLED = false  -> all of them disappear and the code stops working
+//
+// To change it: edit the line below, save, and upload index.html to GitHub.
+// =========================================================================
+let OFFER_ENABLED = true;
+let OFFER_POSTER_EYEBROW = "🪔 Navratri Special";
+let OFFER_BANNER_TEXT = `🪔 Navratri Special — Flat ${Math.round(COUPON_DISCOUNT*100)}% OFF on every ride! Use code ${COUPON_CODE}`;
+let OFFER_POSTER_NOTE = "Valid this Navratri · Toll, parking & driver allowance extra as per terms";
+
+/* =========================================================================
+   YOUR PACKAGES — grouped by category. Use the Trip Manager (admin.html)
+   to add/edit these without touching code.
+   ========================================================================= */
+const CATEGORIES = [
+  { id: "outstation", label: "Outstation Trips" },
+  { id: "local8080", label: "Local Package" },
+  { id: "airport", label: "Airport Transfer" },
+  { id: "localride", label: "Short Rides" }
+];
+
+const PACKAGES = {
+  outstation: [
+    {
+      route: "Vapi/Daman/Silvassa → Statue of Unity",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 5999 },
+        { type: "mapo XL", price: 6999 },
+        { type: "mapo XL premium", price: 9999 },
+        { type: "mapo Traveller (20-seater)", price: 17999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa → Trimbakeshwar",
+      note: "Full-day trip · Min 300 km/day",
+      cars: [
+        { type: "mapo", price: 4999 },
+        { type: "mapo XL", price: 5999 },
+        { type: "mapo XL premium", price: 7499 },
+        { type: "mapo Traveller (20-seater)", price: 11999 }
+      ]
+    }
+  ],
+  local8080: [
+    {
+      route: "Vapi/Daman/Silvassa — Local Package",
+      note: "8 hours / 80 km included",
+      cars: [
+        { type: "mapo", price: 1999 },
+        { type: "mapo XL", price: 2199 },
+        { type: "mapo XL premium", price: 3199 }
+      ]
+    }
+  ],
+  airport: [
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2999 },
+        { type: "mapo XL", price: 3999 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Mumbai Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4799 },
+        { type: "mapo XL", price: 5499 },
+        { type: "mapo XL premium", price: 6499 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "One-way Pickup or Drop · Toll included",
+      cars: [
+        { type: "mapo", price: 2799 },
+        { type: "mapo XL", price: 3799 },
+        { type: "mapo XL premium", price: 4999 }
+      ]
+    },
+    {
+      route: "Vapi/Daman/Silvassa ⇄ Surat Airport",
+      note: "Round Trip · Toll included",
+      cars: [
+        { type: "mapo", price: 4299 },
+        { type: "mapo XL", price: 5299 },
+        { type: "mapo XL premium", price: 6299 }
+      ]
+    }
+  ],
+  localride: [
+    {
+      route: "0 – 10 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 573 },
+        { type: "mapo XL", price: 703 },
+        { type: "mapo XL premium", price: 944 }
+      ]
+    },
+    {
+      route: "11 – 20 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 767 },
+        { type: "mapo XL", price: 911 },
+        { type: "mapo XL premium", price: 1272 }
+      ]
+    },
+    {
+      route: "21 – 30 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 965 },
+        { type: "mapo XL", price: 1119 },
+        { type: "mapo XL premium", price: 1598 }
+      ]
+    },
+    {
+      route: "31 – 40 km",
+      note: "Point to point, no stops",
+      cars: [
+        { type: "mapo", price: 1163 },
+        { type: "mapo XL", price: 1327 },
+        { type: "mapo XL premium", price: 1925 }
+      ]
+    }
+  ]
+};
+
+// Extra per-km / per-hour rates once a package's included km/hours are exceeded
+const EXTRA_RATES = [
+  { type: "mapo", perKm: 12, perHour: 100 },
+  { type: "mapo XL", perKm: 14, perHour: 120 },
+  { type: "mapo XL premium", perKm: 20, perHour: 170 },
+  { type: "mapo Traveller", perKm: 32, perHour: 200 }
+];
+
+// "Trips We Do" carousel — the advertising strip. Add a `photo` filename
+// (e.g. "statue-of-unity.jpg", placed next to index.html) to use a real
+// photo instead of the plain color card.
+const PROMO_TRIPS = [
+  { title: "Statue of Unity", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 5999, color: "#3D5A47", searchTerm: "Statue of Unity", photo: null },
+  { title: "Trimbakeshwar", eyebrow: "FULL-DAY OUTSTATION", fromPrice: 4999, color: "#5A4632", searchTerm: "Trimbakeshwar", photo: null },
+  { title: "Mumbai Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2999, color: "#33475B", searchTerm: "Mumbai Airport", photo: null },
+  { title: "Surat Airport", eyebrow: "AIRPORT TRANSFER", fromPrice: 2799, color: "#4A3A55", searchTerm: "Surat Airport", photo: null },
+  { title: "Local Package", eyebrow: "8 HRS / 80 KM", fromPrice: 1999, color: "#6B4A2E", searchTerm: "Local Package", photo: null }
+];
+
+// =========================================================================
+// SITE FEATURES — switch sections on or off.  true = show,  false = hide
+// (change, save, upload index.html to GitHub)
+// =========================================================================
+const FEATURES = {
+  planner:  true,   // "Plan a trip": pickup from ANY city + automatic fare
+  aboutTab: true,   // Know mapocabs > About us
+  careTab:  true,   // Know mapocabs > How we care about you
+  howTab:   true,   // Know mapocabs > How it works
+  faqTab:   true,   // Know mapocabs > FAQs
+  billLink: true    // "My bill" link in the header and footer
+};
+
+// =========================================================================
+// FARE SETTINGS — used by "Plan a trip" for routes that are NOT in your
+// fixed-fare list (fixed fares always win when a route matches).
+//
+//   ratePerKm        price per km for each car (from your rate sheet)
+//   roadFactor       straight-line distance x this = road distance (1.3 is a good start)
+//   oneWayFactor     one-way drops are billed on km x this, to cover the driver's return
+//   minKmPerDay      round trips are billed at least this many km per day
+//   shortTripMaxKm   up to this distance we use your "Short Rides" prices
+//   roundTo          fares are rounded to the nearest this many rupees
+// =========================================================================
+const FARE = {
+  ratePerKm: { "mapo": 12, "mapo XL": 14, "mapo XL premium": 20, "mapo Traveller (20-seater)": 32 },
+  roadFactor: 1.3,
+  oneWayFactor: 1.5,
+  minKmPerDay: 300,
+  shortTripMaxKm: 40,
+  roundTo: 50,
+  homeCities: ["vapi", "daman", "silvassa"]
+};
+
+// Exact road distances in km. These beat the automatic estimate, so add the
+// routes you drive often to make their fares exact:  ["From", "To", km]
+const ROUTE_KM = [
+  // ["Vapi", "Surat", 125],
+  // ["Vapi", "Mumbai", 175],
+];
+
+/* ================= NOTHING BELOW THIS LINE NEEDS EDITING ================= */
+
+// City / airport / place list used for pickup and drop (name|latitude|longitude|population in thousands).
+const PLACES_RAW = "Abrama|20.859|72.906|21;Abu|24.594|72.718|25;Abu Road|24.480|72.782|50;Achalpur|21.257|77.510|111;Adoni|15.628|77.275|164;Agar|23.712|76.016|35;Agartala|23.836|91.279|203;Agra|27.183|78.017|1430;Ahmadnagar|19.095|74.738|367;Ahmadpur|18.706|76.937|40;Ahmedabad|23.026|72.587|3720;Ahmedabad Airport|23.077|72.635|2500;Airoli|19.151|72.996|100;Aizawl|23.729|92.718|265;Ajmer|26.452|74.639|518;Ajra|16.116|74.211|16;Akalkot|17.525|76.206|39;Aklera|24.413|76.567|20;Akola|20.710|76.998|429;Akot|21.096|77.059|87;Alandi|18.678|73.899|21;Alandur|13.002|80.206|154;Alappuzha|9.490|76.326|177;Alibag|18.648|72.876|21;Aligarh|27.881|78.075|753;Allahabad|25.445|81.843|1073;Alot|23.763|75.557|23;Alwar|27.562|76.625|283;Amalner|21.040|75.059|97;Amarnath|19.200|73.167|218;Amarpatan|24.314|80.977|17;Ambad|19.613|75.789|30;Ambah|26.704|78.227|41;Ambajogai|18.733|76.386|74;Ambattur|13.098|80.162|341;Amet|25.306|73.926|17;Amla|21.925|78.128|30;Amli|20.283|73.017|33;Amod|21.993|72.870|19;Amravati|20.933|77.750|604;Amreli|21.600|71.212|100;Amritsar|31.622|74.875|1092;Amroha|28.903|78.470|176;Amroli|21.251|72.839|17;Anand|22.553|72.955|138;Anantapur|14.678|77.608|240;Anjad|22.042|75.055|24;Anjangaon|21.165|77.309|55;Anjar|23.113|70.027|67;Ankleshwar|21.632|72.990|75;Anshing|20.041|77.315|19;Anta|25.150|76.300|31;Anupgarh|29.191|73.209|33;Anuppur|23.103|81.691|18;Arangaon|19.027|74.715|30;Aron|24.381|77.417|24;Arrah|25.556|84.663|224;Arvi|20.996|78.229|42;Asansol|23.683|86.983|504;Ashoknagar|24.576|77.731|65;Ashta|23.018|76.722|45;Asind|25.734|74.333|15;Aurangabad|19.878|75.342|1016;Ausa|18.247|76.499|34;Avadi|13.115|80.110|250;Babai|22.703|77.935|16;Babra|21.846|71.305|19;Badlapur|19.155|73.266|105;Badnawar|23.022|75.233|19;Bagar|28.188|75.500|16;Bagasra|21.487|70.955|33;Bahadurgarh|28.693|76.936|154;Baharampur|24.105|88.252|181;Bahraigh|27.574|81.595|182;Baihar|22.101|80.550|16;Balaghat|21.816|80.188|80;Balapur|20.666|76.774|42;Bali|22.649|88.341|297;Ballalpur|19.847|79.346|92;Balotra|25.832|72.240|68;Bamor Kalan|24.893|78.151|28;Banda|25.478|80.335|152;Bandikui|27.051|76.573|16;Banswara|23.541|74.442|94;Bantva|21.488|70.076|15;Baramati|18.152|74.578|54;Baran|25.100|76.517|87;Baranagar|22.641|88.377|260;Barasat|22.722|88.482|298;Barddhaman|23.256|87.857|302;Bardoli|21.123|73.112|58;Bareilly|28.367|79.432|745;Bargi|22.991|79.876|18;Bari|26.647|77.616|56;Bari Sadri|24.413|74.473|16;Barmer|25.746|71.392|89;Barsi|18.235|75.693|111;Barwani|22.032|74.900|47;Basi|26.831|76.049|21;Basmat|19.329|77.157|64;Basni|27.172|73.645|23;Basoda|23.852|77.937|69;Baswa|27.150|76.583|23;Bathinda|30.207|74.939|243;Bayana|26.908|77.290|36;Beawar|26.101|74.320|131;Bedi|22.501|70.044|21;Begamganj|23.599|78.341|33;Begun|24.983|75.000|21;Behror|27.888|76.281|26;Belgaum|15.852|74.504|429;Bellary|15.142|76.924|337;Bengaluru|12.972|77.594|5104;Beohari|24.024|81.378|22;Berasia|23.631|77.434|27;Betul|21.901|77.902|92;Bhachau|23.299|70.343|24;Bhadasar|28.315|74.290|33;Bhadra|29.103|75.171|38;Bhadravati|13.848|75.705|164;Bhagalpur|25.244|86.972|362;Bhainsdehi|21.645|77.630|16;Bhandara|21.168|79.649|90;Bhander|25.736|78.746|22;Bhanpura|24.513|75.747|17;Bhanvad|21.931|69.781|21;Bharatpur|27.217|77.490|229;Bharuch|21.695|72.981|154;Bhasawar|27.039|77.048|19;Bhatpara|22.866|88.401|483;Bhavnagar|21.763|72.153|555;Bhawaniganj|24.416|75.836|38;Bhayandar|19.302|72.851|520;Bhayavadar|21.855|70.248|19;Bhikangaon|21.868|75.964|15;Bhilad|20.276|72.842|300;Bhilai|21.209|81.428|625;Bhilwara|25.347|74.641|326;Bhind|26.567|78.787|174;Bhindar|24.502|74.186|17;Bhinmal|24.999|72.271|43;Bhitarwar|25.792|78.111|18;Bhiwadi|28.210|76.861|34;Bhiwandi|19.300|73.059|707;Bhiwani|28.793|76.140|191;Bhopal|23.255|77.403|1600;Bhor|18.149|73.843|19;Bhubaneshwar|20.272|85.834|762;Bhudgaon|16.907|74.600|16;Bhuj|23.254|69.669|133;Bhum|18.459|75.659|19;Bhusaval|21.044|75.785|183;Biaora|23.921|76.911|42;Bidar|17.908|77.515|204;Bihar Sharif|25.201|85.524|244;Bijapur|16.824|75.715|271;Bijawar|24.624|79.490|19;Bikaner|28.018|73.315|576;Bilara|26.181|73.706|42;Bilaspur|22.080|82.155|283;Bilimora|20.770|72.961|511;Bissau|28.247|75.077|23;Boisar|19.804|72.756|16;Bokaro|23.787|85.956|419;Borivli|19.235|72.860|610;Borsad|22.408|72.898|60;Botad|22.169|71.667|117;Brahmapur|19.312|84.793|325;Budaun|28.038|79.127|162;Bulandshahr|28.404|77.858|199;Buldana|20.529|76.185|67;Bundi|25.439|75.637|99;Burhanpur|21.309|76.230|203;Burhar|23.215|81.532|18;Calangute|15.544|73.755|17;Chakan|18.761|73.864|23;Chaklasi|22.653|72.945|38;Chaksu|26.605|75.948|33;Chalala|21.411|71.166|17;Chalisgaon|20.458|75.016|96;Chanasma|23.715|72.113|16;Chanda|19.951|79.295|328;Chandannagar|22.862|88.368|181;Chanderi|24.713|78.138|33;Chandigarh|30.736|76.788|961;Chandor|20.331|74.245|20;Chandur|19.734|79.172|23;Chandur Bazar|21.239|77.747|19;Chapra|25.780|84.747|202;Chennai|13.088|80.278|4328;Chhabra|24.665|76.844|26;Chhala|23.308|72.774|17;Chhapar|27.819|74.439|19;Chhatarpur|24.918|79.589|112;Chhindwara|22.057|78.940|135;Chhota Udepur|22.304|74.016|25;Chhoti Sadri|24.381|74.701|17;Chicholi|21.469|79.702|19;Chidawa|28.239|75.640|41;Chikhli|20.350|76.258|53;Chiplun|17.533|73.509|51;Chittaurgarh|24.890|74.624|107;Chopda|21.246|75.299|66;Chotila|22.423|71.196|15;Churu|28.304|74.967|104;Cochin|9.940|76.260|605;Coimbatore|11.006|76.966|960;Cuddalore|11.756|79.767|159;Cuncolim|15.177|73.994|16;Curchorem|15.263|74.109|23;Cuttack|20.465|85.879|580;Dabhoi|22.183|73.433|56;Daboh|26.002|78.877|18;Dabra|25.886|78.332|61;Dahanu|19.968|72.713|49;Dahegam|23.169|72.822|41;Dakor|22.753|73.150|25;Daman|20.414|72.832|40;Daman Airport|20.434|72.843|2000;Damnagar|21.692|71.517|18;Damoh|23.833|79.442|119;Darbhanga|26.152|85.897|287;Darwha|20.310|77.773|23;Daryapur|20.925|77.326|36;Datia|25.673|78.459|91;Dattapur|20.781|78.141|22;Daund|18.465|74.584|45;Dausa|26.890|76.336|73;Davangere|14.467|75.927|435;Dehra Dun|30.324|78.034|522;Delhi|28.652|77.231|10928;Deolali|19.944|73.834|53;Deoli|25.757|75.380|21;Deori Khas|23.390|79.016|25;Depalpur|22.851|75.542|17;Deshnoke|27.798|73.343|17;Deulgaon Raja|20.018|76.038|27;Devgadh Bariya|22.705|73.909|20;Devgarh|25.525|73.908|18;Dewas|22.966|76.055|261;Dhamnod|22.209|75.471|30;Dhanbad|23.802|86.443|220;Dhandhuka|22.382|71.987|30;Dhanera|24.510|72.023|24;Dhar|22.594|75.298|82;Dharampur|20.537|73.174|21;Dharangaon|21.012|75.274|34;Dhari|21.329|71.026|29;Dharmabad|18.891|77.849|32;Dharur|18.820|76.109|19;Dhaulpur|26.693|77.880|102;Dholka|22.727|72.441|55;Dhoraji|21.734|70.450|81;Dhrangadhra|22.992|71.468|76;Dhrol|22.567|70.418|26;Dhulia|20.901|74.777|367;Dicholi|15.593|73.946|15;Didwana|27.401|74.575|50;Dig|27.472|77.326|43;Diglur|18.548|77.577|53;Digras|20.104|77.718|42;Dinapore|25.637|85.048|153;Dindigul|10.369|77.980|201;Dindori|22.941|81.080|19;Disa|24.256|72.179|92;Diu|20.714|70.982|24;Dohad|22.833|74.260|84;Dombivli|19.217|73.083|1193;Dondaicha|21.324|74.568|46;Dungarpur|23.843|73.715|45;Durg|21.191|81.276|255;Durgapur|23.516|87.308|519;Dwarka|22.239|68.968|36;Ellore|16.713|81.104|183;Erandol|20.922|75.326|31;Etawa|24.184|78.203|55;Etawah|26.776|79.021|257;Faizpur|21.168|75.860|25;Faridabad|28.411|77.313|1220;Farrukhabad|27.391|79.579|241;Fatehpur|25.928|80.813|166;Firozabad|27.151|78.398|306;Fyzabad|26.775|82.150|153;Gadag|15.430|75.630|163;Gadag-Betageri|15.417|75.617|173;Gadarwara|22.924|78.785|41;Gadhada|21.970|71.578|29;Gadhinglaj|16.223|74.350|26;Gajuwaka|17.700|83.217|259;Gandevi|20.812|72.998|16;Gandhidham|23.083|70.133|166;Gandhinagar|23.217|72.683|196;Gangakher|18.970|76.749|46;Ganganagar|29.920|73.875|232;Gangapur|26.472|76.717|120;Garhakota|23.779|79.143|28;Gariadhar|21.539|71.577|36;Gaya|24.797|85.004|424;Gevrai|19.264|75.750|30;Ghatanji|20.142|78.313|21;Ghaziabad|28.665|77.439|1199;Ghoti Budrukh|19.716|73.628|22;Ghugus|19.938|79.112|32;Goa Airport (Dabolim)|15.381|73.831|1500;Godhra|22.775|73.615|132;Gohadi|26.433|78.442|52;Gondal|21.961|70.803|102;Gondia|21.460|80.192|125;Gorakhpur|29.448|75.672|1325;Gosaba|22.165|88.801|223;Greater Noida|28.496|77.536|294;Gulabpura|25.904|74.660|26;Gulbarga|17.336|76.838|484;Guna|24.647|77.311|154;Guntur|16.300|80.457|531;Gurgaon|28.460|77.026|197;Guwahati|26.184|91.746|899;Gwalior|26.230|78.173|882;Hadgaon|19.496|77.659|26;Haldia|22.060|88.110|171;Halol|22.503|73.472|46;Halvad|23.015|71.180|26;Hanumangarh|29.582|74.329|156;Haora|22.577|88.319|1028;Hapur|28.730|77.781|243;Harda Khas|22.344|77.095|67;Haridwar|29.948|78.160|186;Harij|23.694|71.907|19;Harpalpur|25.288|79.333|18;Harsud|22.099|76.734|17;Hatta|24.134|79.601|31;Himatnagar|23.599|72.966|61;Hindaun|26.734|77.035|96;Hindoria|23.903|79.569|15;Hinganghat|20.549|78.840|98;Hingoli|19.715|77.142|76;Hisar|29.154|75.723|296;Hoshangabad|22.747|77.727|109;Hoshiarpur|31.537|75.913|158;Hospet|15.270|76.387|198;Hubli|15.348|75.134|840;Hugli|22.909|88.397|177;Hyderabad|17.384|78.456|3598;Ichalkaranji|16.691|74.461|274;Igatpuri|19.695|73.563|35;Imphal|24.808|93.944|224;Indapur|18.300|73.250|27;Indore|22.718|75.833|1837;Ingraj Bazar|25.004|88.146|170;Itarsi|22.615|77.762|101;Jabalpur|23.167|79.950|1030;Jahazpur|25.620|75.276|20;Jaigaon|26.848|89.376|159;Jaipur|26.920|75.788|2712;Jaisalmer|26.918|70.904|68;Jaisingpur|16.776|74.554|47;Jaitaran|26.204|73.937|21;Jalalpur|20.949|72.898|17;Jalandhar|31.326|75.579|785;Jalgaon|21.003|75.566|429;Jalgaon Jamod|21.052|76.535|28;Jalna|19.841|75.886|262;Jalor|25.346|72.616|50;Jamai|22.196|78.592|23;Jambusar|22.052|72.801|42;Jammu|32.736|74.869|466;Jamnagar|22.473|70.067|492;Jamshedpur|22.803|86.185|616;Jamuria|23.705|87.079|160;Jaora|23.638|75.127|67;Jasdan|22.037|71.208|44;Jatara|25.010|79.049|17;Jaunpur|25.754|82.687|170;Jawad|24.599|74.863|17;Jetpur|21.755|70.623|118;Jhabua|22.768|74.591|34;Jhalawar|24.596|76.165|52;Jhalrapatan|24.542|76.172|33;Jhansi|25.459|78.580|413;Jhunjhunun|28.126|75.398|113;Jind|29.316|76.315|161;Jintur|19.612|76.687|42;Jodhpur|26.268|73.006|921;Jodiya Bandar|22.717|70.283|16;Jora|26.342|77.809|26;Junagadh|21.520|70.460|184;Junnar|19.208|73.875|26;Kadi|23.299|72.334|58;Kadod|21.217|73.220|17;Kagal|16.577|74.315|25;Kailaras|26.305|77.616|25;Kaimori|23.385|79.744|20;Kakinada|16.960|82.238|293;Kalamb|19.044|73.956|27;Kalamnuri|19.674|77.311|23;Kalavad|22.208|70.383|26;Kalmeshwar|21.232|78.920|19;Kalol|22.608|73.463|26;Kalyan|19.244|73.136|1262;Kaman|27.658|77.269|34;Kamarhati|22.671|88.375|333;Kamthi|21.216|79.197|86;Kanchipuram|12.835|79.700|155;Kandla|23.033|70.217|26;Kankauli|16.266|73.712|16;Kannad|20.257|75.138|42;Kannod|22.668|76.743|16;Kanpur|26.465|80.350|2823;Kapadvanj|23.023|73.071|45;Kapren|25.405|76.074|20;Karad|17.289|74.182|56;Karamsad|22.542|72.904|32;Karanja|20.483|77.489|65;Karanpur|29.840|73.455|22;Karauli|26.498|77.028|74;Kareli|22.915|79.064|28;Karera|25.458|78.136|26;Karimnagar|18.439|79.129|229;Karjat|18.911|73.324|35;Karmala|18.408|75.194|23;Karnal|29.692|76.984|225;Karol Bagh|28.651|77.191|505;Kasrawad|22.127|75.611|21;Katangi|23.441|79.796|18;Kathor|21.289|72.941|15;Katihar|25.539|87.570|193;Katol|21.274|78.586|42;Kekri|25.971|75.150|38;Keshod|21.303|70.249|69;Keshorai Patan|25.293|75.939|23;Khachrod|23.423|75.282|32;Khadki|18.564|73.852|76;Khajuraho Group of Monuments|24.848|79.934|26;Khamaria|23.226|79.880|15;Khambhaliya|22.207|69.650|38;Khambhat|22.317|72.619|81;Khamgaon|20.707|76.568|95;Khammam|17.248|80.144|171;Khandela|27.605|75.502|23;Khandwa|21.824|76.351|183;Khapa|21.422|78.982|15;Kharagpur|22.340|87.325|220;Kharakvasla|18.440|73.775|24;Khargone|21.823|75.614|95;Khategaon|22.596|76.913|23;Kheda|22.752|72.685|25;Khedbrahma|24.030|73.046|29;Kheralu|23.885|72.619|21;Khetia|21.671|74.585|15;Khetri|28.001|75.786|17;Khilchipur|24.039|76.578|16;Khirkiyan|22.167|76.861|18;Khopoli|18.786|73.346|64;Khuldabad|20.007|75.192|15;Khurai|24.044|78.330|32;Kinwat|19.626|78.199|26;Kishangarh|26.590|74.854|132;Kodinar|20.794|70.702|35;Kodoli|16.876|74.191|18;Kolaras|25.219|77.612|17;Kolhapur|16.696|74.232|516;Kolkata|22.563|88.363|4631;Kollam|8.881|76.585|394;Kopargaon|19.882|74.476|65;Korba|22.346|82.696|419;Koregaon|18.646|74.059|26;Korwai|24.118|78.040|15;Kosamba|21.462|72.958|33;Kota|25.183|75.839|763;Kotma|23.204|81.979|32;Kotputli|27.702|76.199|44;Koynanagar|17.400|73.767|28;Kozhikode|11.248|75.780|440;Kuchaman|27.147|74.857|57;Kuchera|26.987|73.971|22;Kukatpalli|17.485|78.414|342;Kukshi|22.207|74.758|26;Kultali|21.900|88.400|188;Kulti|23.732|86.844|305;Kumbhraj|24.373|77.048|16;Kumher|27.317|77.371|22;Kundla|21.342|71.306|77;Kurandvad|16.683|74.589|21;Kurduvadi|18.093|75.416|23;Kurnool|15.829|78.036|460;Kutiyana|21.624|69.985|17;Lachhmangarh Sikar|27.823|75.028|48;Ladnun|27.653|74.400|60;Lahar|26.194|78.941|33;Lakheri|25.672|76.177|28;Lakhnadon|22.600|79.601|16;Lal Bahadur Nagar|17.348|78.558|262;Lalpur|22.191|69.964|15;Lalsot|26.560|76.329|31;Lathi|21.723|71.388|23;Latur|18.397|76.568|349;Leteri|24.060|77.409|16;Limbdi|22.565|71.811|42;Lonar|19.985|76.520|22;Lonavala|18.755|73.406|1000;Lonavla|18.753|73.406|59;Loni|28.751|77.290|165;Losal|27.400|74.917|28;Lucknow|26.839|80.923|2472;Ludhiana|30.912|75.854|1545;Lunavada|23.128|73.610|35;Machilipatnam|16.187|81.139|193;Madgaon|15.275|73.958|87;Madhyamgram|22.689|88.446|161;Madurai|9.919|78.120|910;Mahad|18.083|73.417|27;Mahemdavad|22.824|72.756|33;Maheshwar|22.176|75.587|22;Mahgawan|26.495|78.616|16;Mahudha|22.821|72.940|17;Mahwah|27.046|76.932|23;Maihar|24.266|80.761|38;Majalgaon|19.160|76.208|48;Makrana|27.044|74.724|94;Maksi|23.260|76.146|20;Malegaon|20.550|74.535|435;Malkajgiri|17.448|78.526|150;Malkapur|20.886|76.199|65;Malpura|26.284|75.365|29;Malvan|16.060|73.463|19;Manasa|24.478|75.141|24;Manavadar|21.498|70.138|29;Manawar|22.236|75.089|28;Mandal|25.441|74.570|23;Mandalgarh|25.194|75.072|22;Mandideep|23.082|77.533|40;Mandla|22.599|80.371|45;Mandsaur|24.072|75.070|125;Mandvi|22.833|69.352|48;Mangalore|12.917|74.856|417;Mangrol|21.123|70.115|59;Mangrul Pir|20.314|77.342|29;Manmad|20.253|74.438|77;Manoharpur|27.298|75.950|29;Mansa|23.426|72.657|30;Manwat|19.301|76.497|31;Mapuca|15.592|73.809|40;Mapusa|15.594|73.808|300;Margao|15.283|73.986|300;Mathura|27.503|77.672|331;Mau|25.942|83.561|246;Mauganj|24.667|81.873|26;Medinipur|22.421|87.323|153;Meerut|28.980|77.706|1223;Mehekar|20.151|76.568|41;Mendarda|21.321|70.441|17;Merta|26.649|74.034|44;Mhasvad|17.634|74.788|21;Mihona|26.284|78.980|16;Mirzapur|25.145|82.565|220;Modasa|23.463|73.299|59;Monghyr|25.375|86.475|203;Moradabad|28.839|78.777|721;Moram|17.788|76.471|18;Morar|26.226|78.225|44;Morbi|22.817|70.838|118;Morena|26.499|77.995|152;Mormugao|15.389|73.815|102;Morsi|21.340|78.013|36;Morwa|22.905|73.839|20;Mount Abu|24.593|72.716|1200;Mudkhed|19.157|77.503|21;Mukher|18.706|77.368|29;Mul|20.070|79.678|24;Multai|21.775|78.258|22;Mumbai|19.073|72.883|12692;Mumbai Airport|19.089|72.868|3000;Mundra|22.839|69.722|15;Mundwa|27.063|73.823|17;Mungaoli|24.408|78.096|20;Murbad|19.254|73.390|17;Murtajapur|20.733|77.367|40;Murwara|23.838|80.394|196;Muzaffarnagar|29.471|77.703|350;Muzaffarpur|26.123|85.391|333;Mysore|12.298|76.639|868;Nadbai|27.223|77.196|24;Nadiad|22.694|72.862|202;Nagar|27.424|77.099|24;Nagaur|27.202|73.734|97;Nagda|23.458|75.418|104;Nagercoil|8.179|77.432|214;Nagod|24.569|80.588|22;Nagpur|21.146|79.085|2228;Naihati|22.894|88.415|253;Nainpur|22.430|80.106|22;Nainwa|25.771|75.850|16;Najafgarh|28.609|76.980|1365;Naldurg|17.817|76.282|17;Nanded|19.160|77.315|551;Nandgaon|20.307|74.655|24;Nandura Buzurg|20.834|76.459|40;Nandurbar|21.367|74.241|101;Nandyal|15.478|78.484|165;Nangi|22.508|88.215|441;Nangloi Jat|28.680|77.068|194;Napasar|27.961|73.559|22;Naraina|26.791|75.206|17;Naraini|25.190|80.475|15;Narela|28.853|77.093|800;Narsimhapur|22.949|79.184|48;Narsinghgarh|23.708|77.093|30;Narwar|25.644|77.913|17;Nashik|19.997|73.791|1289;Nashik Airport|20.119|73.913|1500;Nasirabad|26.305|74.734|52;Nasrullahganj|22.684|77.271|18;Nathdwara|24.938|73.824|39;Navi Mumbai|19.037|73.016|2600;Navsari|20.942|72.925|171;Nawa|27.020|75.002|20;Nawalgarh|27.852|75.274|58;Neem ka Thana|27.740|75.787|33;Nellore|14.450|79.987|404;Nepanagar|21.454|76.393|33;Neral|19.025|73.317|16;New Delhi|28.636|77.224|318;Nilanga|18.117|76.753|34;Nimaj|26.150|74.001|20;Nimbahera|24.622|74.680|58;Nipani|16.399|74.383|60;Niwai|26.361|75.918|35;Nizamabad|18.672|78.099|305;Nohar|29.183|74.771|46;Noida|28.580|77.330|294;Nokha|27.562|73.471|56;Nowrangapur|19.231|82.548|1221;Okha|22.468|69.070|21;Ongole|15.504|80.045|173;Orai|25.990|79.453|158;Osmanabad|18.182|76.039|86;Ozar|20.095|73.928|45;Pachora|20.667|75.353|47;Padampur|29.709|73.625|18;Padra|22.240|73.085|36;Paithan|19.475|75.386|37;Palanpur|24.171|72.438|123;Palera|25.020|79.228|17;Palghar|19.697|72.765|72;Pali|25.773|73.323|210;Palitana|21.525|71.823|56;Pallavaram|12.968|80.150|157;Panagar|23.285|79.995|27;Panaji|15.496|73.826|66;Panchkula|30.695|76.850|200;Pandharpur|17.679|75.331|96;Pandhurna|21.596|78.526|44;Panihati|22.691|88.374|379;Panipat|29.387|76.968|293;Panna|24.721|80.188|47;Panvel|18.989|73.110|128;Parasia|22.191|78.759|39;Parbhani|19.269|76.771|290;Pardi|20.509|72.946|27;Parli Vaijnath|18.851|76.532|95;Parola|20.881|75.119|37;Partur|19.599|76.215|31;Parvatsar|26.886|74.766|15;Patan|23.851|72.130|118;Pathankot|32.275|75.653|174;Pathardi|19.173|75.174|24;Patharia|23.899|79.194|18;Pathri|19.259|76.434|38;Patiala|30.336|76.392|329;Patna|25.594|85.136|1600;Patur|20.461|76.937|22;Pawni|20.792|79.636|23;Pen|18.737|73.096|34;Petlad|22.477|72.800|52;Phalodi|27.131|72.368|47;Phaltan|17.991|74.432|53;Phulera|26.874|75.242|23;Pilani|28.367|75.604|28;Pilibangan|29.450|74.101|37;Pimpri|18.623|73.807|1285;Pindwara|24.797|73.055|23;Pipar|26.384|73.544|35;Pipri|19.794|75.535|23;Pithampur|22.602|75.696|68;Pokaran|26.920|71.916|21;Ponda|15.403|74.015|19;Porbandar|21.642|69.609|139;Porsa|26.674|78.371|38;Powai|19.116|72.905|20;Pratapgarh|24.032|74.782|38;Proddatur|14.750|78.548|178;Puducherry|11.934|79.830|227;Pulgaon|20.722|78.321|35;Punasa|22.235|76.393|350;Pune|18.520|73.855|2936;Pune Airport|18.582|73.920|2000;Puri|19.798|85.825|171;Purna|19.182|77.026|35;Purnia|25.779|87.474|198;Pusad|19.913|77.578|72;Pushkar|26.490|74.552|16;Quthbullapur|17.501|78.458|226;Radhanpur|23.832|71.605|35;Raebareli|26.231|81.233|186;Raghogarh|24.443|77.198|64;Rahatgarh|23.790|78.395|27;Rahimatpur|17.592|74.200|17;Rahuri|19.391|74.650|37;Raichur|16.205|77.356|226;Raiganj|25.613|88.124|170;Raipur|21.233|81.633|680;Raisen|23.330|77.781|41;Raisinghnagar|29.536|73.449|30;Raj-Nandgaon|21.097|81.029|151;Rajahmundry|17.005|81.778|305;Rajakhera|26.898|78.171|31;Rajaldesar|28.028|74.474|24;Rajgarh|28.642|75.386|50;Rajgurunagar|18.867|73.900|19;Rajkot|22.292|70.793|1177;Rajkot Airport|22.309|70.779|1500;Rajpipla|21.867|73.500|35;Rajpur|22.304|74.356|26;Rajsamand|25.071|73.880|63;Rajula|21.039|71.443|35;Rajura|19.779|79.365|29;Ramagundam|18.755|79.474|235;Ramganj Mandi|24.646|75.943|36;Ramgarh|27.251|75.179|30;Ramgundam|18.801|79.452|452;Rampur|28.810|79.027|296;Rampura|24.467|75.440|18;Ramtek|21.396|79.327|23;Ranavav|21.687|69.745|26;Ranchi|23.343|85.309|846;Rapar|23.573|70.647|22;Ratangarh|28.081|74.619|67;Ratlam|23.330|75.040|237;Ratnagiri|16.992|73.310|76;Raurkela|22.225|84.864|536;Raver|21.248|76.035|27;Rawatbhata|24.930|75.592|37;Rawatsar|29.267|74.403|31;Rehli|23.637|79.063|28;Rewa|24.533|81.292|208;Ringas|27.364|75.568|25;Risod|19.977|76.788|30;Roha|18.437|73.120|90;Rohini|28.743|77.068|860;Rohtak|28.894|76.589|317;Sabalgarh|26.249|77.408|31;Sadri|25.186|73.453|26;Saharanpur|29.968|77.545|485;Salaya|22.310|69.604|30;Salem|11.654|78.155|778;Salumbar|24.135|74.044|17;Sambalpur|21.465|83.976|163;Sambhal|28.585|78.570|196;Sambhar|26.908|75.191|23;Samdari|25.813|72.579|18;Sanand|22.992|72.382|35;Sanawad|22.174|76.070|36;Sanchor|24.754|71.773|29;Sancoale|15.378|73.904|16;Sangamner|19.568|74.212|67;Sangaria|29.799|74.467|39;Sangli|16.854|74.564|601;Sangod|24.927|76.286|20;Sangola|17.439|75.194|31;Saoner|21.385|78.922|30;Saputara|20.574|73.750|1200;Sarangpur|23.567|76.473|36;Sardarshahr|28.441|74.491|87;Sarkhej|22.983|72.502|30;Sarwar|26.063|75.011|18;Sasvad|18.344|74.031|30;Satana|20.595|74.203|34;Satara|17.686|73.993|113;Satna|24.577|80.827|258;Saugor|23.839|78.739|247;Sausar|21.656|78.797|27;Savantvadi|15.904|73.822|23;Savarkundla|21.337|71.303|74;Savda|21.151|75.889|20;Sawai Madhopur|26.023|76.344|109;Sayla|22.549|71.483|15;Secunderabad|17.504|78.543|204;Sehore|23.200|77.083|99;Selu|19.455|76.441|43;Sendhwa|21.686|75.096|55;Seondha|26.154|78.781|21;Seoni|22.085|79.550|101;Seoni Malwa|22.450|77.466|28;Serilingampalle|17.493|78.302|151;Shahada|21.545|74.471|58;Shahdol|23.294|81.362|89;Shahjanpur|27.882|79.909|320;Shahpur|21.237|76.226|19;Shahpura|27.391|75.960|33;Shajapur|23.426|76.278|53;Shamgarh|24.188|75.639|23;Shegaon|20.793|76.699|56;Sheoganj|25.139|73.068|27;Sheopur|25.665|76.696|62;Shimla|31.104|77.167|174;Shimoga|13.932|75.568|320;Shiraguppi|16.619|74.709|25;Shirdi|19.766|74.477|32;Shirpur|21.348|74.880|70;Shivaji Nagar|18.530|73.853|1000;Shivpuri|25.424|77.662|164;Shrigonda|18.615|74.699|28;Shrirampur|22.753|88.342|226;Shujalpur|23.407|76.710|47;Shyamnagar|22.833|88.367|442;Siddhapur|23.918|72.372|54;Sidhi|24.404|81.880|54;Sihor|21.711|71.962|53;Sihora|23.487|80.104|41;Sikar|27.612|75.140|200;Sikka|22.432|69.842|19;Silchar|24.827|92.798|152;Siliguri|26.710|88.429|516;Sillod|20.303|75.653|51;Silvassa|20.274|72.997|27;Singrauli|24.200|82.675|186;Sinnar|19.845|73.999|34;Sirohi|24.888|72.848|39;Sironj|24.103|77.691|45;Sirsa|29.535|75.029|182;Sirur|18.828|74.375|31;Sitapur|27.562|80.683|164;Siwana|25.652|72.422|22;Sohagpur|22.701|78.195|24;Sojat|25.925|73.666|43;Sojitra|22.539|72.720|19;Solapur|17.672|75.910|997;Somnath|20.888|70.401|1200;Songadh|21.170|73.564|25;Sonipat|28.995|77.019|251;Soygaon|20.596|75.618|23;Sri Dungargarh|28.096|74.009|48;Sri Madhopur|27.466|75.597|30;Srinagar|34.086|74.806|976;Srivardhan|18.046|73.016|15;Statue of Unity (Kevadia)|21.838|73.719|2200;Sujangarh|27.700|74.467|184;Suket|24.646|76.042|20;Sunel|24.371|75.957|16;Surajgarh|28.310|75.733|20;Surat|21.196|72.830|2895;Surat Airport|21.114|72.742|2500;Suratgarh|29.322|73.900|63;Surendranagar|22.727|71.649|180;Takhatgarh|25.322|73.005|17;Talaja|21.353|72.035|30;Talegaon Dabhade|18.735|73.676|48;Taleigao|15.469|73.833|17;Taloda|21.561|74.212|26;Tambaram|12.925|80.127|175;Tanjore|10.785|79.139|220;Tarana|23.334|76.043|23;Taranagar|28.669|75.032|29;Tasgaon|17.037|74.602|35;Telhara|21.027|76.839|21;Teni|10.011|77.478|1035;Teonthar|24.982|81.642|17;Than|22.574|71.199|43;Thane|19.197|72.964|1262;Tharad|24.396|71.626|25;Thasra|22.798|73.212|18;Thiruvananthapuram|8.486|76.949|784;Thoothukudi|8.767|78.134|411;Thrissur|10.517|76.217|325;Tijara|27.934|76.855|22;Tikamgarh|24.743|78.831|75;Tiruchirappalli|10.816|78.697|775;Tirunelveli|8.727|77.684|1436;Tirupati|13.636|79.420|251;Tiruppur|11.115|77.355|398;Tiruvottiyur|13.158|80.302|248;Todabhim|26.917|76.817|23;Todaraisingh|26.024|75.482|23;Tonk|26.166|75.788|151;Trimbakeshwar|19.932|73.531|1200;Tuljapur|18.008|76.070|36;Tumkur|13.341|77.102|307;Tumsar|21.383|79.733|43;Udaipur|24.586|73.713|423;Udaipura|23.074|78.511|15;Udgir|18.393|77.118|101;Udupi|13.335|74.746|165;Udvada|20.485|72.915|200;Ujjain|23.182|75.776|457;Ulhasnagar|19.217|73.150|517;Umarga|17.838|76.623|32;Umaria|23.525|80.837|30;Umarkhed|19.601|77.689|35;Umbergaon|20.183|72.751|300;Umred|20.854|79.325|52;Umreth|22.699|73.116|33;Un|23.887|71.770|31;Una|20.823|71.038|57;Unhel|23.338|75.559|16;Unjha|23.804|72.391|55;Unnao|26.547|80.488|162;Upleta|21.740|70.283|56;Uran|18.878|72.939|26;Vada|19.653|73.148|15;Vadnagar|23.786|72.639|25;Vadodara|22.299|73.208|1409;Vadodara Airport|22.336|73.226|2000;Vaijapur|19.927|74.728|40;Valabhipur|21.889|71.879|19;Vallabh Vidyanagar|22.533|72.900|33;Valsad|20.610|72.934|73;Vapi|20.372|72.905|71;Vapi Railway Station|20.372|72.905|1200;Varanasi|25.317|83.010|1164;Varangaon|21.018|75.910|44;Vasa|22.661|72.755|16;Vasai|19.392|72.840|800;Vasco da Gama|15.396|73.816|100;Vasind|19.408|73.263|17;Vejalpur|22.690|73.563|122;Vellore|12.918|79.133|177;Veraval|20.908|70.368|163;Vidisha|23.526|77.811|140;Vijapur|23.562|72.748|24;Vijayawada|16.507|80.647|875;Virar|19.456|72.811|150;Visakhapatnam|17.680|83.202|1063;Visavadar|21.340|70.750|18;Visnagar|23.699|72.552|69;Vite|17.273|74.538|46;Vizianagaram|18.117|83.411|179;Vyara|21.111|73.394|38;Wai|17.953|73.891|33;Wani|20.055|78.953|57;Wankaner|22.612|70.944|48;Warangal|18.000|79.583|558;Waraseoni|21.762|80.043|24;Wardha|20.739|78.598|114;Warora|20.229|79.003|42;Warud|21.471|78.270|48;Washim|20.111|77.133|69;Wer|27.019|77.176|18;Yamunanagar|30.128|77.284|209;Yaval|21.168|75.698|33;Yavatmal|20.393|78.132|128;Yeola|20.042|74.489|47";
+
+
+let couponApplied = false;
+
+function discountedPrice(price){
+  return Math.round(price * (1 - COUPON_DISCOUNT));
+}
+
+document.getElementById("footerWaLink").href = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+// Sends a row to your Google Sheet via the Apps Script Web App.
+// Fails silently (site keeps working) if WEBHOOK_URL hasn't been set yet.
+function logToSheet(payload){
+  if(!WEBHOOK_URL || WEBHOOK_URL.indexOf("PASTE_YOUR") === 0){
+    console.log("WEBHOOK_URL not set yet — skipping sheet log.", payload);
+    return Promise.resolve();
+  }
+  return fetch(WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors", // Apps Script doesn't return normal CORS headers; we don't need to read the response
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  }).catch(err => console.log("Sheet log failed (site still works):", err));
+}
+
+/* ---------------- Small helpers ---------------- */
+function normalize(s){ return s.trim().toLowerCase(); }
+function gid(id){ return document.getElementById(id); }
+function inr(n){ return "₹" + Number(n).toLocaleString("en-IN"); }
+function escHtml(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function formatDateForMessage(iso){
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+function formatTimeForMessage(t){
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || ""); if(!m) return t || "";
+  let h = +m[1]; const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h + ":" + m[2] + " " + ap;
+}
+function newBookingId(){
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const arr = new Uint32Array(4);
+  if(window.crypto && crypto.getRandomValues){ crypto.getRandomValues(arr); } else { for(let i=0;i<4;i++) arr[i] = Math.floor(Math.random()*4294967295); }
+  let s = ""; for(let i=0;i<4;i++) s += chars[arr[i] % chars.length];
+  const d = new Date();
+  const ymd = String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+  return "MC-" + ymd + "-" + s;
+}
+function normPhone(p){
+  let d = String(p || "").replace(/\D/g, "");
+  if(d.length === 12 && d.startsWith("91")) d = d.slice(2);
+  if(d.length === 11 && d.startsWith("0")) d = d.slice(1);
+  return /^[6-9]\d{9}$/.test(d) ? d : "";
+}
+
+/* ---------------- Places + distance ---------------- */
+function normName(s){ return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+const PLACES = PLACES_RAW.split(";").map(r => { const a = r.split("|"); return { n: a[0], la: parseFloat(a[1]), lo: parseFloat(a[2]), pop: parseInt(a[3], 10) || 0, k: normName(a[0]) }; });
+const PLACE_BY_KEY = {}; PLACES.forEach(p => { PLACE_BY_KEY[p.k] = p; });
+const POPULAR_PLACES = ["Vapi","Daman","Silvassa","Surat","Mumbai","Mumbai Airport","Surat Airport","Ahmedabad","Vadodara","Pune","Nashik","Statue of Unity (Kevadia)"];
+const ROUTE_KM_MAP = {};
+ROUTE_KM.forEach(r => { ROUTE_KM_MAP[[normName(r[0]), normName(r[1])].sort().join("|")] = r[2]; });
+
+function matchPlaces(q){
+  const starts = [], has = [];
+  for(const p of PLACES){ if(p.k.startsWith(q)) starts.push(p); else if(p.k.includes(q)) has.push(p); }
+  const byPop = (x, y) => y.pop - x.pop;
+  return starts.sort(byPop).concat(has.sort(byPop)).slice(0, 8);   // biggest / best-known places first
+}
+function havKm(a, b){
+  const R = 6371, t = x => x * Math.PI / 180;
+  const dLa = t(b.la - a.la), dLo = t(b.lo - a.lo);
+  const h = Math.sin(dLa/2)**2 + Math.cos(t(a.la)) * Math.cos(t(b.la)) * Math.sin(dLo/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+function routeKm(a, b){
+  const exact = ROUTE_KM_MAP[[a.k, b.k].sort().join("|")];
+  if(exact) return { km: exact, exact: true };
+  return { km: Math.max(1, Math.round(havKm(a, b) * FARE.roadFactor)), exact: false };
+}
+
+/* ---------------- Fare engine ---------------- */
+const SLAB_MAX = [10, 20, 30, 40];
+function slabPrice(km, carType){
+  const slabs = PACKAGES.localride || [];
+  for(let i = 0; i < slabs.length && i < SLAB_MAX.length; i++){
+    if(km <= SLAB_MAX[i]){ const c = slabs[i].cars.find(x => x.type === carType); return c ? c.price : null; }
+  }
+  return null;
+}
+function estimateFares(km, tripType, days){
+  return Object.keys(FARE.ratePerKm).map(type => {
+    const rate = FARE.ratePerKm[type];
+    const slab = slabPrice(km, type);
+    let price;
+    if(km <= FARE.shortTripMaxKm && slab != null){
+      price = tripType === "round" ? slab * 2 : slab;
+    } else {
+      const billable = tripType === "round" ? Math.max(km * 2, FARE.minKmPerDay * days) : km * FARE.oneWayFactor;
+      price = billable * rate;
+      const top = slabPrice(FARE.shortTripMaxKm, type);
+      const floor = (top != null ? top : FARE.shortTripMaxKm * FARE.oneWayFactor * rate) * (tripType === "round" ? 2 : 1);
+      price = Math.round(Math.max(price, floor) / FARE.roundTo) * FARE.roundTo;
+    }
+    return { type, price };
+  });
+}
+function findFixed(a, b, tripType){
+  const isHome = k => FARE.homeCities.some(h => k === h || k.startsWith(h + " "));
+  let other;
+  if(isHome(a.k) && !isHome(b.k)) other = b.k; else if(isHome(b.k) && !isHome(a.k)) other = a.k; else return [];
+  const out = [];
+  ["airport", "outstation"].forEach(cid => {
+    const cat = CATEGORIES.find(c => c.id === cid);
+    (PACKAGES[cid] || []).forEach(p => {
+      const dest = normName(String(p.route).split(/→|⇄|—/).pop());
+      if(!dest || dest === "local package") return;
+      if(!(other === dest || other.includes(dest))) return;
+      if(cid === "airport"){ const isRound = /round trip/i.test(String(p.note || "")); if((tripType === "round") !== isRound) return; }
+      out.push(Object.assign({}, p, { catLabel: cat ? cat.label : "" }));
+    });
+  });
+  return out;
+}
+function inferTripType(pkg){
+  const n = String(pkg.note || "") + " " + String(pkg.catLabel || "");
+  if(/round trip/i.test(n)) return "Round trip";
+  if(/one-way/i.test(n)) return "One-way";
+  if(/full-day/i.test(n)) return "Full-day trip";
+  if(/local package/i.test(n)) return "Local package";
+  if(/short ride/i.test(n) || /point to point/i.test(n)) return "Short ride";
+  return "";
+}
+
+/* ---------------- Plan a trip (UI) ---------------- */
+const planner = { tripType: "oneway" };
+let plannerCtx = null;
+let lastCustomer = { name: "", phone: "" };
+
+function setMode(m){
+  const plan = m === "plan";
+  gid("plannerBox").style.display = plan ? "block" : "none";
+  gid("browseBox").style.display = plan ? "none" : "flex";
+  gid("modePlan").classList.toggle("active", plan);
+  gid("modeBrowse").classList.toggle("active", !plan);
+}
+function setTripType(t){
+  planner.tripType = t;
+  document.querySelectorAll("#tripSeg .seg-btn").forEach(b => b.classList.toggle("active", b.dataset.t === t));
+  gid("pfReturnWrap").style.display = t === "round" ? "block" : "none";
+  document.querySelector("#plannerBox .plan-grid.dates").classList.toggle("one", t !== "round");
+}
+function swapPlaces(){
+  const a = gid("pfFrom"), b = gid("pfTo"); const tmp = a.value; a.value = b.value; b.value = tmp;
+}
+function setPlanMsg(t){ gid("planMsg").textContent = t || ""; }
+
+function setupAutocomplete(inputId, listId){
+  const input = gid(inputId), list = gid(listId); let items = [], active = -1;
+  function render(){
+    list.innerHTML = items.map((p, i) => `<div class="ac-item ${i === active ? "on" : ""}" data-i="${i}">${escHtml(p.n)}</div>`).join("");
+    list.style.display = items.length ? "block" : "none";
+  }
+  function refresh(){
+    const q = normName(input.value);
+    items = q ? matchPlaces(q) : POPULAR_PLACES.map(n => PLACE_BY_KEY[normName(n)]).filter(Boolean);
+    if(q && PLACE_BY_KEY[q]) items = [];   // exact place typed: hide the list so it never covers the Get fare button
+    active = -1; render();
+  }
+  function choose(p){
+    input.value = p.n; list.style.display = "none";
+    if(inputId === "pfFrom" && !gid("pfTo").value) gid("pfTo").focus();
+  }
+  input.addEventListener("input", refresh);
+  input.addEventListener("focus", refresh);
+  input.addEventListener("keydown", e => {
+    if(e.key === "ArrowDown"){ active = Math.min(items.length - 1, active + 1); render(); e.preventDefault(); }
+    else if(e.key === "ArrowUp"){ active = Math.max(0, active - 1); render(); e.preventDefault(); }
+    else if(e.key === "Enter"){ if(active >= 0 && items[active]){ choose(items[active]); e.preventDefault(); } else { list.style.display = "none"; planTrip(); } }
+    else if(e.key === "Escape"){ list.style.display = "none"; }
+  });
+  list.addEventListener("pointerdown", e => { const el = e.target.closest(".ac-item"); if(el){ e.preventDefault(); choose(items[+el.dataset.i]); } });
+  input.addEventListener("blur", () => setTimeout(() => { list.style.display = "none"; }, 150));
+}
+function resolvePlace(el){
+  const k = normName(el.value); if(!k) return null;
+  if(PLACE_BY_KEY[k]) return PLACE_BY_KEY[k];
+  const starts = PLACES.filter(p => p.k.startsWith(k));
+  return starts.length === 1 ? starts[0] : null;
+}
+
+function planTrip(){
+  const fromEl = gid("pfFrom"), toEl = gid("pfTo");
+  if(!fromEl.value.trim() || !toEl.value.trim()){ setPlanMsg("Please enter both the pickup city and the drop."); return; }
+  const a = resolvePlace(fromEl), b = resolvePlace(toEl);
+  const tripType = planner.tripType;
+  const typeLabel = tripType === "round" ? "Round trip" : "One-way";
+  const travelDate = gid("pfDate").value, returnDate = tripType === "round" ? gid("pfReturn").value : "";
+  if(!a || !b){ showQuoteRequest(fromEl.value.trim(), toEl.value.trim(), typeLabel); return; }
+  if(a.k === b.k){ setPlanMsg("Pickup and drop can't be the same place."); return; }
+  if(tripType === "round" && travelDate && returnDate && returnDate < travelDate){ setPlanMsg("Return date can't be before the travel date."); return; }
+  setPlanMsg("");
+  plannerCtx = { travelDate, returnDate };
+
+  const fixed = findFixed(a, b, tripType);
+  let list;
+  if(fixed.length){
+    list = fixed.map(p => Object.assign({}, p, { meta: { pickupCity: a.n, drop: b.n, tripType: typeLabel, fareType: "Fixed", estKm: "", fromPlanner: true } }));
+  } else {
+    const r = routeKm(a, b);
+    let days = 1;
+    if(tripType === "round" && travelDate && returnDate){ days = Math.max(1, Math.round((new Date(returnDate) - new Date(travelDate)) / 86400000) + 1); }
+    const cars = estimateFares(r.km, tripType, days);
+    const note = typeLabel + " · about " + r.km + " km" + (r.exact ? "" : " (approx.)") +
+      (tripType === "round" ? " · " + days + " day" + (days > 1 ? "s" : "") + " (min " + FARE.minKmPerDay + " km/day)" : "") +
+      " · Toll, parking & driver allowance extra";
+    list = [{ route: a.n + " → " + b.n, catLabel: "Custom trip", note, cars, estimate: true,
+              meta: { pickupCity: a.n, drop: b.n, tripType: typeLabel, fareType: "Estimate", estKm: r.km, fromPlanner: true } }];
+  }
+  showResults(list, "Fare for " + a.n + " → " + b.n);
+}
+
+function showQuoteRequest(fromTxt, toTxt, typeLabel){
+  const pkg = { route: fromTxt + " → " + toTxt, catLabel: "Custom quote",
+    note: "We couldn't find one of these places in our list — send a request and we'll quote you on WhatsApp",
+    cars: [{ type: "Any car — we'll quote you", price: null }],
+    meta: { pickupCity: fromTxt, drop: toTxt, tripType: typeLabel, fareType: "Quote", estKm: "", fromPlanner: true } };
+  plannerCtx = { travelDate: gid("pfDate").value, returnDate: gid("pfReturn").value };
+  setPlanMsg("");
+  showResults([pkg], "Custom quote request");
+}
+
+/* ---------------- Booking window: details -> Booking ID -> WhatsApp ---------------- */
+let pendingBooking = null;
+
+function openBookingFromCard(i, j){
+  const pkg = lastShown.list[i]; if(!pkg) return;
+  openBookingModal(pkg, pkg.cars[j]);
+}
+function openBookingModal(pkg, car){
+  const meta = pkg.meta || {};
+  pendingBooking = { pkg, car, meta, waUrl: "", id: "" };
+  gid("bkFormView").style.display = "block"; gid("bkDoneView").style.display = "none";
+  gid("bkRouteText").textContent = car.price == null ? pkg.route : pkg.route + " — " + car.type;
+  let fare;
+  if(car.price == null){ fare = "Fare: we'll send you a quote on WhatsApp"; }
+  else {
+    const fp = couponApplied ? discountedPrice(car.price) : car.price;
+    fare = "Fare: " + inr(fp) + (pkg.estimate ? " (estimate — confirmed on WhatsApp)" : "") + (couponApplied ? " · coupon " + COUPON_CODE + " applied" : "");
+  }
+  gid("bkFare").textContent = fare;
+  gid("bkPickupLabel").textContent = meta.pickupCity ? "PICKUP ADDRESS IN " + String(meta.pickupCity).toUpperCase() : "PICKUP ADDRESS";
+  gid("bkPickup").value = "";
+  gid("bkName").value = lastCustomer.name; gid("bkPhone").value = lastCustomer.phone;
+  const ctx = meta.fromPlanner && plannerCtx ? plannerCtx : { travelDate: "", returnDate: "" };
+  gid("bkDate").value = ctx.travelDate || ""; gid("bkDate").min = todayISO();
+  gid("bkTime").value = "";
+  const isRound = meta.tripType === "Round trip";
+  gid("bkReturnWrap").style.display = isRound ? "block" : "none";
+  gid("bkReturn").value = isRound ? (ctx.returnDate || "") : ""; gid("bkReturn").min = todayISO();
+  gid("bkStatus").textContent = ""; gid("bkStatus").className = "form-status";
+  gid("bkCopyBtn").textContent = "Copy Booking ID";
+  gid("bookingModal").classList.add("open");
+}
+function closeBookingModal(){ gid("bookingModal").classList.remove("open"); pendingBooking = null; }
+gid("bookingModal").addEventListener("click", e => { if(e.target.id === "bookingModal") closeBookingModal(); });
+
+function bkError(msg){ const el = gid("bkStatus"); el.textContent = msg; el.className = "form-status err"; }
+
+function confirmBooking(){
+  if(!pendingBooking || pendingBooking.id) return;
+  const { pkg, car, meta } = pendingBooking;
+  const name = gid("bkName").value.trim(), pickup = gid("bkPickup").value.trim();
+  const phone = normPhone(gid("bkPhone").value);
+  const date = gid("bkDate").value, time = gid("bkTime").value, ret = gid("bkReturn").value;
+  const isRound = meta.tripType === "Round trip";
+
+  if(!name){ bkError("Please enter your name."); return; }
+  if(!phone){ bkError("Please enter a valid 10-digit mobile number."); return; }
+  if(pickup.length < 4){ bkError("Please enter your pickup address or landmark."); return; }
+  if(!date || !time){ bkError("Please select your travel date and pickup time."); return; }
+  if(date < todayISO()){ bkError("Travel date can't be in the past."); return; }
+  if(isRound){
+    if(!ret){ bkError("Please select your return date."); return; }
+    if(ret < date){ bkError("Return date can't be before the travel date."); return; }
+  }
+
+  const id = newBookingId();
+  const quote = car.price == null;
+  const finalPrice = quote ? "" : (couponApplied ? discountedPrice(car.price) : car.price);
+  const tripType = meta.tripType || inferTripType(pkg);
+  const fareType = meta.fareType || "Fixed";
+  const dateTxt = formatDateForMessage(date) + ", " + formatTimeForMessage(time);
+
+  const lines = [
+    "Hi mapocabs, I'd like to book a cab.",
+    "Booking ID: " + id,
+    "Name: " + name,
+    "Phone: " + phone,
+    "Trip: " + pkg.route + (tripType ? " (" + tripType + ")" : ""),
+    "Pickup: " + (meta.pickupCity ? meta.pickupCity + " — " : "") + pickup
+  ];
+  if(meta.drop) lines.push("Drop: " + meta.drop);
+  lines.push("Travel: " + dateTxt);
+  if(isRound && ret) lines.push("Return date: " + formatDateForMessage(ret));
+  if(!quote) lines.push("Car: " + car.type);
+  lines.push(quote ? "Fare: please send me a quote"
+                   : "Fare: Rs." + Number(finalPrice).toLocaleString("en-IN") + (fareType === "Estimate" ? " (estimate — please confirm)" : ""));
+  if(couponApplied && !quote) lines.push("Coupon: " + COUPON_CODE + " (" + Math.round(COUPON_DISCOUNT * 100) + "% off)");
+  const waUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+
+  logToSheet({
+    type: "enquiry", bookingId: id, name, phone, trip: pkg.route, car: quote ? "" : car.type, price: finalPrice,
+    pickupCity: meta.pickupCity || "", pickupAddress: pickup, drop: meta.drop || "", tripType,
+    travelDate: date, travelTime: time, returnDate: isRound ? ret : "", estKm: meta.estKm || "", fareType,
+    coupon: couponApplied && !quote ? COUPON_CODE : "", message: pkg.note || ""
+  });
+
+  pendingBooking.id = id; pendingBooking.waUrl = waUrl;
+  lastCustomer = { name, phone };
+  window.open(waUrl, "_blank", "noopener");
+  gid("bkIdText").textContent = id;
+  gid("bkFormView").style.display = "none"; gid("bkDoneView").style.display = "block";
+}
+function copyBookingId(){
+  if(!pendingBooking) return;
+  const id = pendingBooking.id, btn = gid("bkCopyBtn");
+  const done = () => { btn.textContent = "Copied ✓"; };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(id).then(done, () => { window.prompt("Copy your Booking ID:", id); }); }
+  else { window.prompt("Copy your Booking ID:", id); }
+}
+function reopenWhatsApp(){ if(pendingBooking && pendingBooking.waUrl) window.open(pendingBooking.waUrl, "_blank", "noopener"); }
+
+/* ---------------- Know mapocabs tabs + feature switches ---------------- */
+function showKnow(id){
+  document.querySelectorAll(".know-panel").forEach(p => p.classList.toggle("show", p.id === "kp-" + id));
+  document.querySelectorAll(".know-tab").forEach(b => b.classList.toggle("active", b.dataset.k === id));
+}
+function initKnow(){
+  const defs = [["about","About us",FEATURES.aboutTab],["care","How we care about you",FEATURES.careTab],["how","How it works",FEATURES.howTab],["faq","FAQs",FEATURES.faqTab]].filter(d => d[2]);
+  const sec = gid("knowSection");
+  if(!defs.length){ sec.style.display = "none"; if(sec.previousElementSibling) sec.previousElementSibling.style.display = "none"; return; }
+  gid("knowTabs").innerHTML = defs.map(d => `<button class="know-tab" data-k="${d[0]}" onclick="showKnow('${d[0]}')">${d[1]}</button>`).join("");
+  showKnow(defs[0][0]);
+}
+function applyFeatures(){
+  if(!FEATURES.planner){
+    gid("modeTabs").style.display = "none"; gid("plannerBox").style.display = "none"; gid("browseBox").style.display = "flex";
+  }
+  if(!FEATURES.billLink){ gid("headerBill").style.display = "none"; gid("footerBill").style.display = "none"; }
+  initKnow();
+}
+
+setupAutocomplete("pfFrom", "acFrom");
+setupAutocomplete("pfTo", "acTo");
+gid("pfDate").min = todayISO(); gid("pfReturn").min = todayISO();
+setTripType("oneway");
+applyFeatures();
+
+function flatten(){
+  let all = [];
+  CATEGORIES.forEach(c => {
+    (PACKAGES[c.id] || []).forEach(p => all.push({ ...p, catId: c.id, catLabel: c.label }));
+  });
+  return all;
+}
+
+function renderCard(pkg, idx){
+  const carsHtml = pkg.cars.map((car, ci) => {
+    let priceHtml, label = "Book on WhatsApp";
+    if(car.price == null){ priceHtml = `<span class="quote-price">Quote on request</span>`; label = "Request quote"; }
+    else {
+      const fp = couponApplied ? discountedPrice(car.price) : car.price;
+      priceHtml = couponApplied
+        ? `<span class="price-strike">${inr(car.price)}</span><span class="car-price">${inr(fp)}</span>`
+        : `<span class="car-price">${inr(fp)}</span>`;
+    }
+    return `
+    <div class="car-row">
+      <div class="car-name">${escHtml(car.type)}</div>
+      <div class="car-right">
+        <div>${priceHtml}</div>
+        <button class="wa-btn" onclick="openBookingFromCard(${idx}, ${ci})">${label}</button>
+      </div>
+    </div>`;
+  }).join("");
+  return `
+    <div class="card">
+      <div class="card-route">${escHtml(pkg.route)}${pkg.estimate ? '<span class="est-tag">ESTIMATE</span>' : ""}</div>
+      <div class="card-sub">${escHtml(pkg.catLabel)}${pkg.note ? " · " + escHtml(pkg.note) : ""}</div>
+      <div class="car-list">${carsHtml}</div>
+      ${pkg.estimate ? '<div class="est-note">Estimated fare based on approximate distance. We\'ll confirm the final fare with you on WhatsApp before your trip.</div>' : ""}
+    </div>
+  `;
+}
+
+let lastShown = { list: [], heading: "" };
+
+function showResults(list, headingText){
+  lastShown = { list, heading: headingText };
+  const resultsEl = document.getElementById("results");
+  if(list.length === 0){
+    resultsEl.innerHTML = `
+      <div class="results-head"><h2>${escHtml(headingText)}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+      <div class="no-match">No match yet — message us on WhatsApp for a custom quote, <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" style="color:var(--amber)">tap here</a>.</div>
+    `;
+    return;
+  }
+  resultsEl.innerHTML = `
+    <div class="results-head"><h2>${escHtml(headingText)}</h2><button class="clear-btn" onclick="clearResults()">Clear</button></div>
+    ${list.map(renderCard).join("")}
+  `;
+  resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const HOME_CITY_KEYWORDS = ["vapi", "daman", "silvassa"];
+
+function runSearch(){
+  const q = normalize(document.getElementById("searchInput").value);
+  if(!q){ clearResults(); return; }
+
+  // Searching your home base (Vapi/Daman/Silvassa) should surface everything —
+  // every trip starts from there, including Short Rides which don't otherwise
+  // mention the city name in their title.
+  if(HOME_CITY_KEYWORDS.some(k => q.includes(k))){
+    showResults(flatten(), `All Trips from Vapi / Daman / Silvassa`);
+    return;
+  }
+
+  const matches = flatten().filter(p => normalize(p.route).includes(q) || normalize(p.catLabel).includes(q));
+  showResults(matches, `Results for "${document.getElementById("searchInput").value}"`);
+}
+
+function quickFilter(catId){
+  document.getElementById("searchInput").value = "";
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const list = (PACKAGES[catId] || []).map(p => ({ ...p, catId: cat.id, catLabel: cat.label }));
+  showResults(list, cat.label);
+}
+
+function searchFromPromo(term){
+  document.getElementById("searchInput").value = term;
+  runSearch();
+}
+
+function clearResults(){
+  document.getElementById("results").innerHTML = "";
+  document.getElementById("searchInput").value = "";
+  lastShown = { list: [], heading: "" };
+}
+
+document.getElementById("searchInput").addEventListener("keyup", e => { if(e.key === "Enter") runSearch(); });
+
+function applyCoupon(){
+  const input = document.getElementById("couponInput");
+  const msgEl = document.getElementById("couponMsg");
+  const code = input.value.trim().toUpperCase();
+
+  if(OFFER_ENABLED && code === COUPON_CODE){
+    couponApplied = true;
+    const bar = document.getElementById("couponBar");
+    bar.innerHTML = `<span class="coupon-applied-badge">🎉 ${COUPON_CODE} applied — ${Math.round(COUPON_DISCOUNT*100)}% off <button onclick="removeCoupon()">✕ remove</button></span>`;
+    if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+    renderCarousel();
+    updatePosterButton();
+  } else {
+    msgEl.textContent = "That code isn't valid.";
+    msgEl.className = "coupon-msg err";
+  }
+}
+
+function removeCoupon(){
+  couponApplied = false;
+  const bar = document.getElementById("couponBar");
+  bar.innerHTML = `
+    <input id="couponInput" type="text" placeholder="Have a coupon?" maxlength="20">
+    <button onclick="applyCoupon()">Apply</button>
+    <span class="coupon-msg" id="couponMsg"></span>
+  `;
+  if(lastShown.list.length) showResults(lastShown.list, lastShown.heading);
+  renderCarousel();
+  updatePosterButton();
+}
+
+function renderCarousel(){
+  const track = document.getElementById("carouselTrack");
+  track.innerHTML = PROMO_TRIPS.map(t => {
+    const bg = t.photo
+      ? `background-image:linear-gradient(180deg, rgba(20,19,18,0.15), rgba(20,19,18,0.85)), url('${t.photo}'); background-size:cover; background-position:center;`
+      : `background:linear-gradient(160deg, ${t.color}, var(--asphalt));`;
+    const priceHtml = couponApplied
+      ? `<span class="promo-price-strike">₹${t.fromPrice.toLocaleString('en-IN')}</span>Starting ₹${discountedPrice(t.fromPrice).toLocaleString('en-IN')}`
+      : `Starting ₹${t.fromPrice.toLocaleString('en-IN')}`;
+    return `
+      <div class="promo-card" style="${bg}" onclick="searchFromPromo('${t.searchTerm.replace(/'/g,"\\'")}')">
+        <div class="pc-content">
+          <div class="pc-eyebrow">${t.eyebrow}</div>
+          <div class="pc-title">${t.title}</div>
+          <div class="pc-price">${priceHtml}</div>
+          <div class="pc-cta">View fares →</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function scrollCarousel(dir){
+  const track = document.getElementById("carouselTrack");
+  track.scrollBy({ left: dir * 300, behavior: "smooth" });
+}
+
+function renderRates(){
+  const grid = document.getElementById("ratesGrid");
+  grid.innerHTML = EXTRA_RATES.map(r => `
+    <div class="terms-cell">
+      <div class="tc-car">${r.type}</div>
+      <div class="tc-rate">₹${r.perKm}/km extra</div>
+      <div class="tc-rate">₹${r.perHour}/hr extra</div>
+    </div>
+  `).join("");
+}
+
+renderCarousel();
+renderRates();
+
+/* ---------------- Offer Banner ---------------- */
+const BANNER_DISMISS_KEY = "mapocabs_banner_dismissed_text";
+
+function showBannerIfEnabled(){
+  if(!OFFER_ENABLED || !OFFER_BANNER_TEXT) return;
+  let dismissed = null;
+  try{ dismissed = sessionStorage.getItem(BANNER_DISMISS_KEY); }catch(e){}
+  if(dismissed === OFFER_BANNER_TEXT) return;
+  document.getElementById("offerBannerText").textContent = OFFER_BANNER_TEXT;
+  document.getElementById("offerBanner").classList.add("show");
+}
+showBannerIfEnabled();
+
+/* ---------------- Offer poster + coupon box (follow the OFFER_ENABLED toggle) ---------------- */
+function setupOfferUI(){
+  const bar = document.getElementById("couponBar");
+  const wrap = document.getElementById("offerPosterWrap");
+  if(!OFFER_ENABLED){
+    // Offer is OFF: hide the coupon box and poster so the code can't be used.
+    if(bar) bar.style.display = "none";
+    wrap.style.display = "none";
+    return;
+  }
+  const pct = Math.round(COUPON_DISCOUNT*100) + "%";
+  document.getElementById("npEyebrow").textContent = OFFER_POSTER_EYEBROW;
+  document.getElementById("npPct").textContent = pct;
+  document.getElementById("npPct2").textContent = pct;
+  document.getElementById("npCode").textContent = COUPON_CODE;
+  document.getElementById("npNote").textContent = OFFER_POSTER_NOTE;
+  wrap.style.display = "block";
+  updatePosterButton();
+}
+function updatePosterButton(){
+  const btn = document.getElementById("npBtn");
+  if(!btn) return;
+  btn.textContent = couponApplied ? "Offer applied ✓" : "Apply offer";
+  btn.classList.toggle("done", couponApplied);
+}
+function applyOfferFromPoster(){
+  if(!OFFER_ENABLED || couponApplied) return;
+  const input = document.getElementById("couponInput");
+  if(!input) return;
+  input.value = COUPON_CODE;
+  applyCoupon();
+}
+setupOfferUI();
+
+function dismissBanner(){
+  const text = document.getElementById("offerBannerText").textContent;
+  try{ sessionStorage.setItem(BANNER_DISMISS_KEY, text); }catch(e){}
+  document.getElementById("offerBanner").classList.remove("show");
+}
+
+
+function toggleAbout(){
+  const panel = document.getElementById("aboutPanel");
+  const btn = document.getElementById("aboutToggleBtn");
+  const collapsed = panel.classList.toggle("about-collapsed");
+  btn.textContent = collapsed ? "Read more" : "Show less";
+}
+
+/* ---------------- Enquiry form ---------------- */
+function submitEnquiry(){
+  const name = document.getElementById("enqName").value.trim();
+  const phone = document.getElementById("enqPhone").value.trim();
+  const trip = document.getElementById("enqTrip").value.trim();
+  const message = document.getElementById("enqMsg").value.trim();
+  const statusEl = document.getElementById("enqStatus");
+
+  if(!name || !phone){
+    statusEl.textContent = "Please add at least your name and phone number.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "enquiry", name, phone, trip, car: "", price: "", fareType: "Enquiry", message });
+
+  statusEl.textContent = "Thanks — we've got your enquiry and will reach out shortly.";
+  statusEl.className = "form-status ok";
+  document.getElementById("enqName").value = "";
+  document.getElementById("enqPhone").value = "";
+  document.getElementById("enqTrip").value = "";
+  document.getElementById("enqMsg").value = "";
+}
+
+/* ---------------- Feedback modal ---------------- */
+let selectedRating = 0;
+
+function renderStars(){
+  const row = document.getElementById("starRow");
+  row.innerHTML = [1,2,3,4,5].map(n => `
+    <button type="button" class="star-btn ${n <= selectedRating ? 'active' : ''}" onclick="setRating(${n})">★</button>
+  `).join("");
+}
+function setRating(n){ selectedRating = n; renderStars(); }
+renderStars();
+
+function openFeedback(){
+  document.getElementById("feedbackModal").classList.add("open");
+}
+function closeFeedback(){
+  document.getElementById("feedbackModal").classList.remove("open");
+}
+document.getElementById("feedbackModal").addEventListener("click", e => {
+  if(e.target.id === "feedbackModal") closeFeedback();
+});
+
+function submitFeedback(){
+  const name = document.getElementById("fbName").value.trim();
+  const phone = document.getElementById("fbPhone").value.trim();
+  const comment = document.getElementById("fbComment").value.trim();
+  const statusEl = document.getElementById("fbStatus");
+
+  if(!name || selectedRating === 0){
+    statusEl.textContent = "Please add your name and pick a star rating.";
+    statusEl.className = "form-status err";
+    return;
+  }
+
+  logToSheet({ type: "feedback", name, phone, rating: selectedRating, comment });
+
+  statusEl.textContent = "Thank you for the feedback!";
+  statusEl.className = "form-status ok";
+  setTimeout(() => {
+    closeFeedback();
+    document.getElementById("fbName").value = "";
+    document.getElementById("fbPhone").value = "";
+    document.getElementById("fbComment").value = "";
+    selectedRating = 0;
+    renderStars();
+    statusEl.textContent = "";
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
