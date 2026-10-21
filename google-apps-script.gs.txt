@@ -13,7 +13,7 @@
 
 // ---- CHANGE THESE TWO ----
 var NOTIFY_EMAIL = "mapocabs@gmail.com";
-var ADMIN_PIN = "CHANGE-THIS-PIN";   // your dashboard password. Use 6+ characters. Keep it private.
+var ADMIN_PIN = "202226";   // your dashboard password. Use 6+ characters. Keep it private.
 // --------------------------
 
 var TZ = "Asia/Kolkata";
