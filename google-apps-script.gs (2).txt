@@ -1,0 +1,271 @@
+// =====================================================================
+// mapocabs backend v2  (paste into Extensions > Apps Script, replacing ALL old code)
+//
+// What it does:
+//  1. Saves every booking/enquiry/feedback from the website into your Google Sheet
+//  2. Gives every booking a unique Booking ID (e.g. MC-261014-K7Q2)
+//  3. Emails you (NOTIFY_EMAIL) on every new booking and feedback
+//  4. Lets only YOU (with ADMIN_PIN) read bookings and mark rides Completed
+//  5. When you mark a ride Completed it creates a unique bill number
+//     (e.g. MCB-2026-0007). The customer can then download the bill on
+//     bill.html using Booking ID + mobile number.
+// =====================================================================
+
+// ---- CHANGE THESE TWO ----
+var NOTIFY_EMAIL = "mapocabs@gmail.com";
+var ADMIN_PIN = "CHANGE-THIS-PIN";   // your dashboard password. Use 6+ characters. Keep it private.
+// --------------------------
+
+var TZ = "Asia/Kolkata";
+var BASE_HEADERS  = ["Date/Time", "Name", "Phone", "Trip", "Car Type", "Price", "Message", "Status"];
+var EXTRA_HEADERS = ["Booking ID", "Pickup City", "Pickup Address", "Drop", "Trip Type", "Travel Date", "Travel Time",
+                     "Return Date", "Est KM", "Fare Type", "Coupon", "Final Fare", "Toll", "Parking",
+                     "Driver Allowance", "Extra Charges", "Total", "Payment Mode", "Invoice No", "Completed At"];
+var FEEDBACK_HEADERS = ["Date/Time", "Name", "Phone", "Rating", "Comment"];
+var TEXT_COLS = ["Phone", "Travel Date", "Travel Time", "Return Date", "Booking ID", "Invoice No", "Date/Time", "Completed At"];
+
+function json_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+function last10_(p) { return String(p || "").replace(/\D/g, "").slice(-10); }
+function clip_(v, n) { return String(v === undefined || v === null ? "" : v).slice(0, n || 300); }
+function num_(v) { var n = parseFloat(v); return isNaN(n) ? 0 : n; }
+function nowIso_() { return Utilities.formatDate(new Date(), TZ, "yyyy-MM-dd'T'HH:mm:ss"); }
+
+// ---------- sheet helpers ----------
+function enquirySheet_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName("Enquiries");
+  if (!sh) { sh = ss.insertSheet("Enquiries"); }
+  if (sh.getLastRow() === 0) {
+    sh.appendRow(BASE_HEADERS.concat(EXTRA_HEADERS));
+    return sh;
+  }
+  // add any missing columns at the end (keeps your old data safe)
+  var lastCol = sh.getLastColumn();
+  var hdr = sh.getRange(1, 1, 1, lastCol).getValues()[0];
+  var need = BASE_HEADERS.concat(EXTRA_HEADERS);
+  for (var i = 0; i < need.length; i++) {
+    if (hdr.indexOf(need[i]) === -1) {
+      sh.getRange(1, hdr.length + 1).setValue(need[i]);
+      hdr.push(need[i]);
+    }
+  }
+  return sh;
+}
+function colMap_(sh) {
+  var hdr = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+  var m = {};
+  for (var i = 0; i < hdr.length; i++) { m[hdr[i]] = i + 1; }
+  return m;
+}
+function cellText_(v, kind) {
+  if (v instanceof Date) {
+    if (kind === "time") return Utilities.formatDate(v, SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(), "HH:mm");
+    if (kind === "date") return Utilities.formatDate(v, SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(), "yyyy-MM-dd");
+    return Utilities.formatDate(v, TZ, "yyyy-MM-dd'T'HH:mm:ss");
+  }
+  return String(v === undefined || v === null ? "" : v);
+}
+function findRowById_(sh, m, id) {
+  var last = sh.getLastRow();
+  if (last < 2 || !m["Booking ID"] || !id) return 0;
+  var vals = sh.getRange(2, m["Booking ID"], last - 1, 1).getValues();
+  for (var i = 0; i < vals.length; i++) { if (String(vals[i][0]) === id) return i + 2; }
+  return 0;
+}
+function genId_() {
+  var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  var s = "";
+  for (var i = 0; i < 4; i++) { s += chars.charAt(Math.floor(Math.random() * chars.length)); }
+  return "MC-" + Utilities.formatDate(new Date(), TZ, "yyMMdd") + "-" + s;
+}
+function checkAdmin_(key) {
+  if (String(key || "") === ADMIN_PIN && ADMIN_PIN !== "CHANGE-THIS-PIN") return true;
+  Utilities.sleep(600); // slows down PIN guessing
+  return false;
+}
+function rowToObj_(m, rowVals, rowNum) {
+  function g(h, kind) { return m[h] ? cellText_(rowVals[m[h] - 1], kind) : ""; }
+  return {
+    row: rowNum, bookingId: g("Booking ID"), date: g("Date/Time"), name: g("Name"), phone: g("Phone"),
+    trip: g("Trip"), car: g("Car Type"), price: g("Price"), message: g("Message"), status: g("Status") || "New",
+    pickupCity: g("Pickup City"), pickupAddress: g("Pickup Address"), drop: g("Drop"), tripType: g("Trip Type"),
+    travelDate: g("Travel Date", "date"), travelTime: g("Travel Time", "time"), returnDate: g("Return Date", "date"),
+    estKm: g("Est KM"), fareType: g("Fare Type"), coupon: g("Coupon"), finalFare: g("Final Fare"),
+    toll: g("Toll"), parking: g("Parking"), driverAllowance: g("Driver Allowance"), extraCharges: g("Extra Charges"),
+    total: g("Total"), paymentMode: g("Payment Mode"), invoiceNo: g("Invoice No"), completedAt: g("Completed At")
+  };
+}
+function writeRow_(sh, m, rowNum, obj) {
+  var lastCol = sh.getLastColumn();
+  for (var i = 0; i < TEXT_COLS.length; i++) {
+    if (m[TEXT_COLS[i]]) { sh.getRange(rowNum, m[TEXT_COLS[i]]).setNumberFormat("@"); }
+  }
+  for (var h in obj) {
+    if (m[h]) { sh.getRange(rowNum, m[h]).setValue(obj[h]); }
+  }
+}
+
+// ---------- website -> sheet ----------
+function doPost(e) {
+  var data;
+  try { data = JSON.parse(e.postData.contents); } catch (err) { return json_({ status: "error", message: "bad request" }); }
+
+  // ----- admin actions (need the PIN) -----
+  if (data.action === "updateStatus" || data.action === "completeRide") {
+    if (!checkAdmin_(data.key)) return json_({ status: "unauthorized" });
+    var sh = enquirySheet_();
+    var m = colMap_(sh);
+    var rowNum = data.bookingId ? findRowById_(sh, m, String(data.bookingId)) : 0;
+    if (!rowNum) { rowNum = parseInt(data.row, 10) || 0; }
+    if (rowNum < 2 || rowNum > sh.getLastRow()) return json_({ status: "error", message: "booking not found" });
+
+    if (data.action === "updateStatus") {
+      var st = String(data.status);
+      if (["New", "Confirmed", "Cancelled"].indexOf(st) === -1) return json_({ status: "error", message: "use completeRide to complete" });
+      sh.getRange(rowNum, m["Status"]).setValue(st);
+      return json_({ status: "ok" });
+    }
+
+    // completeRide
+    var vals = sh.getRange(rowNum, 1, 1, sh.getLastColumn()).getValues()[0];
+    var bid = m["Booking ID"] ? String(vals[m["Booking ID"] - 1] || "") : "";
+    if (!bid) { bid = genId_(); }              // old bookings get an ID now
+    var invoiceNo = m["Invoice No"] ? String(vals[m["Invoice No"] - 1] || "") : "";
+    var lock = LockService.getScriptLock();
+    lock.waitLock(20000);
+    try {
+      if (!invoiceNo) {
+        var props = PropertiesService.getScriptProperties();
+        var y = Utilities.formatDate(new Date(), TZ, "yyyy");
+        var n = parseInt(props.getProperty("INV_" + y) || "0", 10) + 1;
+        props.setProperty("INV_" + y, String(n));
+        invoiceNo = "MCB-" + y + "-" + ("0000" + n).slice(-4);
+      }
+      var fare = num_(data.finalFare), toll = num_(data.toll), parking = num_(data.parking);
+      var da = num_(data.driverAllowance), extra = num_(data.extraCharges);
+      writeRow_(sh, m, rowNum, {
+        "Booking ID": bid, "Status": "Completed", "Final Fare": fare, "Toll": toll, "Parking": parking,
+        "Driver Allowance": da, "Extra Charges": extra, "Total": fare + toll + parking + da + extra,
+        "Payment Mode": clip_(data.paymentMode, 40), "Invoice No": invoiceNo, "Completed At": nowIso_()
+      });
+    } finally { lock.releaseLock(); }
+    return json_({ status: "ok", invoiceNo: invoiceNo, bookingId: bid });
+  }
+
+  // ----- feedback -----
+  if (data.type === "feedback") {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var fsh = ss.getSheetByName("Feedback");
+    if (!fsh) { fsh = ss.insertSheet("Feedback"); fsh.appendRow(FEEDBACK_HEADERS); }
+    fsh.appendRow([nowIso_(), clip_(data.name, 100), clip_(data.phone, 30), clip_(data.rating, 5), clip_(data.comment, 1000)]);
+    sendNotification("New Feedback - mapocabs",
+      "Name: " + clip_(data.name, 100) + "\nPhone: " + clip_(data.phone, 30) + "\nRating: " + clip_(data.rating, 5) +
+      " / 5\nComment: " + clip_(data.comment, 1000));
+    return json_({ status: "ok" });
+  }
+
+  // ----- new booking / enquiry -----
+  var esh = enquirySheet_();
+  var em = colMap_(esh);
+  var lock2 = LockService.getScriptLock();
+  lock2.waitLock(20000);
+  var id = String(data.bookingId || "");
+  var duplicate = false;
+  try {
+    if (!/^MC-\d{6}-[A-Z2-9]{4}$/.test(id)) { id = genId_(); }
+    var existing = findRowById_(esh, em, id);
+    if (existing) {
+      var samePhone = last10_(esh.getRange(existing, em["Phone"]).getValue()) === last10_(data.phone);
+      if (samePhone) { duplicate = true; } else { id = genId_(); }
+    }
+    if (!duplicate) {
+      var r = esh.getLastRow() + 1;
+      writeRow_(esh, em, r, {
+        "Date/Time": nowIso_(), "Name": clip_(data.name, 100), "Phone": clip_(data.phone, 30), "Trip": clip_(data.trip),
+        "Car Type": clip_(data.car, 60), "Price": data.price === "" || data.price === undefined ? "" : num_(data.price),
+        "Message": clip_(data.message, 500), "Status": "New", "Booking ID": id,
+        "Pickup City": clip_(data.pickupCity, 100), "Pickup Address": clip_(data.pickupAddress, 300),
+        "Drop": clip_(data.drop, 100), "Trip Type": clip_(data.tripType, 30),
+        "Travel Date": clip_(data.travelDate, 20), "Travel Time": clip_(data.travelTime, 10),
+        "Return Date": clip_(data.returnDate, 20), "Est KM": clip_(data.estKm, 10),
+        "Fare Type": clip_(data.fareType, 20), "Coupon": clip_(data.coupon, 40)
+      });
+    }
+  } finally { lock2.releaseLock(); }
+
+  if (!duplicate) {
+    sendNotification("New Booking " + id + " - mapocabs",
+      "Booking ID: " + id + "\nName: " + clip_(data.name, 100) + "\nPhone: " + clip_(data.phone, 30) +
+      "\nTrip: " + clip_(data.trip) + "\nPickup: " + clip_(data.pickupCity, 100) + " " + clip_(data.pickupAddress, 300) +
+      "\nDrop: " + clip_(data.drop, 100) + "\nType: " + clip_(data.tripType, 30) +
+      "\nTravel: " + clip_(data.travelDate, 20) + " " + clip_(data.travelTime, 10) +
+      (data.returnDate ? "\nReturn: " + clip_(data.returnDate, 20) : "") +
+      "\nCar: " + clip_(data.car, 60) + "\nFare: Rs." + clip_(data.price, 12) + " (" + clip_(data.fareType, 20) + ")" +
+      (data.coupon ? "\nCoupon: " + clip_(data.coupon, 40) : "") +
+      "\nNote: " + clip_(data.message, 500));
+  }
+  return json_({ status: "ok", bookingId: id });
+}
+
+// ---------- reading ----------
+function doGet(e) {
+  var p = (e && e.parameter) ? e.parameter : {};
+
+  // Customer bill lookup (public, but needs BOTH Booking ID and the mobile number)
+  if (p.action === "bill") {
+    var sh = enquirySheet_();
+    var m = colMap_(sh);
+    var rowNum = findRowById_(sh, m, String(p.id || "").toUpperCase().trim());
+    if (rowNum) {
+      var o = rowToObj_(m, sh.getRange(rowNum, 1, 1, sh.getLastColumn()).getValues()[0], rowNum);
+      if (last10_(o.phone) === last10_(p.phone) && last10_(p.phone).length === 10) {
+        if (o.status !== "Completed" || !o.invoiceNo) {
+          return json_({ status: "pending", bookingStatus: o.status });
+        }
+        return json_({ status: "ok", bill: {
+          invoiceNo: o.invoiceNo, bookingId: o.bookingId, completedAt: o.completedAt, name: o.name, phone: o.phone,
+          trip: o.trip, pickupCity: o.pickupCity, pickupAddress: o.pickupAddress, drop: o.drop, tripType: o.tripType,
+          travelDate: o.travelDate, travelTime: o.travelTime, returnDate: o.returnDate, car: o.car, coupon: o.coupon,
+          finalFare: num_(o.finalFare), toll: num_(o.toll), parking: num_(o.parking),
+          driverAllowance: num_(o.driverAllowance), extraCharges: num_(o.extraCharges),
+          total: num_(o.total), paymentMode: o.paymentMode
+        }});
+      }
+    }
+    Utilities.sleep(600);
+    return json_({ status: "notfound" });
+  }
+
+  // Dashboard data (needs your PIN)
+  if (p.action === "list") {
+    if (!checkAdmin_(p.key)) return json_({ status: "unauthorized" });
+    var sh2 = enquirySheet_();
+    var m2 = colMap_(sh2);
+    var out = { status: "ok", enquiries: [], feedback: [] };
+    var last = sh2.getLastRow();
+    if (last >= 2) {
+      var all = sh2.getRange(2, 1, last - 1, sh2.getLastColumn()).getValues();
+      for (var i = 0; i < all.length; i++) {
+        if (!all[i][m2["Name"] - 1] && !all[i][m2["Phone"] - 1]) continue;
+        out.enquiries.push(rowToObj_(m2, all[i], i + 2));
+      }
+    }
+    var fsh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Feedback");
+    if (fsh && fsh.getLastRow() >= 2) {
+      var fv = fsh.getRange(2, 1, fsh.getLastRow() - 1, 5).getValues();
+      for (var j = 0; j < fv.length; j++) {
+        if (!fv[j][1]) continue;
+        out.feedback.push({ row: j + 2, date: cellText_(fv[j][0]), name: fv[j][1], phone: fv[j][2], rating: fv[j][3], comment: fv[j][4] });
+      }
+    }
+    return json_(out);
+  }
+
+  return json_({ status: "ok", service: "mapocabs-backend", version: 2 });
+}
+
+function sendNotification(subject, body) {
+  try { MailApp.sendEmail(NOTIFY_EMAIL, subject, body); } catch (err) { console.log("Email failed: " + err); }
+}
